@@ -1,3 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+@font-face {
+    font-family: "Audrey_Normal";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-Normal.otf")
+}
+
+@font-face {
+    font-family: "Audrey_Normal_Oblique";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-NormalOblique.otf")
+}
+
+@font-face {
+    font-family: "Audrey_Medium";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-Medium.otf")
+}
+
+@font-face {
+    font-family: "Audrey_Medium_Oblique";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-MediumOblique.otf")
+}
+
+@font-face {
+    font-family: "Audrey_Bold";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-Bold.otf")
+}
+
+@font-face {
+    font-family: "Audrey_Bold_Oblique";
+    src: url("../../Assets/Fonts/Audrey_Body/Audrey-BoldOblique.otf")
+}
+
+@font-face {
+    font-family: "Bargemo";
+    src: url("../../Assets/Fonts/Bargemo_Heading/Bargemo-Regular.otf")
+}
+
+@font-face {
+    font-family: "Holipop";
+    src: url("../../Assets/Fonts/Holipop_Title/Holipop.otf")
+}
+
+@font-face {
+    font-family: "Petrona_ExtraLight";
+    src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-ExtraLight.ttf")
+}
+
+@font-face {
+    font-family: "Petrona_Light";
+    src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Light.ttf")
+}
+
+@font-face {
+    font-family: "Petrona_Regular";
+    src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-SemiBold.ttf")
+}
+
+@font-face {
+    font-family: "Petrona_Thin";
+    src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Thin.ttf")
+}
+
