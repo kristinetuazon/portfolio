@@ -281,13 +281,13 @@ const Home: NextPage = () => {
       />
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p id="name" className="mt-20 text-center  text-3xl">
-          <Image alt="dangoLogo" height="300" src={odango}></Image>
+          <Image alt="dangoLogo" height="300" src={odango} id="dango"></Image>
         </p>
         <h1
           id="start"
           className="mt-10 text-center font-audreyMedium text-3xl uppercase text-white"
         >
-          Hi, my name is Kristine,
+         <span className="text-5xl self-center font-bodyRegular">{"<"}</span> Hi, my name is Kristine <span className="text-5xl font-bodyRegular">{"/>"}</span>
         </h1>
         <p className=" mt-3 text-center font-bodyThin  text-2xl text-white">
           and I&apos;m a full-stack software developer based in Yokohama, Japan.
