@@ -110,7 +110,7 @@
   margin-left: -1px;
   width: 2px;
   height: 90px;
-  background: black;
+  background: #708A81;
   content: " ";
 }
 @-webkit-keyframes elasticus {
@@ -324,3 +324,33 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+
+span{
+  background-image: linear-gradient(#2B2129, #2B2129);
+  background-size: 0% 100%;
+  background-repeat:no-repeat;
+  transition: background-size 1s ease-in;
+}
+
+.active{
+  background-size: 100% 100%;
+  /* transition: color 1s ease-in;
+  color: black; */
+  text-shadow: 3px;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+  
+.item {
+    font-size: 40px;
+    opacity: 0.2;
+    padding: 30px 0;
+    color: white;
+  }
+
