@@ -314,11 +314,13 @@
   }
 }
 
-#scrollbar-hide::-webkit-scrollbar {
-  display: none;
+body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
+  background-color: #2B2129;
 }
 
-#scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }

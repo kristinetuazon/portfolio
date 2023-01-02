@@ -16,9 +16,11 @@
     "@trpc/next": "^10.0.0",
     "@trpc/react-query": "^10.0.0",
     "@trpc/server": "^10.0.0",
+    "gsap": "^3.11.4",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-progressbar-on-scroll": "^2.0.0",
     "superjson": "1.9.1",
     "zod": "^3.18.0"
   },
