@@ -17,7 +17,8 @@ import WebIcon from '@mui/icons-material/Web';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
-import odango from '/public/dango-svgrepo-com.svg'
+import odango from '/public/dango-svgrepo-com.svg';
+import onigiri from '/public/rice-ball-svgrepo-com.svg';
 
 
 // import { trpc } from "../utils/trpc";
@@ -281,7 +282,7 @@ const Home: NextPage = () => {
       />
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p id="name" className="mt-20 text-center  text-3xl">
-          <Image alt="dangoLogo" height="300" src={odango} id="dango"></Image>
+          <Image alt="dangoLogo" height="200" src={odango} id="dango"></Image>
         </p>
         <h1
           id="start"
@@ -292,10 +293,15 @@ const Home: NextPage = () => {
         <p className=" mt-3 text-center font-bodyThin  text-2xl text-white">
           and I&apos;m a full-stack software developer based in Yokohama, Japan.
         </p>
-        <div id="scroll-title" className="mt-36 text-mint">
+        <div id="scroll-title" className="mt-36 font-audreyNormal uppercase text-mint">
           Scroll
         </div>
-        <div id="scroll-down"></div>
+        <div className="gelatine flex w-screen flex-col items-center justify-center">
+        <Image alt="onigiriArrow"  className="rotate-180 mt-2" height="10" src={onigiri} id="onigiri"></Image>
+        <Image alt="onigiriArrow"  className="rotate-180 mt-2" height="20" src={onigiri} id="onigiri"></Image>
+        <Image alt="onigiriArrow"  className="rotate-180 mt-2" height="30" src={onigiri} id="onigiri"></Image>
+        </div>
+      
       </div>
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <div className="mt-36 grid grid-cols-3">
@@ -322,34 +328,16 @@ const Home: NextPage = () => {
           id="portfolio"
           className="mb-10 font-heading text-5xl tracking-widest text-white hover:tracking-wide"
         >
-          port·​fo·​lio
+          port<span>·</span>​fo<span>·</span>lio
         </h1>
 
         <div
           id="portfolio1"
           className="mr-10 ml-10 text-center font-bodyThinItalic text-white"
         >
-          <p className="decoration-coffee hover:line-through">
-            1 : a hinged cover or flexible case for carrying loose papers,
-            pictures, or pamphlets
-          </p>
-          <br />
-          <p className="decoration-mint hover:line-through">
-            2 [from the use of such a case to carry documents of state] : the
-            office and functions of a minister of state or member of a cabinet
-          </p>
-          <br />
-          <p className="decoration-creme hover:line-through">
-            3 : the securities held by an investor : the commercial paper held
-            by a financial house (such as a bank)
-          </p>
-          <br />
-          <p className="decoration-white hover:line-through">
-            4 : a set of pictures (such as drawings or photographs) usually
-            bound in book form or loose in a folder
-          </p>
+         
           <p className="decoration-orange hover:underline">
-            <br />5 : a selection of work compiled over a period of time and
+            <br /><span className="font-audreyMedium uppercase">NOUN:</span> a selection of work compiled over a period of time and
             used for assessing performance or progress
           </p>
         </div>
@@ -483,7 +471,7 @@ const Home: NextPage = () => {
             className="item item4 font-audreyNormal uppercase"
             href="#tokyonoire"
           >
-            <p className="text-center">🕵🏼</p>tokyo noire
+            <p className="text-center">🔎</p>tokyo noire
           </a>
         </div>
       </div>

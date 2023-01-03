@@ -71,7 +71,10 @@
   font-family: "Petrona_Thin_Italic";
   src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-ThinItalic.ttf");
 }
-
+* {
+  overflow-x: hidden;
+  cursor: none;
+}
 #scroll-down {
   display: block;
   position: relative;
@@ -83,7 +86,6 @@
   display: block;
   text-transform: uppercase;
   /* color: black; */
-  font-family: "raleway";
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 0.4em;
@@ -110,7 +112,7 @@
   margin-left: -1px;
   width: 2px;
   height: 90px;
-  background: #708A81;
+  background: #708a81;
   content: " ";
 }
 @-webkit-keyframes elasticus {
@@ -317,22 +319,24 @@
 body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll; 
-  background-color: #2B2129;
+  overflow-y: scroll;
+  background-color: #2b2129;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
+  overflow-x: hidden;
 }
 
-span{
-  background-image: linear-gradient(#2B2129, #2B2129);
+span {
+  background-image: linear-gradient(#2b2129, #2b2129);
   background-size: 0% 100%;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   transition: background-size 1s ease-in;
 }
 
-.active{
+.active {
   background-size: 100% 100%;
   /* transition: color 1s ease-in;
   color: black; */
@@ -344,13 +348,42 @@ span{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
 }
-  
-.item {
-    font-size: 40px;
-    opacity: 0.2;
-    padding: 30px 0;
-    color: white;
-  }
 
+.item {
+  font-size: 40px;
+  opacity: 0.2;
+  padding: 30px 0;
+  color: white;
+}
+
+.gelatine {
+  animation: gelatine 0.5s infinite;
+}
+@keyframes gelatine {
+  from,
+  to {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: black;
+  mix-blend-mode: difference;
+  background-color: white;
+}
