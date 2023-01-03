@@ -15,7 +15,7 @@ module.exports = {
       coffee: "#C2956E",
       charcoal: "#2B2129",
       white: "#F6FBF4",
-      pink: "#F4C2C2",
+      pink: "#c88e95",
       // blackboard: "#OC1301",
     },
     fontFamily: {
