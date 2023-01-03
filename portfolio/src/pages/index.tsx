@@ -27,7 +27,7 @@ import studyHero4 from "/public/StudyHero/StudyHero4.jpg";
 import studyHero5 from "/public/StudyHero/StudyHero5.jpg";
 import studyHero6 from "/public/StudyHero/StudyHero6.jpg";
 import YouTube, { YouTubeProps } from "react-youtube";
-import costOfLiving1 from "public/costOfLiving/Cost_of_Living1.jpg"
+import costOfLiving1 from "/public/costOfLiving/Cost_of_Living1.jpg"
 import costOfLiving2 from "/public/CostOfLiving/Cost_of_Living2.jpg";
 import costOfLiving3 from "/public/CostOfLiving/Cost_of_Living3.jpg";
 import costOfLiving4 from "/public/CostOfLiving/Cost_of_Living4.jpg";
@@ -36,11 +36,11 @@ import minimize2 from "public/Minimize/Minimize2.jpeg";
 import minimize3 from "public/Minimize/Minimize3.jpeg";
 import minimize4 from "public/Minimize/Minimize4.jpeg";
 import minimize5 from "public/Minimize/Minimize5.jpeg";
-import tokyoNoire1 from "public/TokyoNoire/tokyoNoire.001.jpeg";
-import tokyoNoire2 from "public/TokyoNoire/tokyoNoire.002.jpeg";
-import tokyoNoire3 from "public/TokyoNoire/tokyoNoire.003.jpeg";
-import tokyoNoire4 from "public/TokyoNoire/tokyoNoire.004.jpeg";
-import tokyoNoire5 from "public/TokyoNoire/tokyoNoire.005.jpeg";
+import tokyoNoire1 from "public/TokyoNoire/TokyoNoire1.jpeg";
+import tokyoNoire2 from "public/TokyoNoire/TokyoNoire2.jpeg";
+import tokyoNoire3 from "public/TokyoNoire/TokyoNoire3.jpeg";
+import tokyoNoire4 from "public/TokyoNoire/TokyoNoire4.jpeg";
+import tokyoNoire5 from "public/TokyoNoire/TokyoNoire5.jpeg";
 
 // import { trpc } from "../utils/trpc";
 
