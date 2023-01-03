@@ -27,7 +27,7 @@ import studyHero4 from "/public/StudyHero/StudyHero4.jpg";
 import studyHero5 from "/public/StudyHero/StudyHero5.jpg";
 import studyHero6 from "/public/StudyHero/StudyHero6.jpg";
 import YouTube, { YouTubeProps } from "react-youtube";
-import costOfLiving1 from "/public/costOfLiving/Cost_of_Living1.jpg"
+import costOfLiving1 from "/public/CostOfLiving/Cost_of_Living1.jpg"
 import costOfLiving2 from "/public/CostOfLiving/Cost_of_Living2.jpg";
 import costOfLiving3 from "/public/CostOfLiving/Cost_of_Living3.jpg";
 import costOfLiving4 from "/public/CostOfLiving/Cost_of_Living4.jpg";
