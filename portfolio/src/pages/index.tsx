@@ -645,7 +645,7 @@ const Home: NextPage = () => {
           >
             <GitHubIcon fontSize="large" />
           </Link>
-          <Link className="mt-3" href="#">
+          <Link className="mt-3" href="##">
             <YouTubeIcon fontSize="large" />
           </Link>
         </div>
