@@ -5,7 +5,7 @@ import Link from "next/link";
 import ProgressBar from "react-progressbar-on-scroll";
 import picture1 from "/public/DSCF0639.jpg";
 import picture2 from "/public/IMG_0536.jpg";
-import picture4 from "/public/DSC00681.jpg";
+import picture4 from "/public/reload.jpg";
 import picture5 from "/public/DSCF0609.jpg";
 import picture6 from "/public/GP_3_TokyoNoire_eedited.jpeg";
 import GitHubIcon from "@mui/icons-material/GitHub";
