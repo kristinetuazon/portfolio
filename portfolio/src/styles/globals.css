@@ -386,4 +386,6 @@ span {
   background-color: black;
   mix-blend-mode: difference;
   background-color: white;
+  z-index: 999999;
+  pointer-events: none;
 }
