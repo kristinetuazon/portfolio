@@ -367,20 +367,20 @@ const Home: NextPage = () => {
         },
       }
     );
-    gsap.fromTo(
-      "#studyHeroVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyHeroVideo",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#studyHeroVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#studyHeroVideo",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
 
     gsap.fromTo(
       "#costOfLiving1",
@@ -441,20 +441,20 @@ const Home: NextPage = () => {
       }
     );
 
-    gsap.fromTo(
-      "#costOfLivingVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLivingVideo",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#costOfLivingVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#costOfLivingVideo",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
 
     gsap.fromTo(
       "#minimize1",
@@ -532,20 +532,20 @@ const Home: NextPage = () => {
     );
 
 
-    gsap.fromTo(
-      "#minimizeVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeVideoPane",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#minimizeVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#minimizeVideoPane",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
 
     gsap.fromTo(
       "#tokyoNoire1",
@@ -622,20 +622,20 @@ const Home: NextPage = () => {
       }
     );
 
-        gsap.fromTo(
-      "#tokyoNoireVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyoNoireVideo",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    //     gsap.fromTo(
+    //   "#tokyoNoireVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#tokyoNoireVideo",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
   }, []);
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
