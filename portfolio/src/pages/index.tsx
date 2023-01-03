@@ -27,7 +27,7 @@ import studyHero4 from "/public/StudyHero/StudyHero4.jpg";
 import studyHero5 from "/public/StudyHero/StudyHero5.jpg";
 import studyHero6 from "/public/StudyHero/StudyHero6.jpg";
 import YouTube, { YouTubeProps } from "react-youtube";
-import costOfLiving1 from "/public/CostOfLiving/Cost_of_Living1.jpg"
+import costOfLiving1 from "/public/CostOfLiving/Cost_of_Living1.jpg";
 import costOfLiving2 from "/public/CostOfLiving/Cost_of_Living2.jpg";
 import costOfLiving3 from "/public/CostOfLiving/Cost_of_Living3.jpg";
 import costOfLiving4 from "/public/CostOfLiving/Cost_of_Living4.jpg";
@@ -531,7 +531,6 @@ const Home: NextPage = () => {
       }
     );
 
-
     // gsap.fromTo(
     //   "#minimizeVideo",
     //   { scale: 0 },
@@ -982,12 +981,15 @@ const Home: NextPage = () => {
           ></Image>
         </div>
       </div>
-      <div id="studyHeroVideoPane" className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-creme">
+      <div
+        id="studyHeroVideoPane"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-creme"
+      >
         <YouTube
           id="studyHeroVideo"
           videoId="W3A1CalxAh8"
           opts={opts}
-          loading={"lazy"} 
+          loading={"lazy"}
           onReady={onPlayerReady}
         />
       </div>
@@ -1003,7 +1005,11 @@ const Home: NextPage = () => {
           A legacy project that helps people find their next home within their
           budget.
         </p>
-        <Link className="mt-3" id="costOfLivingButton" href="https://youtu.be/iHT86r0FjlU">
+        <Link
+          className="mt-3"
+          id="costOfLivingButton"
+          href="https://youtu.be/iHT86r0FjlU"
+        >
           <YouTubeIcon fontSize="large" />
         </Link>
 
@@ -1043,7 +1049,7 @@ const Home: NextPage = () => {
           className="mt-10"
           videoId="iHT86r0FjlU"
           opts={opts}
-          loading={"lazy"} 
+          loading={"lazy"}
           // onReady={onPlayerReady}
         />
       </div>
@@ -1099,26 +1105,25 @@ const Home: NextPage = () => {
             src={minimize4}
             width="950"
           ></Image>
-           <Image
+          <Image
             alt="minimize5"
             className="absolute"
             id="minimize5"
             src={minimize5}
             width="950"
           ></Image>
-  
         </div>
       </div>
       <div
         id="minimizeVideoPane"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-pink to-charcoal"
       >
-              <YouTube
+        <YouTube
           id="minimizeVideo"
           className="mt-10"
           videoId="w1CIF_Wsj-Y"
           opts={opts}
-          loading={"lazy"} 
+          loading={"lazy"}
           // onReady={onPlayerReady}
         />
       </div>
@@ -1135,17 +1140,17 @@ const Home: NextPage = () => {
         </p>
         <div id="tokyonoireButtons" className="grid grid-cols-3 gap-3">
           <Link className="mt-3" href="https://github.com/TokyoNoire">
-            <GitHubIcon fontSize="large" className="text-white"/>
+            <GitHubIcon fontSize="large" className="text-white" />
           </Link>
-          <Link className="mt-3" href="https://tokyonoire.com/" >
-            <WebIcon fontSize="large"className="text-white" />
+          <Link className="mt-3" href="https://tokyonoire.com/">
+            <WebIcon fontSize="large" className="text-white" />
           </Link>
           <Link className="mt-3" href="https://youtu.be/biS2DXEf2As">
-            <YouTubeIcon fontSize="large" className="text-white"/>
+            <YouTubeIcon fontSize="large" className="text-white" />
           </Link>
-          </div>
+        </div>
 
-          <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
+        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
           <Image
             alt="tokyoNoire1"
             className="absolute"
@@ -1174,27 +1179,28 @@ const Home: NextPage = () => {
             src={tokyoNoire4}
             width="950"
           ></Image>
-           <Image
+          <Image
             alt="tokyoNoire5"
             className="absolute"
             id="tokyoNoire5"
             src={tokyoNoire5}
             width="950"
           ></Image>
-  
         </div>
       </div>
-      <div id="tokyoNoireVideoPane" className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
-
-      <YouTube
+      <div
+        id="tokyoNoireVideoPane"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal"
+      >
+        <YouTube
           id="tokyoNoireVideo"
           className="mt-10"
           videoId="biS2DXEf2As"
           opts={opts}
-          loading={"lazy"} 
+          loading={"lazy"}
           // onReady={onPlayerReady}
         />
-        </div>
+      </div>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
         <p id="contact" className="font-heading text-5xl text-white">
           contact me
