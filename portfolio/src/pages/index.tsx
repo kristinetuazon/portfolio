@@ -26,7 +26,18 @@ import studyHero3 from "/public/StudyHero/StudyHero3.jpg";
 import studyHero4 from "/public/StudyHero/StudyHero4.jpg";
 import studyHero5 from "/public/StudyHero/StudyHero5.jpg";
 import studyHero6 from "/public/StudyHero/StudyHero6.jpg";
-import { YoutubeSearchedFor } from "@mui/icons-material";
+import YouTube, { YouTubeProps } from "react-youtube";
+import costOfLiving1 from "public/costOfLiving/Cost_of_Living1.jpg"
+import costOfLiving2 from "/public/CostOfLiving/Cost_of_Living2.jpg";
+import costOfLiving3 from "/public/CostOfLiving/Cost_of_Living3.jpg";
+import costOfLiving4 from "/public/CostOfLiving/Cost_of_Living4.jpg";
+import minimize1 from "public/Minimize/Minimize1.jpeg";
+import minimize2 from "public/Minimize/Minimize2.jpeg";
+import minimize3 from "public/Minimize/Minimize3.jpeg";
+import minimize4 from "public/Minimize/Minimize4.jpeg";
+import minimize5 from "public/Minimize/Minimize5.jpeg";
+import minimize6 from "public/Minimize/Minimize7.jpeg";
+import minimize7 from "public/Minimize/Minimize8.jpeg";
 
 // import { trpc } from "../utils/trpc";
 
@@ -353,7 +364,105 @@ const Home: NextPage = () => {
         },
       }
     );
+    gsap.fromTo(
+      "#studyHeroVideo",
+      { scale: 0 },
+      {
+        scale: 1,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#studyHeroVideo",
+          start: "top 40%",
+          end: "top 30%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#costOfLiving1",
+      { x: -10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLiving",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+    gsap.fromTo(
+      "#costOfLiving2",
+      { x: 10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLivingDesc",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#costOfLiving3",
+      { x: -10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLivingButton",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#costOfLiving4",
+      { x: 10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLiving3",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#costOfLivingVideo",
+      { scale: 0 },
+      {
+        scale: 1,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLivingVideo",
+          start: "top 40%",
+          end: "top 30%",
+          scrub: true,
+        },
+      }
+    );
   }, []);
+
+  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  };
+
+  const opts: YouTubeProps["opts"] = {
+    height: "390",
+    width: "640",
+  };
 
   return (
     <>
@@ -645,12 +754,12 @@ const Home: NextPage = () => {
           >
             <GitHubIcon fontSize="large" />
           </Link>
-          <Link className="mt-3" href="##">
+          <Link className="mt-3" href="https://youtu.be/W3A1CalxAh8">
             <YouTubeIcon fontSize="large" />
           </Link>
         </div>
 
-        <div className="relative flex h-[550px] w-full flex-col items-center justify-center">
+        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
           <Image
             alt="studyHero1"
             className="absolute"
@@ -689,7 +798,15 @@ const Home: NextPage = () => {
           ></Image>
         </div>
       </div>
-
+      <div id="studyHeroVideoPane" className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-creme">
+        <YouTube
+          id="studyHeroVideo"
+          videoId="W3A1CalxAh8"
+          opts={opts}
+          loading={"lazy"} 
+          onReady={onPlayerReady}
+        />
+      </div>
       <div
         id="costofliving"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-coffee"
@@ -697,15 +814,56 @@ const Home: NextPage = () => {
         <span className="mb-5 font-heading text-5xl  text-white">
           cost of living
         </span>
-        <p className="text-center font-bodyThin">
+        <p className="text-center font-bodyThin" id="costOfLivingDesc">
           {" "}
           A legacy project that helps people find their next home within their
           budget.
         </p>
-        <Link className="mt-3" href="#">
+        <Link className="mt-3" id="costOfLivingButton" href="https://youtu.be/iHT86r0FjlU">
           <YouTubeIcon fontSize="large" />
         </Link>
+
+        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
+          <Image
+            alt="costOfLiving1"
+            className="absolute"
+            id="costOfLiving1"
+            src={costOfLiving1}
+          ></Image>
+          <Image
+            alt="costOfLiving2"
+            className="absolute"
+            id="costOfLiving2"
+            src={costOfLiving2}
+          ></Image>
+          <Image
+            alt="costOfLiving3"
+            className="absolute"
+            id="costOfLiving3"
+            src={costOfLiving3}
+          ></Image>
+          <Image
+            alt="costOfLiving4"
+            className="absolute"
+            id="costOfLiving4"
+            src={costOfLiving4}
+          ></Image>
+        </div>
       </div>
+      <div
+        id="costOfLivingVideoPane"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-coffee"
+      >
+        <YouTube
+          id="costOfLivingVideo"
+          className="mt-10"
+          videoId="iHT86r0FjlU"
+          opts={opts}
+          loading={"lazy"} 
+          // onReady={onPlayerReady}
+        />
+      </div>
+
       <div
         id="minimize"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-orange"
@@ -724,9 +882,60 @@ const Home: NextPage = () => {
           <Link className="mt-3" href="https://minimize-one.vercel.app/">
             <WebIcon fontSize="large" />
           </Link>
-          <Link className="mt-3" href="#">
+          <Link className="mt-3" href="https://youtu.be/w1CIF_Wsj-Y">
             <YouTubeIcon fontSize="large" />
           </Link>
+        </div>
+        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
+          <Image
+            alt="minimize1"
+            className="absolute"
+            id="minimize1"
+            src={minimize1}
+            width="950"
+          ></Image>
+          {/* <Image
+            alt="minimize2"
+            className="absolute"
+            id="minimize2"
+            src={minimize2}
+            width="950"
+          ></Image>
+          <Image
+            alt="minimize3"
+            className="absolute"
+            id="minimize3"
+            src={minimize3}
+            width="950"
+          ></Image>
+          <Image
+            alt="minimize4"
+            className="absolute"
+            id="minimize4"
+            src={minimize4}
+            width="950"
+          ></Image>
+           <Image
+            alt="minimize5"
+            className="absolute"
+            id="minimize5"
+            src={minimize5}
+            width="950"
+          ></Image>
+           <Image
+            alt="minimize6"
+            className="absolute"
+            id="costOfLiving6"
+            src={minimize6}
+            width="950"
+          ></Image>
+           <Image
+            alt="minimize7"
+            className="absolute"
+            id="minimize7"
+            src={minimize7}
+            width="950"
+          ></Image> */}
         </div>
       </div>
       <div
@@ -746,7 +955,7 @@ const Home: NextPage = () => {
           <Link className="mt-3" href="https://tokyonoire.com/">
             <WebIcon fontSize="large" />
           </Link>
-          <Link className="mt-3" href="#">
+          <Link className="mt-3" href="https://youtu.be/biS2DXEf2As">
             <YouTubeIcon fontSize="large" />
           </Link>
         </div>
