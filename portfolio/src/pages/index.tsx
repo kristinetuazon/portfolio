@@ -452,6 +452,97 @@ const Home: NextPage = () => {
         },
       }
     );
+
+    gsap.fromTo(
+      "#minimize1",
+      { x: 10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#costOfLivingVideoPane",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#minimize2",
+      { x: -10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#minimize",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#minimize3",
+      { x: 10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#minimizeDesc",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#minimize4",
+      { x: -10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#minimizeButtons",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#minimize5",
+      { x: 10000 },
+      {
+        x: 0,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#minimize5",
+          start: "top 10%",
+          end: "top 5%",
+          scrub: true,
+        },
+      }
+    );
+
+
+    gsap.fromTo(
+      "#minimizeVideo",
+      { scale: 0 },
+      {
+        scale: 1,
+        duration: 3,
+        scrollTrigger: {
+          trigger: "#minimizeVideo",
+          start: "top 40%",
+          end: "top 30%",
+          scrub: true,
+        },
+      }
+    );
   }, []);
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
@@ -866,13 +957,13 @@ const Home: NextPage = () => {
 
       <div
         id="minimize"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-orange"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-pink"
       >
         <span className="mb-5 font-heading text-5xl  text-white">minimize</span>
-        <p className="font-bodyThin">
+        <p id="minimizeDesc" className="font-bodyThin">
           A tinder-style decluttering application.
         </p>
-        <div className="grid grid-cols-3 gap-3">
+        <div id="minimizeButtons" className="grid grid-cols-3 gap-3">
           <Link
             className="mt-3"
             href="https://github.com/kristinetuazon/minimize"
@@ -894,7 +985,7 @@ const Home: NextPage = () => {
             src={minimize1}
             width="950"
           ></Image>
-          {/* <Image
+          <Image
             alt="minimize2"
             className="absolute"
             id="minimize2"
@@ -922,25 +1013,26 @@ const Home: NextPage = () => {
             src={minimize5}
             width="950"
           ></Image>
-           <Image
-            alt="minimize6"
-            className="absolute"
-            id="costOfLiving6"
-            src={minimize6}
-            width="950"
-          ></Image>
-           <Image
-            alt="minimize7"
-            className="absolute"
-            id="minimize7"
-            src={minimize7}
-            width="950"
-          ></Image> */}
+  
         </div>
       </div>
       <div
+        id="minimizeVideoPane"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-pink to-pink"
+      >
+              <YouTube
+          id="minimizeVideo"
+          className="mt-10"
+          videoId="w1CIF_Wsj-Y"
+          opts={opts}
+          loading={"lazy"} 
+          // onReady={onPlayerReady}
+        />
+      </div>
+
+      <div
         id="tokyonoire"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange to-orange"
+        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-pink to-charcoal"
       >
         <span className="mb-5 font-heading text-5xl  text-white">
           tokyo noire
@@ -960,11 +1052,6 @@ const Home: NextPage = () => {
           </Link>
         </div>
       </div>
-
-      <div
-        id="tokyonoire"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange to-charcoal"
-      ></div>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
         <p id="contact" className="font-heading text-5xl text-white">
           contact me
