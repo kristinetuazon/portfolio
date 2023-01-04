@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import ProgressBar from "react-progressbar-on-scroll";
@@ -374,10 +374,11 @@ const Home: NextPage = () => {
     //     scale: 1,
     //     duration: 3,
     //     scrollTrigger: {
-    //       trigger: "#studyHeroVideo",
+    //       trigger: "#studyHeroVideoPane",
     //       start: "top 40%",
     //       end: "top 30%",
     //       scrub: true,
+    //       markers: true,
     //     },
     //   }
     // );
@@ -448,7 +449,7 @@ const Home: NextPage = () => {
     //     scale: 1,
     //     duration: 3,
     //     scrollTrigger: {
-    //       trigger: "#costOfLivingVideo",
+    //       trigger: "#costOfLivingVideoPane",
     //       start: "top 40%",
     //       end: "top 30%",
     //       scrub: true,
@@ -628,7 +629,7 @@ const Home: NextPage = () => {
     //     scale: 1,
     //     duration: 3,
     //     scrollTrigger: {
-    //       trigger: "#tokyoNoireVideo",
+    //       trigger: "#tokyoNoireVideoPane",
     //       start: "top 40%",
     //       end: "top 30%",
     //       scrub: true,
@@ -637,14 +638,15 @@ const Home: NextPage = () => {
     // );
   }, []);
 
+
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   };
 
   const opts: YouTubeProps["opts"] = {
-    height: "390",
-    width: "640",
+    height: "400",
+    width: "420",
   };
 
   return (
@@ -987,6 +989,7 @@ const Home: NextPage = () => {
       >
         <YouTube
           id="studyHeroVideo"
+          className="h-ful"
           videoId="W3A1CalxAh8"
           opts={opts}
           loading={"lazy"}
