@@ -17,24 +17,80 @@ const TokyoNoire = () => {
 
   //!!!fix animations by undeleting the code
 
-    // gsap.registerPlugin(ScrollTrigger);
-    // useEffect(() => {
-    //   gsap.fromTo(
-    //     "#navStart",
-    //     { opacity: 0.1 },
-    //     {
-    //       scrollTrigger: {
-    //         trigger: "#name",
-    //         start: "top center",
-    //         end: "20% center",
-    //         scrub: true,
-    //       },
-    //       duration: 0.8,
-    //       opacity: 1,
-    //       immediateRender: false,
-    //     })
+    gsap.registerPlugin(ScrollTrigger);
+    useEffect(() => {
+      gsap.fromTo(
+        "#tokyoNoire1",
+        { x: 10000 },
+        {
+          x: 0,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#minimizeVideoPane",
+            start: "top 10%",
+            end: "top 5%",
+            scrub: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#tokyoNoire2",
+        { x: -10000 },
+        {
+          x: 0,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#tokyonoire",
+            start: "top 10%",
+            end: "top 5%",
+            scrub: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#tokyoNoire3",
+        { x: 10000 },
+        {
+          x: 0,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#tokyonoireDesc",
+            start: "top 10%",
+            end: "top 5%",
+            scrub: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#tokyoNoire4",
+        { x: -10000 },
+        {
+          x: 0,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#tokyonoireButtons",
+            start: "top 10%",
+            end: "top 5%",
+            scrub: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#tokyoNoire5",
+        { x: 10000 },
+        {
+          x: 0,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#tokyoNoire5",
+            start: "top 10%",
+            end: "top 5%",
+            scrub: true,
+          },
+        }
+      );
 
-    // }, [])
+    }, [])
 
   return (
     <>
