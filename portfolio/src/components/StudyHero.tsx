@@ -3,8 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import GitHubIcon from "@mui/icons-material/GitHub";
-
-// import YouTube, { YouTubeProps } from "react-youtube";
 import Link from "next/link";
 import Image from "next/image";
 import studyHero1 from "/public/StudyHero/StudyHero1.jpg";
