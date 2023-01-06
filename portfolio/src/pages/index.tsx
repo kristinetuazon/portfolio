@@ -1,46 +1,21 @@
 import { type NextPage } from "next";
 import { useEffect, useState, useCallback, useRef } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import ProgressBar from "react-progressbar-on-scroll";
-import picture1 from "/public/DSCF0639.jpg";
-import picture2 from "/public/IMG_0536.jpg";
-import picture4 from "/public/reload.jpg";
-import picture5 from "/public/DSCF0609.jpg";
-import picture6 from "/public/GP_3_TokyoNoire_eedited.jpeg";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import NavBar from "../components/NavBar";
-import WebIcon from "@mui/icons-material/Web";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+import Hero from "../components/Hero";
+import StudyHero from "../components/StudyHero";
+import CostOfLiving from "../components/CostOfLiving";
+import Minimize from "../components/Minimize";
+import TokyoNoire from "../components/TokyoNoire";
+import ContactMe from "../components/ContactMe";
 import odango from "/public/dango-svgrepo-com.svg";
 import onigiri from "/public/rice-ball-svgrepo-com.svg";
-import studyHero1 from "/public/StudyHero/StudyHero1.jpg";
-import studyHero2 from "/public/StudyHero/StudyHero2.jpg";
-import studyHero3 from "/public/StudyHero/StudyHero3.jpg";
-import studyHero4 from "/public/StudyHero/StudyHero4.jpg";
-import studyHero5 from "/public/StudyHero/StudyHero5.jpg";
-import studyHero6 from "/public/StudyHero/StudyHero6.jpg";
 import YouTube, { YouTubeProps } from "react-youtube";
-import costOfLiving1 from "/public/CostOfLiving/Cost_of_Living1.jpg";
-import costOfLiving2 from "/public/CostOfLiving/Cost_of_Living2.jpg";
-import costOfLiving3 from "/public/CostOfLiving/Cost_of_Living3.jpg";
-import costOfLiving4 from "/public/CostOfLiving/Cost_of_Living4.jpg";
-import minimize1 from "public/Minimize/Minimize1.jpeg";
-import minimize2 from "public/Minimize/Minimize2.jpeg";
-import minimize3 from "public/Minimize/Minimize3.jpeg";
-import minimize4 from "public/Minimize/Minimize4.jpeg";
-import minimize5 from "public/Minimize/Minimize5.jpeg";
-import tokyoNoire1 from "public/TokyoNoire/TokyoNoire1.jpeg";
-import tokyoNoire2 from "public/TokyoNoire/TokyoNoire2.jpeg";
-import tokyoNoire3 from "public/TokyoNoire/TokyoNoire3.jpeg";
-import tokyoNoire4 from "public/TokyoNoire/TokyoNoire4.jpeg";
-import tokyoNoire5 from "public/TokyoNoire/TokyoNoire5.jpeg";
+import ProjectNavBar from "../components/ProjectNavBar";
 
 // import { trpc } from "../utils/trpc";
 
@@ -49,78 +24,6 @@ const Home: NextPage = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    gsap.fromTo(
-      "#picture1",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture2",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture3",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      ".picture5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture4",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 50%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
     gsap.fromTo(
       "#portfolio1",
       { scale: 0 },
@@ -144,40 +47,6 @@ const Home: NextPage = () => {
         // @ts-expect-error gsap utils
         onEnter: () => span.classList.add("active"),
       });
-    });
-
-    document.querySelectorAll(".item").forEach((item) => {
-      gsap.fromTo(
-        item,
-        { opacity: 0.1 },
-        {
-          scrollTrigger: {
-            trigger: item,
-            start: "top center",
-            end: "20% center",
-            scrub: true,
-          },
-          duration: 0.8,
-          opacity: 1,
-          immediateRender: false,
-        }
-      );
-
-      gsap.fromTo(
-        item,
-        { opacity: 1 },
-        {
-          scrollTrigger: {
-            trigger: item,
-            start: "80% center",
-            end: "bottom center",
-            scrub: true,
-          },
-          duration: 0.8,
-          opacity: 0.1,
-          immediateRender: false,
-        }
-      );
     });
 
     gsap.fromTo(
@@ -283,90 +152,6 @@ const Home: NextPage = () => {
       }
     );
 
-    gsap.fromTo(
-      "#studyHero1",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizestart",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#studyHero2",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoirestart",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#studyHero3",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyhero",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#studyHero4",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyhero2",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#studyHero5",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyhero3",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#studyHero6",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyHero5",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
     // gsap.fromTo(
     //   "#studyHeroVideo",
     //   { scale: 0 },
@@ -383,65 +168,6 @@ const Home: NextPage = () => {
     //   }
     // );
 
-    gsap.fromTo(
-      "#costOfLiving1",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLiving",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#costOfLiving2",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLivingDesc",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#costOfLiving3",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLivingButton",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#costOfLiving4",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLiving3",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
     // gsap.fromTo(
     //   "#costOfLivingVideo",
     //   { scale: 0 },
@@ -456,81 +182,6 @@ const Home: NextPage = () => {
     //     },
     //   }
     // );
-
-    gsap.fromTo(
-      "#minimize1",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLivingVideoPane",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#minimize2",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimize",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#minimize3",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeDesc",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#minimize4",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeButtons",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#minimize5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimize5",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
 
     // gsap.fromTo(
     //   "#minimizeVideo",
@@ -547,81 +198,6 @@ const Home: NextPage = () => {
     //   }
     // );
 
-    gsap.fromTo(
-      "#tokyoNoire1",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeVideoPane",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire2",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoire",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire3",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoireDesc",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire4",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoireButtons",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyoNoire5",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
     //     gsap.fromTo(
     //   "#tokyoNoireVideo",
     //   { scale: 0 },
@@ -637,7 +213,6 @@ const Home: NextPage = () => {
     //   }
     // );
   }, []);
-
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
@@ -712,24 +287,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
-        <div className="mt-36 grid h-fit grid-cols-3">
-          <Image
-            className="col-span-2 h-full"
-            id="picture1"
-            alt="picture1"
-            src={picture1}
-          />
-          <div>
-            <Image
-              className="picture2 object-cover"
-              alt="picture6"
-              src={picture6}
-            />
-          </div>
-          <Image className="picture3" alt="picture2" src={picture2} />
-          <Image className="picture5 h-full" alt="picture5" src={picture5} />
-          <Image className="picture4 h-full" alt="picture4" src={picture4} />
-        </div>
+        <Hero/>
       </div>
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p className="mt-20 font-audreyMediumOblique uppercase text-white">
@@ -871,117 +429,14 @@ const Home: NextPage = () => {
           future.
         </p>
 
-        <p id="projects" className="mt-56 font-bodyRegularItalic">
-          Introducing my
-        </p>
-        <span
-          id="about"
-          className="mb-3 text-center font-heading text-5xl tracking-widest text-white hover:tracking-wide"
-        >
-          Projects
-        </span>
-        <p className="mb-20 font-bodyRegularItalic">
-          ~feel free to jump around, or go with the flow~
-        </p>
-
-        <div className="list ">
-          <a
-            className="item item1 font-audreyNormal uppercase"
-            href="#studyhero"
-          >
-            <p className="text-center">⚔️</p>study hero{" "}
-          </a>
-          <a
-            className="item item2 font-audreyNormal uppercase"
-            href="#costofliving"
-          >
-            <p className="text-center">💳</p>cost of living
-          </a>
-          <a
-            className="item item3 font-audreyNormal uppercase"
-            href="#minimize"
-          >
-            <p className="text-center" id="minimizestart">
-              ▫️
-            </p>
-            minimize
-          </a>
-          <a
-            className="item item4 font-audreyNormal uppercase"
-            href="#tokyonoire"
-          >
-            <p className="text-center" id="tokyonoirestart">
-              🔎
-            </p>
-            tokyo noire
-          </a>
-        </div>
+        <ProjectNavBar />
       </div>
 
       <div
         id="studyhero"
         className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-mint to-creme"
       >
-        <span
-          id="studyhero2"
-          className="mt-36 mb-5 font-heading text-5xl text-white"
-        >
-          study hero
-        </span>
-        <p className="font-bodyThin">
-          A gamified pomodoro web application for game-lovers.
-        </p>
-        <div className="grid grid-cols-2 gap-3">
-          <Link
-            id="studyhero3"
-            className="mt-3 mb-5"
-            href="https://github.com/Ghost-Pepper-Greenfield/study-hero"
-          >
-            <GitHubIcon fontSize="large" />
-          </Link>
-          <Link className="mt-3" href="https://youtu.be/W3A1CalxAh8">
-            <YouTubeIcon fontSize="large" />
-          </Link>
-        </div>
-
-        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
-          <Image
-            alt="studyHero1"
-            className="absolute"
-            id="studyHero1"
-            src={studyHero1}
-          ></Image>
-          <Image
-            alt="studyHero2"
-            className="absolute"
-            id="studyHero2"
-            src={studyHero2}
-          ></Image>
-          <Image
-            alt="studyHero3"
-            className="absolute"
-            id="studyHero3"
-            src={studyHero3}
-          ></Image>
-          <Image
-            alt="studyHero4"
-            className="absolute"
-            id="studyHero4"
-            src={studyHero4}
-          ></Image>
-          <Image
-            alt="studyHero5"
-            className="absolute"
-            id="studyHero5"
-            src={studyHero5}
-          ></Image>
-          <Image
-            alt="studyHero6"
-            className="absolute"
-            id="studyHero6"
-            src={studyHero6}
-          ></Image>
-        </div>
+        <StudyHero />
       </div>
       <div
         id="studyHeroVideoPane"
@@ -1000,48 +455,7 @@ const Home: NextPage = () => {
         id="costofliving"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-coffee"
       >
-        <span className="mb-5 font-heading text-5xl  text-white">
-          cost of living
-        </span>
-        <p className="text-center font-bodyThin" id="costOfLivingDesc">
-          {" "}
-          A legacy project that helps people find their next home within their
-          budget.
-        </p>
-        <Link
-          className="mt-3"
-          id="costOfLivingButton"
-          href="https://youtu.be/iHT86r0FjlU"
-        >
-          <YouTubeIcon fontSize="large" />
-        </Link>
-
-        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
-          <Image
-            alt="costOfLiving1"
-            className="absolute"
-            id="costOfLiving1"
-            src={costOfLiving1}
-          ></Image>
-          <Image
-            alt="costOfLiving2"
-            className="absolute"
-            id="costOfLiving2"
-            src={costOfLiving2}
-          ></Image>
-          <Image
-            alt="costOfLiving3"
-            className="absolute"
-            id="costOfLiving3"
-            src={costOfLiving3}
-          ></Image>
-          <Image
-            alt="costOfLiving4"
-            className="absolute"
-            id="costOfLiving4"
-            src={costOfLiving4}
-          ></Image>
-        </div>
+        <CostOfLiving />
       </div>
       <div
         id="costOfLivingVideoPane"
@@ -1061,61 +475,7 @@ const Home: NextPage = () => {
         id="minimize"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-pink"
       >
-        <span className="mb-5 font-heading text-5xl  text-white">minimize</span>
-        <p id="minimizeDesc" className="font-bodyThin">
-          A tinder-style decluttering application.
-        </p>
-        <div id="minimizeButtons" className="grid grid-cols-3 gap-3">
-          <Link
-            className="mt-3"
-            href="https://github.com/kristinetuazon/minimize"
-          >
-            <GitHubIcon fontSize="large" />
-          </Link>
-          <Link className="mt-3" href="https://minimize-one.vercel.app/">
-            <WebIcon fontSize="large" />
-          </Link>
-          <Link className="mt-3" href="https://youtu.be/w1CIF_Wsj-Y">
-            <YouTubeIcon fontSize="large" />
-          </Link>
-        </div>
-        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
-          <Image
-            alt="minimize1"
-            className="absolute"
-            id="minimize1"
-            src={minimize1}
-            width="950"
-          ></Image>
-          <Image
-            alt="minimize2"
-            className="absolute"
-            id="minimize2"
-            src={minimize2}
-            width="950"
-          ></Image>
-          <Image
-            alt="minimize3"
-            className="absolute"
-            id="minimize3"
-            src={minimize3}
-            width="950"
-          ></Image>
-          <Image
-            alt="minimize4"
-            className="absolute"
-            id="minimize4"
-            src={minimize4}
-            width="950"
-          ></Image>
-          <Image
-            alt="minimize5"
-            className="absolute"
-            id="minimize5"
-            src={minimize5}
-            width="950"
-          ></Image>
-        </div>
+        <Minimize />
       </div>
       <div
         id="minimizeVideoPane"
@@ -1135,61 +495,7 @@ const Home: NextPage = () => {
         id="tokyonoire"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal"
       >
-        <span className="mb-5 font-heading text-5xl  text-white">
-          tokyo noire
-        </span>
-        <p id="tokyonoireDesc" className="text-center font-bodyThin text-white">
-          A geo-location, narrative based game platform and editor.
-        </p>
-        <div id="tokyonoireButtons" className="grid grid-cols-3 gap-3">
-          <Link className="mt-3" href="https://github.com/TokyoNoire">
-            <GitHubIcon fontSize="large" className="text-white" />
-          </Link>
-          <Link className="mt-3" href="https://tokyonoire.com/">
-            <WebIcon fontSize="large" className="text-white" />
-          </Link>
-          <Link className="mt-3" href="https://youtu.be/biS2DXEf2As">
-            <YouTubeIcon fontSize="large" className="text-white" />
-          </Link>
-        </div>
-
-        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
-          <Image
-            alt="tokyoNoire1"
-            className="absolute"
-            id="tokyoNoire1"
-            src={tokyoNoire1}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire2"
-            className="absolute"
-            id="tokyoNoire2"
-            src={tokyoNoire2}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire3"
-            className="absolute"
-            id="tokyoNoire3"
-            src={tokyoNoire3}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire4"
-            className="absolute"
-            id="tokyoNoire4"
-            src={tokyoNoire4}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire5"
-            className="absolute"
-            id="tokyoNoire5"
-            src={tokyoNoire5}
-            width="950"
-          ></Image>
-        </div>
+        <TokyoNoire />
       </div>
       <div
         id="tokyoNoireVideoPane"
@@ -1205,37 +511,7 @@ const Home: NextPage = () => {
         />
       </div>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
-        <p id="contact" className="font-heading text-5xl text-white">
-          contact me
-        </p>
-        <p className="text-center font-heading text-5xl text-white">
-          and let&apos;s collaborate ✨
-        </p>
-        <Link
-          href="https://github.com/kristinetuazon"
-          className="mt-10 font-bodyRegular text-xl text-white"
-        >
-          <GitHubIcon /> @kristinetuazon
-        </Link>
-        <Link
-          href="https://www.linkedin.com/in/kristinejanetuazon/"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          <LinkedInIcon /> @kristinejanetuazon
-        </Link>
-        <Link
-          href="mailto:kristine.jane.tuazon@gmail.com"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          {" "}
-          <EmailTwoToneIcon /> email
-        </Link>
-        <Link
-          href="https://www.instagram.com/kristinetuazon/"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          <InstagramIcon /> @kristinetuazon
-        </Link>
+        <ContactMe />
       </div>
     </>
   );
