@@ -9,7 +9,7 @@ import tokyoNoire2 from "public/TokyoNoire/TokyoNoire2.jpeg";
 import tokyoNoire3 from "public/TokyoNoire/TokyoNoire3.jpeg";
 import tokyoNoire4 from "public/TokyoNoire/TokyoNoire4.jpeg";
 import tokyoNoire5 from "public/TokyoNoire/TokyoNoire5.jpeg";
-import YouTube, { YouTubeProps } from "react-youtube";
+// import YouTube, { YouTubeProps } from "react-youtube";
 import Link from "next/link";
 import Image from "next/image";
 
