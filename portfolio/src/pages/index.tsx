@@ -8,16 +8,15 @@ import picture2 from "/public/IMG_0536.jpg";
 import picture4 from "/public/reload.jpg";
 import picture5 from "/public/DSCF0609.jpg";
 import picture6 from "/public/GP_3_TokyoNoire_eedited.jpeg";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import NavBar from "../components/NavBar";
+import ContactMe from "../components/ContactMe";
+import TokyoNoire from "../components/TokyoNoire";
 import WebIcon from "@mui/icons-material/Web";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import odango from "/public/dango-svgrepo-com.svg";
 import onigiri from "/public/rice-ball-svgrepo-com.svg";
 import studyHero1 from "/public/StudyHero/StudyHero1.jpg";
@@ -36,11 +35,7 @@ import minimize2 from "public/Minimize/Minimize2.jpeg";
 import minimize3 from "public/Minimize/Minimize3.jpeg";
 import minimize4 from "public/Minimize/Minimize4.jpeg";
 import minimize5 from "public/Minimize/Minimize5.jpeg";
-import tokyoNoire1 from "public/TokyoNoire/TokyoNoire1.jpeg";
-import tokyoNoire2 from "public/TokyoNoire/TokyoNoire2.jpeg";
-import tokyoNoire3 from "public/TokyoNoire/TokyoNoire3.jpeg";
-import tokyoNoire4 from "public/TokyoNoire/TokyoNoire4.jpeg";
-import tokyoNoire5 from "public/TokyoNoire/TokyoNoire5.jpeg";
+
 
 // import { trpc } from "../utils/trpc";
 
@@ -547,80 +542,6 @@ const Home: NextPage = () => {
     //   }
     // );
 
-    gsap.fromTo(
-      "#tokyoNoire1",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeVideoPane",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire2",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoire",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire3",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoireDesc",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire4",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyonoireButtons",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#tokyoNoire5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyoNoire5",
-          start: "top 10%",
-          end: "top 5%",
-          scrub: true,
-        },
-      }
-    );
 
     //     gsap.fromTo(
     //   "#tokyoNoireVideo",
@@ -637,7 +558,6 @@ const Home: NextPage = () => {
     //   }
     // );
   }, []);
-
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
@@ -884,7 +804,7 @@ const Home: NextPage = () => {
           ~feel free to jump around, or go with the flow~
         </p>
 
-        <div className="list ">
+        <div className="list">
           <a
             className="item item1 font-audreyNormal uppercase"
             href="#studyhero"
@@ -1135,61 +1055,7 @@ const Home: NextPage = () => {
         id="tokyonoire"
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal"
       >
-        <span className="mb-5 font-heading text-5xl  text-white">
-          tokyo noire
-        </span>
-        <p id="tokyonoireDesc" className="text-center font-bodyThin text-white">
-          A geo-location, narrative based game platform and editor.
-        </p>
-        <div id="tokyonoireButtons" className="grid grid-cols-3 gap-3">
-          <Link className="mt-3" href="https://github.com/TokyoNoire">
-            <GitHubIcon fontSize="large" className="text-white" />
-          </Link>
-          <Link className="mt-3" href="https://tokyonoire.com/">
-            <WebIcon fontSize="large" className="text-white" />
-          </Link>
-          <Link className="mt-3" href="https://youtu.be/biS2DXEf2As">
-            <YouTubeIcon fontSize="large" className="text-white" />
-          </Link>
-        </div>
-
-        <div className="relative mt-10 flex h-[550px] w-full flex-col items-center justify-center">
-          <Image
-            alt="tokyoNoire1"
-            className="absolute"
-            id="tokyoNoire1"
-            src={tokyoNoire1}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire2"
-            className="absolute"
-            id="tokyoNoire2"
-            src={tokyoNoire2}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire3"
-            className="absolute"
-            id="tokyoNoire3"
-            src={tokyoNoire3}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire4"
-            className="absolute"
-            id="tokyoNoire4"
-            src={tokyoNoire4}
-            width="950"
-          ></Image>
-          <Image
-            alt="tokyoNoire5"
-            className="absolute"
-            id="tokyoNoire5"
-            src={tokyoNoire5}
-            width="950"
-          ></Image>
-        </div>
+       <TokyoNoire/>
       </div>
       <div
         id="tokyoNoireVideoPane"
@@ -1205,37 +1071,7 @@ const Home: NextPage = () => {
         />
       </div>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
-        <p id="contact" className="font-heading text-5xl text-white">
-          contact me
-        </p>
-        <p className="text-center font-heading text-5xl text-white">
-          and let&apos;s collaborate ✨
-        </p>
-        <Link
-          href="https://github.com/kristinetuazon"
-          className="mt-10 font-bodyRegular text-xl text-white"
-        >
-          <GitHubIcon /> @kristinetuazon
-        </Link>
-        <Link
-          href="https://www.linkedin.com/in/kristinejanetuazon/"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          <LinkedInIcon /> @kristinejanetuazon
-        </Link>
-        <Link
-          href="mailto:kristine.jane.tuazon@gmail.com"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          {" "}
-          <EmailTwoToneIcon /> email
-        </Link>
-        <Link
-          href="https://www.instagram.com/kristinetuazon/"
-          className="mt-5 font-bodyRegular text-xl text-white"
-        >
-          <InstagramIcon /> @kristinetuazon
-        </Link>
+        <ContactMe />
       </div>
     </>
   );
