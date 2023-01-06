@@ -14,24 +14,27 @@ import Link from "next/link";
 import Image from "next/image";
 
 const TokyoNoire = () => {
-    gsap.registerPlugin(ScrollTrigger);
-    useEffect(() => {
-      gsap.fromTo(
-        "#navStart",
-        { opacity: 0.1 },
-        {
-          scrollTrigger: {
-            trigger: "#name",
-            start: "top center",
-            end: "20% center",
-            scrub: true,
-          },
-          duration: 0.8,
-          opacity: 1,
-          immediateRender: false,
-        })
 
-    }, [])
+  //!!!fix animations by undeleting the code
+
+    // gsap.registerPlugin(ScrollTrigger);
+    // useEffect(() => {
+    //   gsap.fromTo(
+    //     "#navStart",
+    //     { opacity: 0.1 },
+    //     {
+    //       scrollTrigger: {
+    //         trigger: "#name",
+    //         start: "top center",
+    //         end: "20% center",
+    //         scrub: true,
+    //       },
+    //       duration: 0.8,
+    //       opacity: 1,
+    //       immediateRender: false,
+    //     })
+
+    // }, [])
 
   return (
     <>

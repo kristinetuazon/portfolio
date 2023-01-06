@@ -8,6 +8,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 
 const ContactMe = () => {
+  //!!! add animations
+
   //   gsap.registerPlugin(ScrollTrigger);
   //   useEffect(() => {
   //     gsap.fromTo(
