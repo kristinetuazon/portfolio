@@ -17,7 +17,7 @@ const NavBar = () => {
         },
         duration: 0.8,
         opacity: 1,
-        immediateRender: false,
+        // immediateRender: false,
       }
     );
 
@@ -33,7 +33,7 @@ const NavBar = () => {
         },
         duration: 0.8,
         opacity: 1,
-        immediateRender: false,
+        // immediateRender: false,
       }
     );
 
@@ -49,7 +49,7 @@ const NavBar = () => {
         },
         duration: 0.8,
         opacity: 1,
-        immediateRender: false,
+        // immediateRender: false,
       }
     );
 
@@ -65,14 +65,14 @@ const NavBar = () => {
         },
         duration: 0.8,
         opacity: 1,
-        immediateRender: false,
+        // immediateRender: false,
       }
     );
   }, []);
 
   return (
     <>
-      <nav className="z-999999 w-100 fixed inset-x-0 bottom-0 flex justify-evenly ">
+      <nav className="z- w-100 fixed inset-x-0 bottom-0 flex justify-evenly ">
         <div className="grid grid-cols-4 gap-4 ">
           <a
             id="navStart"
