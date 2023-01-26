@@ -9,14 +9,10 @@ import tokyoNoire2 from "public/TokyoNoire/TokyoNoire2.jpeg";
 import tokyoNoire3 from "public/TokyoNoire/TokyoNoire3.jpeg";
 import tokyoNoire4 from "public/TokyoNoire/TokyoNoire4.jpeg";
 import tokyoNoire5 from "public/TokyoNoire/TokyoNoire5.jpeg";
-// import YouTube, { YouTubeProps } from "react-youtube";
 import Link from "next/link";
 import Image from "next/image";
 
 const TokyoNoire = () => {
-
-  //!!!fix animations by undeleting the code
-
     gsap.registerPlugin(ScrollTrigger);
     useEffect(() => {
       gsap.fromTo(
@@ -94,7 +90,7 @@ const TokyoNoire = () => {
 
   return (
     <>
-       <span className="mb-5 font-heading text-5xl  text-white">
+       <span className="mb-5 font-audreyNormal uppercase text-4xl  text-white">
           tokyo noire
         </span>
         <p id="tokyonoireDesc" className="text-center font-bodyThin text-white">

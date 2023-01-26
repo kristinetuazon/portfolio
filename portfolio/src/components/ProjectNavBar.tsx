@@ -47,7 +47,7 @@ const ProjectNavBar = () => {
       </p>
       <span
         id="about"
-        className="mb-3 text-center font-heading text-5xl tracking-widest text-white hover:tracking-wide"
+        className="mb-3 text-center font-heading uppercase text-4xl tracking-widest text-white hover:tracking-wide"
       >
         Projects
       </span>
@@ -55,9 +55,9 @@ const ProjectNavBar = () => {
         ~feel free to jump around, or go with the flow~
       </p>
 
-      <div className="list">
-        <a className="item item1 font-audreyNormal uppercase" href="#studyhero">
-          <p className="text-center">⚔️</p>study hero{" "}
+      <div className="grid grid-rows-4">
+        <a className="font-audreyNormal uppercase" href="#studyhero">
+          ⚔️ study hero{" "}
         </a>
         <a
           className="item item2 font-audreyNormal uppercase"
