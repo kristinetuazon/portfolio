@@ -6,19 +6,6 @@ const ProjectNavBar = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    // const elems = gsap.utils.toArray(".circle");
-    // function animate5Random() {
-    //   gsap.utils.shuffle(elems);
-    //   let tl = gsap.timeline({ onComplete: animate5Random }),
-    //     subset = elems.slice(0, 4);
-    //   tl.to(subset, {
-    //     opacity: 0,
-    //   }).set(subset, {
-    //     opacity: 1,
-    //   });
-    // }
-
-    // animate5Random();
 
     gsap.utils.toArray(".bubble").forEach((star) => {
       tweenProperty(star, "scale", 0.5, 4);
@@ -26,8 +13,12 @@ const ProjectNavBar = () => {
       tweenProperty(star, "y", -30, 30);
     });
 
-
-    function tweenProperty(target:any, prop: string, min: number, max:number) {
+    function tweenProperty(
+      target: any,
+      prop: string,
+      min: number,
+      max: number
+    ) {
       const randomDur = gsap.utils.random(3, 6, 0.2, true);
       const randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
 
@@ -42,10 +33,10 @@ const ProjectNavBar = () => {
     }
 
     function background() {
-      const next = gsap.utils.random(3, 6, 0.5, true);
+      // const next = gsap.utils.random(3, 6, 0.5, true);
       const opa = gsap.utils.random(0.2, 1, 0.1, true);
 
-      gsap.to("#svg01", { opacity: opa, duration: 3, ease: "none" });
+      gsap.to("#svg", { opacity: opa, duration: 3, ease: "none" });
 
       // const delayedCall = gsap.delayedCall(next, background);
     }
@@ -103,23 +94,30 @@ const ProjectNavBar = () => {
         scrolling down~
       </p>
 
-      <svg id="svg01" viewBox="0 0 500 400">
-        <a className="bubble" href="#studyhero">
+      <svg id="svg" viewBox="0 0 500 400">
+        {/* <a className="bubble" href="#studyhero"> */}
           <circle cx="100" cy="80" className="fill-orange"></circle>
-        </a>
+        {/* </a> */}
 
-        <a className="bubble" href="#costofliving"><circle cx="100" cy="80" className="fill-creme"/></a>
+        {/* <a className="bubble" href="#costofliving"> */}
+          <circle cx="100" cy="80" className="fill-creme" />
+        {/* </a> */}
 
-        <a className="bubble" href="#minimize"> <circle className="fill-pink" cx="200" cy="120" /></a>
+        {/* <a className="bubble" href="#minimize"> */}
+          <circle className="fill-pink" cx="200" cy="120" />
+        {/* </a> */}
 
+        {/* <a className="bubble" href="#tokyonoire"> */}
+          <circle className="fill-charcoal" cx="300" cy="50" />{" "}
+        {/* </a> */}
 
-          <a className="bubble" href="#tokyonoire"><circle className="fill-charcoal"cx="300" cy="50" /> </a>
+        {/* <a className="bubble" href="#tokyonoire"> */}
+          <circle className="fill-coffee" cx="300" cy="130" />
+        {/* </a> */}
 
-
-          <a className="bubble" href="#tokyonoire"><circle className="fill-coffee" cx="300" cy="130" /></a>
-
-
-          <a className="bubble" href="#minimize"><circle className="fill-white" cx="250" cy="100" /></a>
+        {/* <a className="bubble" href="#minimize"> */}
+          <circle className="fill-white" cx="250" cy="100" />
+        {/* </a> */}
       </svg>
     </>
   );
