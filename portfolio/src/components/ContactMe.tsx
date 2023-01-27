@@ -8,9 +8,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 
 const ContactMe = () => {
-  //!!! add animations
 
-  //   gsap.registerPlugin(ScrollTrigger);
   //   useEffect(() => {
   //     gsap.fromTo(
   //       "#navStart",
@@ -31,10 +29,10 @@ const ContactMe = () => {
 
   return (
     <>
-      <p id="contact" className="font-heading text-5xl text-white">
+      <p id="contact" className="font-audreyNormal uppercase text-4xl text-white">
         contact me
       </p>
-      <p className="text-center font-heading text-5xl text-white">
+      <p className="text-center font-audreyNormal uppercase text-3xl text-white">
         and let&apos;s collaborate ✨
       </p>
       <Link

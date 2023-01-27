@@ -4,7 +4,54 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 const ProjectNavBar = () => {
   gsap.registerPlugin(ScrollTrigger);
+
   useEffect(() => {
+    // const elems = gsap.utils.toArray(".circle");
+    // function animate5Random() {
+    //   gsap.utils.shuffle(elems);
+    //   let tl = gsap.timeline({ onComplete: animate5Random }),
+    //     subset = elems.slice(0, 4);
+    //   tl.to(subset, {
+    //     opacity: 0,
+    //   }).set(subset, {
+    //     opacity: 1,
+    //   });
+    // }
+
+    // animate5Random();
+
+    gsap.utils.toArray(".bubble").forEach((star) => {
+      tweenProperty(star, "scale", 0.5, 4);
+      tweenProperty(star, "x", -200, 200);
+      tweenProperty(star, "y", -30, 30);
+    });
+
+
+    function tweenProperty(target:any, prop: string, min: number, max:number) {
+      const randomDur = gsap.utils.random(3, 6, 0.2, true);
+      const randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
+
+      gsap.to(target, {
+        [prop]: gsap.utils.random(min, max),
+        duration: randomDur(),
+        delay: randomDelay(),
+        ease: "none",
+        onComplete: tweenProperty,
+        onCompleteParams: [target, prop, min, max],
+      });
+    }
+
+    function background() {
+      const next = gsap.utils.random(3, 6, 0.5, true);
+      const opa = gsap.utils.random(0.2, 1, 0.1, true);
+
+      gsap.to("#svg01", { opacity: opa, duration: 3, ease: "none" });
+
+      // const delayedCall = gsap.delayedCall(next, background);
+    }
+
+    background();
+
     document.querySelectorAll(".item").forEach((item) => {
       gsap.fromTo(
         item,
@@ -47,40 +94,33 @@ const ProjectNavBar = () => {
       </p>
       <span
         id="about"
-        className="mb-3 text-center font-heading text-5xl tracking-widest text-white hover:tracking-wide"
+        className="mb-3 text-center font-heading text-4xl uppercase tracking-widest text-white hover:tracking-wide"
       >
         Projects
       </span>
-      <p className="mb-20 font-bodyRegularItalic">
-        ~feel free to jump around, or go with the flow~
+      <p className="mb-20 text-center font-bodyRegularItalic">
+        ~click a bubble to land in a random project or go with the flow by
+        scrolling down~
       </p>
 
-      <div className="list">
-        <a className="item item1 font-audreyNormal uppercase" href="#studyhero">
-          <p className="text-center">⚔️</p>study hero{" "}
+      <svg id="svg01" viewBox="0 0 500 400">
+        <a className="bubble" href="#studyhero">
+          <circle cx="100" cy="80" className="fill-orange"></circle>
         </a>
-        <a
-          className="item item2 font-audreyNormal uppercase"
-          href="#costofliving"
-        >
-          <p className="text-center">💳</p>cost of living
-        </a>
-        <a className="item item3 font-audreyNormal uppercase" href="#minimize">
-          <p className="text-center" id="minimizestart">
-            ▫️
-          </p>
-          minimize
-        </a>
-        <a
-          className="item item4 font-audreyNormal uppercase"
-          href="#tokyonoire"
-        >
-          <p className="text-center" id="tokyonoirestart">
-            🔎
-          </p>
-          tokyo noire
-        </a>
-      </div>
+
+        <a className="bubble" href="#costofliving"><circle cx="100" cy="80" className="fill-creme"/></a>
+
+        <a className="bubble" href="#minimize"> <circle className="fill-pink" cx="200" cy="120" /></a>
+
+
+          <a className="bubble" href="#tokyonoire"><circle className="fill-charcoal"cx="300" cy="50" /> </a>
+
+
+          <a className="bubble" href="#tokyonoire"><circle className="fill-coffee" cx="300" cy="130" /></a>
+
+
+          <a className="bubble" href="#minimize"><circle className="fill-white" cx="250" cy="100" /></a>
+      </svg>
     </>
   );
 };

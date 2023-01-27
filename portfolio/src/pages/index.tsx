@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import ProgressBar from "react-progressbar-on-scroll";
 import Image from "next/image";
@@ -17,10 +17,7 @@ import onigiri from "/public/rice-ball-svgrepo-com.svg";
 import YouTube, { YouTubeProps } from "react-youtube";
 import ProjectNavBar from "../components/ProjectNavBar";
 
-// import { trpc } from "../utils/trpc";
-
 const Home: NextPage = () => {
-  // const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
@@ -43,9 +40,9 @@ const Home: NextPage = () => {
         // @ts-expect-error gsap utils
         trigger: span,
         start: "top center",
-        // toggleClass: "active",
-        // @ts-expect-error gsap utils
-        onEnter: () => span.classList.add("active"),
+        toggleClass: "active",
+        // onEnter: () => span.classList.add("active"),
+        scrub: true,
       });
     });
 
@@ -243,7 +240,16 @@ const Home: NextPage = () => {
       />
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p id="name" className="mt-20 text-center  text-3xl">
-          <Image alt="dangoLogo" height="200" src={odango} id="dango"></Image>
+          <Image
+            alt="dangoLogo"
+            height="200"
+            src={odango}
+            id="dango"
+            priority
+            sizes="(max-height: 200px) 100vw,
+              (max-height: 200px) 50vw,
+              33vw"
+          ></Image>
         </p>
         <h1
           id="start"
@@ -287,7 +293,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
-        <Hero/>
+        <Hero />
       </div>
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p className="mt-20 font-audreyMediumOblique uppercase text-white">
@@ -298,7 +304,7 @@ const Home: NextPage = () => {
 
         <h1
           id="portfolio"
-          className="mb-10 font-heading text-5xl tracking-widest text-white hover:tracking-wide"
+          className="mb-10 font-heading uppercase text-4xl tracking-widest text-white"
         >
           port<span>·</span>​fo<span>·</span>lio
         </h1>
@@ -323,7 +329,7 @@ const Home: NextPage = () => {
         </p>
         <span
           id="about"
-          className="mb-3 font-heading text-5xl tracking-widest text-white hover:tracking-wide"
+          className="mb-3 font-heading uppercase text-4xl tracking-widest text-white"
         >
           Hello World;
         </span>
@@ -444,7 +450,6 @@ const Home: NextPage = () => {
       >
         <YouTube
           id="studyHeroVideo"
-          className="h-ful"
           videoId="W3A1CalxAh8"
           opts={opts}
           loading={"lazy"}

@@ -19,8 +19,8 @@ module.exports = {
       // blackboard: "#OC1301",
     },
     fontFamily: {
-      title: ['Holipop', 'serif'],
-      heading: ['Bargemo', 'serif'],
+      title: ['Audrey_Normal','serif'],
+      heading: ['Audrey_Normal', 'serif'],
       audreyNormal: ['Audrey_Normal', 'serif'],
       audreyOblique: ['Audrey_Normal_Oblique', 'serif'],
       audreyMedium: ['Audrey_Medium', 'serif'],

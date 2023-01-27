@@ -89,20 +89,57 @@ const Hero = () => {
       <div className="mt-36 grid h-fit grid-cols-3">
         <Image
           className="col-span-2 h-full"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
           id="picture1"
           alt="picture1"
           src={picture1}
+          priority
+          placeholder="blur"
         />
         <div>
           <Image
             className="picture2 object-cover"
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
             alt="picture6"
             src={picture6}
+            priority
+            placeholder="blur"
           />
         </div>
-        <Image className="picture3" alt="picture2" src={picture2} />
-        <Image className="picture5 h-full" alt="picture5" src={picture5} />
-        <Image className="picture4 h-full" alt="picture4" src={picture4} />
+        <Image
+          className="picture3"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          alt="picture2"
+          src={picture2}
+          priority
+          placeholder="blur"
+        />
+        <Image
+          className="picture5 h-full"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          alt="picture5"
+          src={picture5}
+          priority
+          placeholder="blur"
+        />
+        <Image
+          className="picture4 h-full"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          alt="picture4"
+          src={picture4}
+          priority
+          placeholder="blur"
+        />
       </div>
     </>
   );
