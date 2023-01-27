@@ -26,10 +26,10 @@ const ProjectNavBar = () => {
       tweenProperty(star, "y", -30, 30);
     });
 
-    /* @ts-ignore */
-    function tweenProperty(target, prop, min, max) {
-      var randomDur = gsap.utils.random(3, 6, 0.2, true);
-      var randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
+
+    function tweenProperty(target:any, prop: string, min: number, max:number) {
+      const randomDur = gsap.utils.random(3, 6, 0.2, true);
+      const randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
 
       gsap.to(target, {
         [prop]: gsap.utils.random(min, max),
@@ -42,13 +42,12 @@ const ProjectNavBar = () => {
     }
 
     function background() {
-      var next = gsap.utils.random(3, 6, 0.5, true);
-      var opa = gsap.utils.random(0.2, 1, 0.1, true);
+      const next = gsap.utils.random(3, 6, 0.5, true);
+      const opa = gsap.utils.random(0.2, 1, 0.1, true);
 
       gsap.to("#svg01", { opacity: opa, duration: 3, ease: "none" });
 
-      /* @ts-ignore */
-      var delayedCall = gsap.delayedCall(next, background);
+      // const delayedCall = gsap.delayedCall(next, background);
     }
 
     background();
@@ -87,8 +86,6 @@ const ProjectNavBar = () => {
       );
     });
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <>
