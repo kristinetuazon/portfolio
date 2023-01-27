@@ -7,7 +7,7 @@ const ProjectNavBar = () => {
 
   useEffect(() => {
 
-    gsap.utils.toArray(".bubble").forEach((star) => {
+    gsap.utils.toArray("circle").forEach((star) => {
       tweenProperty(star, "scale", 0.5, 4);
       tweenProperty(star, "x", -200, 200);
       tweenProperty(star, "y", -30, 30);
@@ -90,7 +90,7 @@ const ProjectNavBar = () => {
         Projects
       </span>
       <p className="mb-20 text-center font-bodyRegularItalic">
-        ~click a bubble to land in a random project or go with the flow by
+        ~click a bubble to land on a random project or go with the flow by
         scrolling down~
       </p>
 
