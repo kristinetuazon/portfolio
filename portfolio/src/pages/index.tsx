@@ -149,66 +149,66 @@ const Home: NextPage = () => {
       }
     );
 
-    gsap.fromTo(
-      "#studyHeroVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#studyHeroVideoPane",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-          markers: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#studyHeroVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#studyHeroVideoPane",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //       markers: true,
+    //     },
+    //   }
+    // );
 
-    gsap.fromTo(
-      "#costOfLivingVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#costOfLivingVideoPane",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#costOfLivingVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#costOfLivingVideoPane",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
 
-    gsap.fromTo(
-      "#minimizeVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#minimizeVideoPane",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   "#minimizeVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#minimizeVideoPane",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
 
-        gsap.fromTo(
-      "#tokyoNoireVideo",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#tokyoNoireVideoPane",
-          start: "top 40%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+    //     gsap.fromTo(
+    //   "#tokyoNoireVideo",
+    //   { scale: 0 },
+    //   {
+    //     scale: 1,
+    //     duration: 3,
+    //     scrollTrigger: {
+    //       trigger: "#tokyoNoireVideoPane",
+    //       start: "top 40%",
+    //       end: "top 30%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
   }, []);
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
@@ -450,7 +450,6 @@ const Home: NextPage = () => {
       >
         <YouTube
           id="studyHeroVideo"
-          className="h-ful"
           videoId="W3A1CalxAh8"
           opts={opts}
           loading={"lazy"}

@@ -74,7 +74,7 @@ const CostOfLiving = () => {
   
     return (
       <>
-      <span className="mb-5 font-heading uppercase text-4xl text-white">
+      <span id="costOfLiving" className="mb-5 font-heading uppercase text-4xl text-white">
       cost of living
     </span>
     <p className="text-center font-bodyThin" id="costOfLivingDesc">
@@ -96,6 +96,7 @@ const CostOfLiving = () => {
         className="absolute"
         id="costOfLiving1"
         src={costOfLiving1}
+        priority
       ></Image>
       <Image
         alt="costOfLiving2"
