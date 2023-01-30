@@ -9,7 +9,7 @@ const ProjectNavBar = () => {
     gsap.utils.toArray(".ball").forEach((circle) => {
       console.log(circle) 
       tweenProperty(circle, "scale", 1, 2);
-      tweenProperty(circle, "x", 0, 1300);
+      tweenProperty(circle, "x", 0, 1200);
       tweenProperty(circle, "y", 0, 600);
     });
 
@@ -91,7 +91,6 @@ const ProjectNavBar = () => {
         ~click a bubble to land on a random project or go with the flow by
         scrolling down~
       </p>
-      <p className="mb-20 text-center font-bodyRegularItalic"> note: the bubbles are unavailable for mobile devices. </p>
 
 
       <div id="background" className="relative w-screen h-screen">
