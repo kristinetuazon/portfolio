@@ -6,29 +6,21 @@ const ProjectNavBar = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    // const elems = gsap.utils.toArray(".circle");
-    // function animate5Random() {
-    //   gsap.utils.shuffle(elems);
-    //   let tl = gsap.timeline({ onComplete: animate5Random }),
-    //     subset = elems.slice(0, 4);
-    //   tl.to(subset, {
-    //     opacity: 0,
-    //   }).set(subset, {
-    //     opacity: 1,
-    //   });
-    // }
-
-    // animate5Random();
-
-    gsap.utils.toArray(".bubble").forEach((star) => {
-      tweenProperty(star, "scale", 0.5, 4);
-      tweenProperty(star, "x", -200, 200);
-      tweenProperty(star, "y", -30, 30);
+    gsap.utils.toArray(".ball").forEach((circle) => {
+      console.log(circle) 
+      tweenProperty(circle, "scale", 1, 2);
+      tweenProperty(circle, "x", 0, 1300);
+      tweenProperty(circle, "y", 0, 600);
     });
 
 
-    function tweenProperty(target:any, prop: string, min: number, max:number) {
-      const randomDur = gsap.utils.random(3, 6, 0.2, true);
+    function tweenProperty(
+      target: any,
+      prop: string,
+      min: number,
+      max: number
+    ) {
+      const randomDur = gsap.utils.random(10, 10, 0.2, true);
       const randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
 
       gsap.to(target, {
@@ -41,16 +33,13 @@ const ProjectNavBar = () => {
       });
     }
 
-    function background() {
-      const next = gsap.utils.random(3, 6, 0.5, true);
-      const opa = gsap.utils.random(0.2, 1, 0.1, true);
+    // function background() {
+    //   const opa = gsap.utils.random(0.2, 1, 0.1, true);
 
-      gsap.to("#svg01", { opacity: opa, duration: 3, ease: "none" });
+    //   gsap.to("#background", { opacity: opa, duration: 3, ease: "none" });
+    // }
 
-      // const delayedCall = gsap.delayedCall(next, background);
-    }
-
-    background();
+    // background();
 
     document.querySelectorAll(".item").forEach((item) => {
       gsap.fromTo(
@@ -98,29 +87,30 @@ const ProjectNavBar = () => {
       >
         Projects
       </span>
-      <p className="mb-20 text-center font-bodyRegularItalic">
-        ~click a bubble to land in a random project or go with the flow by
+      <p className="text-center font-bodyRegularItalic">
+        ~click a bubble to land on a random project or go with the flow by
         scrolling down~
       </p>
-
-      <svg id="svg01" viewBox="0 0 500 400">
-        <a className="bubble" href="#studyhero">
-          <circle cx="100" cy="80" className="fill-orange"></circle>
-        </a>
-
-        <a className="bubble" href="#costofliving"><circle cx="100" cy="80" className="fill-creme"/></a>
-
-        <a className="bubble" href="#minimize"> <circle className="fill-pink" cx="200" cy="120" /></a>
+      <p className="mb-20 text-center font-bodyRegularItalic"> note: the bubbles are unavailable for mobile devices. </p>
 
 
-          <a className="bubble" href="#tokyonoire"><circle className="fill-charcoal"cx="300" cy="50" /> </a>
+      <div id="background" className="relative w-screen h-screen">
+      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
+      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
+      <a className="bubble" href="#minimize"><div className="ball"></div></a>
+      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
+      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
+      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
+      <a className="bubble" href="#minimize"><div className="ball"></div></a>
+      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
+      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
+      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
+      <a className="bubble" href="#minimize"><div className="ball"></div></a>
+      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
+      </div>
 
-
-          <a className="bubble" href="#tokyonoire"><circle className="fill-coffee" cx="300" cy="130" /></a>
-
-
-          <a className="bubble" href="#minimize"><circle className="fill-white" cx="250" cy="100" /></a>
-      </svg>
+      
+  
     </>
   );
 };
