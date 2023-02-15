@@ -95,7 +95,7 @@ const Minimize = () => {
     <>
       <span className="mb-5 font-heading uppercase text-4xl text-white">minimize</span>
       <p id="minimizeDesc" className="font-bodyThin">
-        A tinder-style decluttering application.
+        A tinder-style decluttering application. Both version one and version two exists.
       </p>
       <div id="minimizeButtons" className="grid grid-cols-3 gap-3">
         <Link
@@ -104,7 +104,7 @@ const Minimize = () => {
         >
           <GitHubIcon fontSize="large" />
         </Link>
-        <Link className="mt-3" href="https://minimize-one.vercel.app/">
+        <Link className="mt-3" href="https://www.mnmz.app/">
           <WebIcon fontSize="large" />
         </Link>
         <Link className="mt-3" href="https://youtu.be/w1CIF_Wsj-Y">
