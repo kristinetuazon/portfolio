@@ -75,7 +75,6 @@ const NavBar = () => {
       <nav className="w-100 fixed inset-x-0 top-5 flex justify-evenly ">
         <div className="grid grid-cols-4 gap-4 ">
           <div id="navStart" className="grid grid-rows-2 place-items-center">
-            <p>🌑</p>
             <a
               className="inset-y-0 left-0 font-audreyMedium uppercase text-white"
               href="#name"
