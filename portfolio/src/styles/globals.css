@@ -316,18 +316,18 @@
   }
 }
 
-body {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
+ /* body {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
   overflow-y: scroll;
   background-color: #2b2129;
   overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
+  display: none; 
   overflow-x: hidden;
-}
+}  */
 
 span {
   background-image: linear-gradient(#2b2129, #2b2129);
