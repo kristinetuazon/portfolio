@@ -429,7 +429,7 @@ circle{
     inset 0 50px 140px #fde9ea, 0 0 90px #fff; 
 }
 
-/* @keyframes float {
+@keyframes float {
   0% {
     transform: translatey(0px);
   }
@@ -439,5 +439,5 @@ circle{
   100% {
     transform: translatey(0px);
   }
-} */
+}
 
