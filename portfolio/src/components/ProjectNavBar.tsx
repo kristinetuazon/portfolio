@@ -93,7 +93,7 @@ const ProjectNavBar = () => {
       </p>
 
 
-      <div id="background" className="relative w-screen h-screen">
+      <div id="background" className="relative w-screen h-[90vh]">
       <a className="bubble" href="#studyhero"><div className="ball"></div></a>
       <a className="bubble" href="#costofliving"><div className="ball"></div></a>
       <a className="bubble" href="#minimize"><div className="ball"></div></a>
