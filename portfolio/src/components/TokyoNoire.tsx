@@ -90,7 +90,7 @@ const TokyoNoire = () => {
 
   return (
     <>
-       <span className="mb-5 font-audreyNormal uppercase text-4xl  text-white">
+       <span className="mb-5 font-audreyNormal uppercase text-4xl text-white overflow-hidden">
           tokyo noire
         </span>
         <p id="tokyonoireDesc" className="text-center font-bodyThin text-white">

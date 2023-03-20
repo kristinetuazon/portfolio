@@ -83,7 +83,7 @@ const ProjectNavBar = () => {
       </p>
       <span
         id="about"
-        className="mb-3 text-center font-heading text-4xl uppercase tracking-widest text-white hover:tracking-wide"
+        className="mb-3 text-center font-heading text-4xl uppercase tracking-widest text-white hover:tracking-wide overflow-hidden"
       >
         Projects
       </span>

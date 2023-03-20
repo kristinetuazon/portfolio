@@ -93,7 +93,7 @@ const Minimize = () => {
 
   return (
     <>
-      <span className="mb-5 font-heading uppercase text-4xl text-white">minimize</span>
+      <span className="mb-5 font-heading uppercase text-4xl text-white overflow-hidden">minimize</span>
       <p id="minimizeDesc" className="font-bodyThin">
         A tinder-style decluttering application. Both version one and version two exists.
       </p>

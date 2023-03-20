@@ -253,7 +253,7 @@ const Home: NextPage = () => {
         </p>
         <h1
           id="start"
-          className="mt-10 text-center font-audreyMedium text-3xl uppercase text-white"
+          className="mt-10 text-center font-audreyMedium text-3xl uppercase text-white overflow-hidden"
         >
           <span className="self-center font-bodyRegular text-5xl">{"<"}</span>{" "}
           Hi, my name is Kristine{" "}
@@ -304,7 +304,7 @@ const Home: NextPage = () => {
 
         <h1
           id="portfolio"
-          className="mb-10 font-heading uppercase text-4xl tracking-widest text-white"
+          className="mb-10 font-heading uppercase text-4xl tracking-widest text-white overflow-hidden"
         >
           port<span>·</span>​fo<span>·</span>lio
         </h1>
@@ -329,7 +329,7 @@ const Home: NextPage = () => {
         </p>
         <span
           id="about"
-          className="mb-3 font-heading uppercase text-4xl tracking-widest text-white"
+          className="mb-3 font-heading uppercase text-4xl tracking-widest text-white overflow-hidden"
         >
           Hello World;
         </span>

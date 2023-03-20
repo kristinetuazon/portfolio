@@ -74,7 +74,7 @@ const CostOfLiving = () => {
   
     return (
       <>
-      <span id="costOfLiving" className="mb-5 font-heading uppercase text-4xl text-white">
+      <span id="costOfLiving" className="mb-5 font-heading uppercase text-4xl text-white overflow-hidden">
       cost of living
     </span>
     <p className="text-center font-bodyThin" id="costOfLivingDesc">

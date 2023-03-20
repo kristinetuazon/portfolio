@@ -29,10 +29,10 @@ const ContactMe = () => {
 
   return (
     <>
-      <p id="contact" className="font-audreyNormal uppercase text-4xl text-white">
+      <p id="contact" className="font-audreyNormal uppercase text-4xl text-white overflow-hidden">
         contact me
       </p>
-      <p className="text-center font-audreyNormal uppercase text-3xl text-white">
+      <p className="text-center font-audreyNormal uppercase text-3xl text-white overflow-hidden">
         and let&apos;s collaborate ✨
       </p>
       <Link

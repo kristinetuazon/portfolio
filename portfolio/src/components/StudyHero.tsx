@@ -105,7 +105,7 @@ const StudyHero = () => {
     <>
       <span
         id="studyhero2"
-        className="mt-36 mb-5 font-heading uppercase text-4xl text-white"
+        className="mt-36 mb-5 font-heading uppercase text-4xl text-white overflow-hidden"
       >
         study hero
       </span>
