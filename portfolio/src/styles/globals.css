@@ -162,3 +162,46 @@ span {
     inset 0 50px 140px #fde9ea, 0 0 90px #fff; 
 }
 
+
+/* ---------- Blog ---------- */
+
+/* The portfolio sets overflow-x: hidden on every element for its slide-in
+   animations; the blog doesn't need that, and it would clip code blocks. */
+.blog,
+.blog * {
+  overflow-x: visible;
+}
+.blog .post-body pre,
+.blog .post-body table {
+  display: block;
+  overflow-x: auto;
+}
+.blog .post-body :not(pre) > code {
+  background: rgba(246, 251, 244, 0.08);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
+}
+
+/* > [!NOTE] style callouts */
+.blog .alert {
+  border-left: 4px solid var(--alert-color);
+  background: color-mix(in srgb, var(--alert-color) 14%, transparent);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.75rem 1.25rem;
+  margin: 1.75em 0;
+}
+.blog .alert > :first-child { margin-top: 0; }
+.blog .alert > :last-child { margin-bottom: 0; }
+.blog .alert-title {
+  color: var(--alert-color);
+  font-family: Audrey_Medium, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85em;
+  margin-bottom: 0.25em;
+}
+.blog .alert-note { --alert-color: #a9c4ba; }
+.blog .alert-tip { --alert-color: #9fc79a; }
+.blog .alert-important { --alert-color: #c88e95; }
+.blog .alert-warning { --alert-color: #DD8E58; }
+.blog .alert-caution { --alert-color: #e07a6b; }

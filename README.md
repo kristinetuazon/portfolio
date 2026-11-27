@@ -15,12 +15,14 @@ npm run dev
 
 Then open http://localhost:3000.
 
-Other scripts: `npm run build`, `npm run lint`, `npm run typecheck`.
+Other scripts: `npm run build`, `npm run lint`, `npm run typecheck`, `npm test`.
 
 ## Where things live
 
 | What | Where |
 | --- | --- |
+| Blog posts (Markdown) | `portfolio/content/blog/` — see its [README](portfolio/content/blog/README.md) |
+| Blog post images | `portfolio/public/blog/<post>/` |
 | Projects (title, links, screenshots, video, colors) | `portfolio/src/data/projects.ts` |
 | Page layout and about-me text | `portfolio/src/pages/index.tsx` |
 | Scroll animation helpers | `portfolio/src/lib/gsap.ts` |
