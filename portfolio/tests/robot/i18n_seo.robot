@@ -130,3 +130,15 @@ Sitemap And Robots Point At Each Other
     Should Contain    ${xml}    hreflang="ja"
     ${robots}=    Evaluate JavaScript    ${None}    async () => (await fetch("/robots.txt")).text()
     Should Contain    ${robots}    Sitemap: https://www.kristinecodes.dev/sitemap.xml
+
+The History Timeline Has Every Chapter In Both Languages
+    [Tags]    smoke    history    i18n
+    Open Site
+    Get Element Count    .ht-chapter    ==    6
+    Get Element Count    .ht-rail-fill    ==    1
+    Get Element Count    .ht-bar    ==    4
+    Text Should Contain    .ht-chapter[data-id="bootcamp"]    Code Chrysalis
+    Text Should Contain    .ew-story    Code Chrysalis
+    Open Site    /ja
+    Get Element Count    .ht-chapter    ==    6
+    Text Should Contain    .ht-chapter[data-id="lazuli"]    Lazuliへ

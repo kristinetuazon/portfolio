@@ -105,19 +105,6 @@ body {
   transform: rotate(90deg);
   margin-bottom: 45px;
 }
-.story span {
-  background-image: linear-gradient(rgb(var(--c-highlight)), rgb(var(--c-highlight)));
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  transition: background-size 1s ease-in;
-}
-
-.story .active {
-  background-size: 100% 100%;
-  /* transition: color 1s ease-in;
-  color: black; */
-  text-shadow: 3px;
-}
 
 .gelatine {
   animation: gelatine 0.5s infinite;
@@ -1477,4 +1464,244 @@ a.lang-option:focus-visible {
   from {
     opacity: 0;
   }
+}
+
+/* ---------- History: the commit history so far ---------- */
+
+.history {
+  width: 100%;
+  max-width: 64rem;
+  margin-top: 6rem;
+  padding: 0 1.5rem;
+}
+@media (min-width: 768px) {
+  .history {
+    padding: 0 7rem 0 2rem;
+  }
+}
+.ht-summary {
+  display: grid;
+  gap: 2rem;
+  margin: 2rem auto 0;
+  max-width: 46rem;
+}
+@media (min-width: 768px) {
+  .ht-summary {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+}
+.ht-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+.ht-chart {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(var(--c-white) / 0.12);
+  background: rgb(var(--c-charcoal) / 0.45);
+}
+.ht-bars {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+.ht-bar-row {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: Petrona_Regular, "Zen Maru Gothic", serif;
+  font-size: 0.85rem;
+  color: rgb(var(--c-white));
+}
+.ht-bar-track {
+  height: 0.75rem;
+}
+.ht-bar {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+}
+.ht-bar-note {
+  color: rgb(var(--c-creme));
+  font-size: 0.75rem;
+}
+
+/* The timeline: a rail with a dot per chapter */
+.ht-list-wrap {
+  position: relative;
+  margin-top: 4rem;
+}
+/* Aida cloth: a column of tiny holes; stitched crosses fill it in */
+.ht-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.2rem;
+  width: 14px;
+  background-image: radial-gradient(circle, rgb(var(--c-white) / 0.22) 1.2px, transparent 1.6px);
+  background-size: 14px 14px;
+  background-position: 0 0;
+}
+.ht-rail-fill {
+  position: absolute;
+  inset: 0;
+  /* Thread colors through the chapters, cut into little ✕ stitches by the mask */
+  background: linear-gradient(#f6c177, #f2a7b6, #7aa2d6, #a3c46f, #9acd32, #dd8e58);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Cpath d='M3 3l8 8M11 3l-8 8' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E")
+    0 0 / 14px 14px repeat-y;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Cpath d='M3 3l8 8M11 3l-8 8' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E")
+    0 0 / 14px 14px repeat-y;
+}
+.ht-needle {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 14px;
+  height: 38px;
+  margin: -6px 0 0 -7px;
+  transform: rotate(18deg);
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+.ht-needle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ht-needle {
+    display: none;
+  }
+}
+.ht-list {
+  display: grid;
+  gap: 4rem;
+}
+.ht-chapter {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  padding-left: 2.5rem;
+}
+.ht-dot {
+  position: absolute;
+  left: -0.35rem;
+  top: 0.2rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+@media (min-width: 976px) {
+  .ht-rail {
+    left: 50%;
+    margin-left: -7px;
+  }
+  .ht-chapter {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding-left: 0;
+    align-items: center;
+  }
+  .ht-dot {
+    left: 50%;
+    top: 50%;
+    margin: -0.95rem 0 0 -0.95rem;
+  }
+  .ht-chapter .ht-text {
+    text-align: right;
+  }
+  .ht-chapter .ht-text ul {
+    justify-content: flex-end;
+  }
+  .ht-chapter.is-right .ht-text {
+    order: 2;
+    text-align: left;
+  }
+  .ht-chapter.is-right .ht-text ul {
+    justify-content: flex-start;
+  }
+}
+
+/* Pictures sit on a little paper card */
+.ht-visual {
+  position: relative;
+  max-width: 22rem;
+  padding: 1rem;
+  /* A running stitch around the edge, like a sewn-on patch */
+  outline: 2px dashed rgba(194, 149, 110, 0.7);
+  outline-offset: -7px;
+  border-radius: 0.75rem;
+  background: #fbf6ea;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.15);
+  transform: rotate(-1.5deg);
+}
+:root[data-theme="light"] .ht-visual {
+  box-shadow:
+    0 10px 26px rgba(43, 33, 41, 0.16),
+    0 0 0 1px rgba(43, 33, 41, 0.1);
+}
+.ht-chapter.is-right .ht-visual {
+  transform: rotate(1.5deg);
+  justify-self: end;
+}
+@media (max-width: 975px) {
+  .ht-chapter.is-right .ht-visual {
+    justify-self: start;
+  }
+}
+.hv-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hv-bootcamp {
+  display: grid;
+  gap: 0.5rem;
+}
+.hv-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+}
+.hv-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+.hv-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
+
+/* Lazuli year cards: highlights with a little dango bullet in the year's color */
+.lz-highlights {
+  display: grid;
+  gap: 0.45rem;
+}
+.lz-highlights li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-family: Petrona_Regular, "Zen Maru Gothic", serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgb(var(--c-white));
+}
+.lz-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--dot);
 }
