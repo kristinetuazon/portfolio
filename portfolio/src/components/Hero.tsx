@@ -29,11 +29,10 @@ const Hero = () => {
   return (
     <div ref={grid} className="mt-36 grid h-fit grid-cols-3">
       <Image
-        className="picture1 col-span-2 h-full"
+        className="picture1 col-span-2 h-full object-cover"
         sizes={SIZES}
         alt={t.story.photos.camera}
         src={picture1}
-        priority
         placeholder="blur"
       />
       <div>

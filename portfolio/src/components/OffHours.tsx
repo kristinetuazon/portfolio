@@ -84,44 +84,50 @@ const withHyphens = (text: string) =>
 
 /** A tiny Yamanote line: the green loop with 30 stations and a walker going round. */
 const YamanoteLoop = ({ onFoot }: { onFoot: string }) => (
-  <svg viewBox="0 0 120 120" className="oh-loop h-24 w-24" aria-hidden="true">
-    <circle cx="60" cy="60" r="44" fill="none" stroke="#9acd32" strokeWidth="6" />
-    {Array.from({ length: 30 }, (_, i) => {
-      const a = (i / 30) * Math.PI * 2;
-      return (
-        <circle
-          key={i}
-          cx={60 + Math.cos(a) * 44}
-          cy={60 + Math.sin(a) * 44}
-          r="1.6"
-          fill="#fbf6ea"
-        />
-      );
-    })}
-    <g className="oh-walker">
-      <circle cx="60" cy="16" r="5.5" fill="#f2a7b6" stroke="#2b2129" strokeWidth="1.5" />
-    </g>
-    <text
-      x="60"
-      y="57"
-      textAnchor="middle"
-      fontFamily="Audrey_Medium, serif"
-      fontSize="15"
-      fill="#2b2129"
-    >
-      30/30
-    </text>
-    <text
-      x="60"
-      y="74"
-      textAnchor="middle"
-      fontFamily="Petrona_Italic, Zen Maru Gothic, serif"
-      fontSize="11"
-      fill="#7a675f"
-    >
-      {onFoot}
-    </text>
-  </svg>
+  <div className="oh-loop-wrap relative h-24 w-24" aria-hidden="true">
+    <svg viewBox="0 0 120 120" className="oh-loop h-24 w-24">
+      <circle cx="60" cy="60" r="44" fill="none" stroke="#9acd32" strokeWidth="6" />
+      {Array.from({ length: 30 }, (_, i) => {
+        const a = (i / 30) * Math.PI * 2;
+        return (
+          <circle
+            key={i}
+            cx={60 + Math.cos(a) * 44}
+            cy={60 + Math.sin(a) * 44}
+            r="1.6"
+            fill="#fbf6ea"
+          />
+        );
+      })}
+      <text
+        x="60"
+        y="57"
+        textAnchor="middle"
+        fontFamily="Audrey_Medium, serif"
+        fontSize="15"
+        fill="#2b2129"
+      >
+        30/30
+      </text>
+      <text
+        x="60"
+        y="74"
+        textAnchor="middle"
+        fontFamily="Petrona_Italic, Zen Maru Gothic, serif"
+        fontSize="11"
+        fill="#7a675f"
+      >
+        {onFoot}
+      </text>
+    </svg>
+    {/* The walker goes round in its own layer, spun with CSS: animating an SVG
+      attribute every frame made the browser re-lay-out the whole page. */}
+    <div className="oh-walker-spin">
+      <svg viewBox="0 0 120 120" className="h-full w-full">
+        <circle cx="60" cy="16" r="5.5" fill="#f2a7b6" stroke="#2b2129" strokeWidth="1.5" />
+      </svg>
+    </div>
+  </div>
 );
 
 /** "Off the clock": hobbies as a scrapbook page of polaroids and notes. */
@@ -143,14 +149,6 @@ const OffHours = () => {
           ease: "back.out(1.6)",
           scrollTrigger: { trigger: item, start: "top 92%" },
         });
-      });
-      // The walker goes round the Yamanote loop.
-      gsap.to(".oh-walker", {
-        rotation: 360,
-        svgOrigin: "60 60",
-        duration: 14,
-        ease: "none",
-        repeat: -1,
       });
     },
     { scope: root },

@@ -70,17 +70,10 @@ const SALMON: [number, number, number, number, number][] = [
   [58, 41, 4.5, 2.5, 40],
 ];
 
-// Steam wisps that curl up from the top when the onigiri "lights up".
-const STEAM = [
-  "M41 8c-4-5 4-9 0-14s4-9 0-14",
-  "M50 4c-4-5 4-9 0-14s4-9 0-14s4-8 0-12",
-  "M59 8c-4-5 4-9 0-14s4-9 0-14",
-];
-
 /**
  * A realistic-ish onigiri: shaded rice with a grain texture, a nori wrap with a
  * soft sheen, and a different topping per kind. It also carries hidden parts
- * the nav animates: two bite marks, steam, and a little face. Decorative.
+ * the nav animates: two bite marks and a little face. Decorative.
  */
 const Onigiri = ({
   kind,
@@ -165,10 +158,6 @@ const Onigiri = ({
         </clipPath>
         <filter id={`${id}-soft`} x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="3" />
-        </filter>
-
-        <filter id={`${id}-steam`} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.1" />
         </filter>
         {/* Everything is drawn through this mask; the chomps start at scale 0 (no bite) unless bitten. */}
         <mask id={`${id}-bite`} maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
@@ -337,21 +326,6 @@ const Onigiri = ({
             ))}
           </g>
         </g>
-      </g>
-
-      {/* Steam (yaki gets a warmer, wavier shimmer) */}
-      <g
-        className="onigiri-steam"
-        opacity="0"
-        filter={`url(#${id}-steam)`}
-        fill="none"
-        stroke={yaki ? "#ffe2b8" : "#ffffff"}
-        strokeWidth={yaki ? 2.6 : 3.4}
-        strokeLinecap="round"
-      >
-        {STEAM.map((d, i) => (
-          <path key={i} d={d} />
-        ))}
       </g>
     </svg>
   );

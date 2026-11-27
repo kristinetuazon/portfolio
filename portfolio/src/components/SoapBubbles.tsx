@@ -5,8 +5,7 @@ import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
-/** Fired on `window` every time a bubble is popped. */
-export const BUBBLE_POP_EVENT = "bubble-pop";
+import { BUBBLE_POP_EVENT } from "../lib/bubbles";
 
 type Bubble = {
   el: HTMLElement;
@@ -74,19 +73,14 @@ const SoapBubbles = () => {
       // With reduced motion the bubbles just sit there (and can still be popped).
       const calm = reducedMotion();
 
-      // Never quite round: each film wobbles on its own rhythm.
-      if (!calm) {
-        bubbles.forEach((b) => {
-          gsap.to(b.el.querySelector(".soap-film"), {
-            scaleX: rand(1.03, 1.06),
-            scaleY: rand(0.94, 0.97),
-            duration: rand(0.9, 1.6),
-            ease: "sine.inOut",
-            yoyo: true,
-            repeat: -1,
-          });
-        });
-      }
+      // Never quite round: each film wobbles on its own rhythm (a CSS animation,
+      // so it runs off the main thread; the numbers just vary it per bubble).
+      bubbles.forEach((b) => {
+        const film = b.el.querySelector<HTMLElement>(".soap-film")!;
+        film.style.setProperty("--wobble-x", String(rand(1.03, 1.06)));
+        film.style.setProperty("--wobble-y", String(rand(0.94, 0.97)));
+        film.style.animationDuration = `${rand(0.9, 1.6)}s`;
+      });
 
       // --- Drift, sway and shy away from the cursor ---------------------------
       const mouse = { x: -9999, y: -9999 };

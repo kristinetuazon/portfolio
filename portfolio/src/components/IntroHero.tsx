@@ -93,10 +93,11 @@ const IntroHero = () => {
         .from(
           split.chars,
           {
-            y: -70,
-            scaleY: 1.7,
-            scaleX: 0.6,
-            opacity: 0,
+            // No fade: the heading is the first big thing on screen, so it stays
+            // visible from the first paint (good for load speed) and just jiggles in.
+            y: -40,
+            scaleY: 1.5,
+            scaleX: 0.7,
             duration: 0.9,
             ease: "elastic.out(1.2, 0.45)",
             stagger: 0.035,
@@ -179,7 +180,7 @@ const IntroHero = () => {
       </p>
       <NowLine />
 
-      <div id="scroll-title" className="mt-28 font-audreyNormal uppercase text-mint">
+      <div id="scroll-title" className="mt-28 font-audreyNormal uppercase text-coffee">
         {t.intro.scroll}
       </div>
       <div className="gelatine flex flex-col items-center" aria-hidden="true">

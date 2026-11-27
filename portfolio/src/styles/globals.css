@@ -2,75 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fonts: compressed (woff2) and trimmed to Latin letters and punctuation by
+   fontTools; the originals are in Assets/Fonts. They live in public/fonts so the
+   intro fonts can be preloaded (see _document). "swap" shows a fallback font
+   while these load instead of invisible text. */
 @font-face {
   font-family: "Audrey_Normal";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-Normal.otf");
+  src: url("/fonts/Audrey-Normal.woff2") format("woff2");
+  font-display: swap;
 }
-
-@font-face {
-  font-family: "Audrey_Normal_Oblique";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-NormalOblique.otf");
-}
-
 @font-face {
   font-family: "Audrey_Medium";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-Medium.otf");
+  src: url("/fonts/Audrey-Medium.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Audrey_Medium_Oblique";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-MediumOblique.otf");
+  src: url("/fonts/Audrey-MediumOblique.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Audrey_Bold";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-Bold.otf");
+  src: url("/fonts/Audrey-Bold.woff2") format("woff2");
+  font-display: swap;
 }
-
-@font-face {
-  font-family: "Audrey_Bold_Oblique";
-  src: url("../../Assets/Fonts/Audrey_Body/Audrey-BoldOblique.otf");
-}
-
-@font-face {
-  font-family: "Bargemo";
-  src: url("../../Assets/Fonts/Bargemo_Heading/Bargemo-Regular.otf");
-}
-
-@font-face {
-  font-family: "Holipop";
-  src: url("../../Assets/Fonts/Holipop_Title/Holipop.otf");
-}
-
-@font-face {
-  font-family: "Petrona_ExtraLight";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-ExtraLight.ttf");
-}
-
 @font-face {
   font-family: "Petrona_Light";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Light.ttf");
+  src: url("/fonts/Petrona-Light.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Petrona_Regular";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Regular.ttf");
+  src: url("/fonts/Petrona-Regular.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Petrona_Thin";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Thin.ttf");
+  src: url("/fonts/Petrona-Thin.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Petrona_Italic";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-Italic.ttf");
+  src: url("/fonts/Petrona-Italic.woff2") format("woff2");
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Petrona_Thin_Italic";
-  src: url("../../Assets/Fonts/Petrona_Body/static/Petrona-ThinItalic.ttf");
+  src: url("/fonts/Petrona-ThinItalic.woff2") format("woff2");
+  font-display: swap;
 }
+
 /* Stop the slide-in animations (which start a full screen-width off to the side)
    from making the page scroll sideways. This used to be "* { overflow-x: hidden }",
    but on every element that also turns overflow-y into "auto", so any box whose
@@ -111,18 +92,6 @@ html,
 body {
   overflow-x: hidden; /* fallback for older browsers */
   overflow-x: clip;
-}
-
-/* Custom cursor only where there is a mouse; on touch screens it would just sit in the corner. */
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none;
-  }
-}
-@media not ((hover: hover) and (pointer: fine)) {
-  .cursor {
-    display: none;
-  }
 }
 
 #scroll-title {
@@ -169,18 +138,6 @@ body {
   }
 }
 
-.cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  mix-blend-mode: difference;
-  background-color: white;
-  z-index: 999999;
-  pointer-events: none;
-}
 
 /* ---------- Blog ---------- */
 
@@ -231,7 +188,6 @@ body {
   display: block;
   perspective: 1100px;
   border-radius: 0.6rem;
-  cursor: none;
 }
 .envelope-link:focus-visible {
   outline: 2px dashed rgb(var(--c-white));
@@ -543,7 +499,6 @@ body {
 .rice-btn {
   position: relative;
   display: block;
-  cursor: none;
   border-radius: 0.5rem;
 }
 .rice-icon {
@@ -674,9 +629,10 @@ body {
 /* ---------- Soap bubbles ---------- */
 
 .soap-layer {
+  animation: soap-arrive 0.8s ease-out;
   position: fixed;
   inset: 0;
-  z-index: 40; /* above the page, below the nav (50) and cursor */
+  z-index: 40; /* above the page, below the nav (50) */
   pointer-events: none;
   overflow: hidden;
 }
@@ -1100,9 +1056,6 @@ a.lang-option:focus-visible {
 :root[data-theme="light"] .soap-drop {
   background: rgba(105, 90, 145, 0.5);
 }
-:root[data-theme="light"] #scroll-title {
-  color: rgb(var(--c-coffee));
-}
 /* Japanese has no italics; a slanted fake looks wrong. */
 :lang(ja) em,
 :lang(ja) .now-items em {
@@ -1490,5 +1443,38 @@ a.lang-option:focus-visible {
 @media (max-width: 767px) {
   .pc-head-en {
     display: none;
+  }
+}
+
+/* Bubble films wobble (values per bubble are set in SoapBubbles) */
+.soap-film {
+  animation: soap-wobble 1.2s ease-in-out infinite alternate;
+}
+@keyframes soap-wobble {
+  to {
+    transform: scale(var(--wobble-x, 1.04), var(--wobble-y, 0.96));
+  }
+}
+
+/* The Yamanote walker, spun as a layer of its own */
+.oh-walker-spin {
+  position: absolute;
+  inset: 0;
+  animation: oh-walk 14s linear infinite;
+}
+@keyframes oh-walk {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .soap-film,
+  .oh-walker-spin {
+    animation: none;
+  }
+}
+@keyframes soap-arrive {
+  from {
+    opacity: 0;
   }
 }

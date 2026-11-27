@@ -69,7 +69,8 @@ Then open http://localhost:3000.
 portfolio/
 ├── content/blog/            Blog posts: <slug>/index.md (+ writing guide README)
 ├── public/                  Photos, project screenshots, blog images (public/blog/<slug>/)
-├── Assets/Fonts/            Audrey, Petrona, Bargemo and Holipop font files
+├── Assets/Fonts/            Original Audrey and Petrona font files
+├── public/fonts/            The web versions (woff2, Latin only) the site actually loads
 └── src/
     ├── pages/               index.tsx (home), 404, mailbox/ (list, post, RSS), sitemap.xml, api/og (preview cards)
     ├── i18n/index.ts        English and Japanese copy
@@ -136,6 +137,16 @@ missing image, …) fails the build with a message naming the file, so it can't
 go live half-broken. The full guide is in
 [`portfolio/content/blog/README.md`](portfolio/content/blog/README.md), and
 the draft post `how-to-write-a-post` shows every feature.
+
+## Fonts
+
+The site loads small `woff2` copies of its fonts from `portfolio/public/fonts`.
+To regenerate one after changing a font in `Assets/Fonts` (needs
+`pip install fonttools brotli`):
+
+```bash
+python3 -m fontTools.subset Assets/Fonts/Audrey_Body/Audrey-Medium.otf --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2190-21FF,U+2212,U+2215,U+2713,U+FEFF,U+FFFD" --flavor=woff2 --layout-features='*' --output-file=public/fonts/Audrey-Medium.woff2
+```
 
 ## Deploying
 

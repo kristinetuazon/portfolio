@@ -28,8 +28,9 @@ const NowLine = () => {
     if (!item || reducedMotion()) return;
     gsap.fromTo(
       item,
-      { y: 10, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.8)", overwrite: true },
+      // Slides up without fading, so the text is always readable (and passes contrast checks).
+      { y: 10, scale: 0.96 },
+      { y: 0, scale: 1, duration: 0.6, ease: "back.out(1.8)", overwrite: true },
     );
   }, [current]);
 
@@ -44,7 +45,8 @@ const NowLine = () => {
         type="button"
         className="now-items"
         onClick={() => setCurrent((c) => (c + 1) % NOW.length)}
-        aria-label={t.intro.nowNext}
+        // The name starts with what's showing, so it matches the visible text.
+        aria-label={`${NOW[current]![locale].verb} ${NOW[current]![locale].what}. ${t.intro.nowNext}`}
       >
         <span ref={list} className="now-stack" aria-hidden="true">
           {NOW.map((item, i) => (

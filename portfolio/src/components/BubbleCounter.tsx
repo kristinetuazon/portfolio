@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, reducedMotion } from "../lib/gsap";
-import { BUBBLE_POP_EVENT } from "./SoapBubbles";
+import { BUBBLE_POP_EVENT } from "../lib/bubbles";
 import { useT, type Dict } from "../i18n";
 
 const STORAGE_KEY = "bubbles-popped-all-time";
