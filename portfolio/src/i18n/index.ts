@@ -225,7 +225,11 @@ const en = {
   contact: {
     title: "contact me",
     sub: "and let's collaborate ✨",
+    note: "Questions, ideas, or just hello: my mailbox is always open.",
     email: "email",
+    copy: "copy",
+    copied: "copied!",
+    copyLabel: "Copy my email address",
   },
   notFound: {
     title: "This page got eaten",
@@ -456,7 +460,11 @@ const ja: Dict = {
   contact: {
     title: "おたよりください",
     sub: "いっしょに何かつくりませんか ✨",
+    note: "質問でも、アイデアでも、ただのあいさつでも。いつでもお待ちしています。",
     email: "メール",
+    copy: "コピー",
+    copied: "コピーしました",
+    copyLabel: "メールアドレスをコピー",
   },
   notFound: {
     title: "このページ、食べられちゃいました",

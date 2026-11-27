@@ -107,7 +107,7 @@ const Home: NextPage = () => {
 
       <section
         id="contact"
-        className="flex min-h-screen flex-col items-center justify-center bg-charcoal"
+        className="flex min-h-screen flex-col items-center justify-center bg-charcoal px-4 py-24 md:pr-28"
       >
         <ContactMe />
       </section>
