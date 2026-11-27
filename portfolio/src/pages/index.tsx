@@ -4,6 +4,7 @@ import Link from "next/link";
 import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
 import OnigiriNav from "../components/OnigiriNav";
 import SoapBubbles from "../components/SoapBubbles";
+import BubbleCounter from "../components/BubbleCounter";
 import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
@@ -34,6 +35,7 @@ const Home: NextPage = () => {
 
       <OnigiriNav />
       <SoapBubbles />
+      <BubbleCounter />
       <IntroHero />
       <LazuliSection />
 

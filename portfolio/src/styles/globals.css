@@ -707,3 +707,73 @@
     animation: none;
   }
 }
+
+/* ---------- Bubble pop counter ---------- */
+
+.pop-counter {
+  position: fixed;
+  z-index: 45; /* above the bubbles, below the nav */
+  left: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  overflow: visible;
+  padding: 0.4rem 0.9rem 0.4rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(43, 33, 41, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(246, 251, 244, 0.12);
+  color: #f6fbf4;
+  font-family: Petrona_Regular, serif;
+  font-size: 0.85rem;
+  line-height: 1.1;
+  pointer-events: none;
+  user-select: none;
+}
+.pop-counter * {
+  overflow: visible;
+}
+/* A tiny soap bubble */
+.pop-counter-bubble {
+  position: relative;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 30% 18% at 33% 27%, rgba(255, 255, 255, 0.95), transparent 100%),
+    radial-gradient(circle, transparent 55%, rgba(255, 255, 255, 0.25) 70%, transparent 72%),
+    conic-gradient(from 30deg, rgba(255, 120, 200, 0.6), rgba(255, 220, 120, 0.5), rgba(140, 255, 190, 0.5), rgba(120, 200, 255, 0.6), rgba(190, 140, 255, 0.55), rgba(255, 120, 200, 0.6));
+  -webkit-mask: radial-gradient(circle, rgba(0, 0, 0, 0.22) 0 52%, rgba(0, 0, 0, 0.5) 60%, #000 67% 71%, transparent 72%);
+  mask: radial-gradient(circle, rgba(0, 0, 0, 0.22) 0 52%, rgba(0, 0, 0, 0.5) 60%, #000 67% 71%, transparent 72%);
+}
+.pop-counter-number {
+  display: inline-block;
+  min-width: 1ch;
+  font-family: Audrey_Medium, serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+.pop-counter-total {
+  display: block;
+  margin-top: 0.1rem;
+  font-family: Petrona_Italic, serif;
+  font-size: 0.7rem;
+  color: #c2956e;
+}
+.pop-counter-cheer {
+  position: absolute;
+  left: 0.4rem;
+  bottom: calc(100% + 0.5rem);
+  white-space: nowrap;
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  background: #f6fbf4;
+  color: #2b2129;
+  font-family: Audrey_Medium, serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}

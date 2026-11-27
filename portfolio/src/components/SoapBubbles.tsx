@@ -5,6 +5,9 @@ import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
+/** Fired on `window` every time a bubble is popped. */
+export const BUBBLE_POP_EVENT = "bubble-pop";
+
 type Bubble = {
   el: HTMLElement;
   size: number;
@@ -166,6 +169,8 @@ const SoapBubbles = () => {
       popRef.current = contextSafe!((b: Bubble) => {
         if (b.popped) return;
         b.popped = true;
+        // Let the pop counter know.
+        window.dispatchEvent(new CustomEvent(BUBBLE_POP_EVENT));
         const cx = (gsap.getProperty(b.el, "x") as number) + b.size / 2;
         const cy = (gsap.getProperty(b.el, "y") as number) + b.size / 2;
 
