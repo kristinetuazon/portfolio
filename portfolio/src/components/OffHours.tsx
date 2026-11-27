@@ -28,9 +28,16 @@ const ITEMS: Item[] = [
     tape: "#f2a7b6",
   },
   {
+    emoji: "🎬",
+    title: "Quiet vlogs",
+    text: "Small, non-talking vlogs. Maybe a future YouTube channel?",
+    tilt: 1.5,
+    tape: "#708a81",
+  },
+  {
     emoji: "💌",
     title: "Wedding invites",
-    text: "…and making the wedding invitations, too.",
+    text: "Making wedding invitations for friends, too.",
     tilt: 2.5,
     tape: "#a3c46f",
   },
@@ -52,6 +59,7 @@ const ITEMS: Item[] = [
   {
     emoji: "🎨",
     title: "Painting & cross-stitch",
+    text: "My most complicated patterns so far: Van Gogh's Sunflowers and Two Women in a Boat.",
     tilt: -2.5,
     tape: "#c88e95",
   },
@@ -65,7 +73,7 @@ const ITEMS: Item[] = [
   {
     emoji: "🍞",
     title: "Bread",
-    text: "I started baking bread because I like soup.",
+    text: "I started baking bread because I like soup. Favorite add-ins: cheese or dried cranberries.",
     tilt: -2,
     tape: "#dd8e58",
   },
