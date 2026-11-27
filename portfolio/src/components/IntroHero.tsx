@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { gsap, reducedMotion, SplitText, useGSAP } from "../lib/gsap";
-import odango from "../../public/dango-svgrepo-com.svg";
+import Dango from "./Dango";
 import onigiri from "../../public/rice-ball-svgrepo-com.svg";
 
 /** First screen: bouncy name, a dango you can poke, and a nudge to scroll. */
@@ -83,7 +83,7 @@ const IntroHero = () => {
         className="hero-dango"
         aria-label="Poke the dango"
       >
-        <Image className="hero-dango-img" alt="" height={200} src={odango} priority />
+        <Dango className="hero-dango-img h-[200px] w-[200px]" />
       </button>
 
       <h1 className="hello mt-10 text-center font-audreyMedium text-3xl uppercase text-white">
