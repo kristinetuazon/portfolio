@@ -8,11 +8,13 @@ type Props = { posts: PostSummary[] };
 
 const BlogIndex: NextPage<Props> = ({ posts }) => (
   <BlogLayout
-    title="Blog · kristineCodes;"
+    title="Mailbox · kristineCodes;"
     description="Letters from Kristine, a software engineer at Lazuli in Japan."
   >
     <p className="font-bodyRegularItalic text-creme">notes, stories &amp; things I learned</p>
-    <h1 className="mt-2 font-heading text-4xl uppercase tracking-widest text-white">the blog;</h1>
+    <h1 className="mt-2 font-heading text-4xl uppercase tracking-widest text-white">
+      the mailbox;
+    </h1>
 
     {posts.length === 0 ? (
       <p className="mt-16 font-bodyThin text-xl text-creme">First post coming soon ✨</p>

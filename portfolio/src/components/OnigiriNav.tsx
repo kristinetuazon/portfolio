@@ -254,8 +254,8 @@ const OnigiriNav = () => {
           </li>
         ))}
       </ol>
-      <Link href="/blog" className="rice-blog">
-        blog
+      <Link href="/mailbox" className="rice-blog">
+        mailbox
       </Link>
     </nav>
   );

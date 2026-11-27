@@ -1,4 +1,4 @@
-# Writing blog posts
+# Writing blog posts (the mailbox)
 
 Posts are Markdown files in this folder. There is no CMS: add or edit a file,
 push to `main`, and Vercel redeploys the site in about a minute. You can do
@@ -7,11 +7,11 @@ all of it from GitHub's web editor.
 ## Add a post
 
 1. Make a folder named after the post's URL, using lowercase words and dashes:
-   `content/blog/my-first-post/` becomes `/blog/my-first-post`.
+   `content/blog/my-first-post/` becomes `/mailbox/my-first-post`.
 2. Inside it, create `index.md` (copy `how-to-write-a-post/index.md` to start).
 3. If the post has images, put them in `public/blog/my-first-post/`.
    Keep them web-sized (about 1600px wide, under 500 KB).
-4. Run `npm run dev` and open http://localhost:3000/blog to preview it,
+4. Run `npm run dev` and open http://localhost:3000/mailbox to preview it,
    then commit and push.
 
 ## Frontmatter
@@ -41,7 +41,7 @@ and autolinks. Also:
 - **Callouts:** start a quote with `> [!NOTE]`, `> [!TIP]`, `> [!IMPORTANT]`,
   `> [!WARNING]` or `> [!CAUTION]`.
 - **Images:** `![description](photo.jpg)` loads `public/blog/<folder>/photo.jpg`.
-- **Headings** get ids, so you can link to `/blog/my-post#some-heading`.
+- **Headings** get ids, so you can link to `/mailbox/my-post#some-heading`.
 
 Raw HTML is not rendered, on purpose.
 

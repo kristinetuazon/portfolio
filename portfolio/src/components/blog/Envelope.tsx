@@ -25,7 +25,7 @@ const postmark = (iso: string) =>
  */
 const Envelope = ({ post }: { post: PostSummary }) => {
   const router = useRouter();
-  const href = `/blog/${post.slug}`;
+  const href = `/mailbox/${post.slug}`;
   const opening = useRef<{ tl: gsap.core.Timeline; timer: number; el: HTMLElement } | null>(null);
 
   // Put the envelope back the way it was (closed, sealed, fully visible).

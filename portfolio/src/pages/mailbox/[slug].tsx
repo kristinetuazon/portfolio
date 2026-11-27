@@ -125,7 +125,7 @@ const BlogPost: NextPage<Props> = ({ post }) => {
               <p className="mb-4 text-sm">Last updated {formatDate(post.updated)}</p>
             )}
             <Link
-              href="/blog"
+              href="/mailbox"
               className="text-charcoal decoration-orange underline-offset-4 hover:underline"
             >
               ← Back to all letters
