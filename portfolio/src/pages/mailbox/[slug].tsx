@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import BlogLayout, { formatDate, Tags } from "../../components/blog/BlogLayout";
 import { gsap, reducedMotion, useGSAP } from "../../lib/gsap";
 import { loadPosts } from "../../services/blog/loader";
 import type { Post } from "../../services/blog/types";
+import { absolute, ogImage, PERSON } from "../../lib/site";
 
 type Props = { post: Post };
 
@@ -72,15 +72,29 @@ const BlogPost: NextPage<Props> = ({ post }) => {
     <BlogLayout
       title={`${post.title} · kristineCodes;`}
       description={post.summary}
+      path={`/mailbox/${post.slug}`}
+      letterTitle={post.title}
       image={post.cover}
+      imageAlt={post.coverAlt}
+      jsonLd={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.summary,
+        datePublished: post.publishedAt,
+        dateModified: post.updated ?? post.publishedAt,
+        inLanguage: "en",
+        url: absolute(`/mailbox/${post.slug}`),
+        image: post.cover ? absolute(post.cover) : ogImage(post.title, "letter"),
+        keywords: post.tags.join(", ") || undefined,
+        author: PERSON,
+        mainEntityOfPage: absolute(`/mailbox/${post.slug}`),
+      }}
     >
       {/* Without JavaScript, show the letter straight away. */}
       <noscript>
         <style>{`.letter-intro{opacity:1 !important}`}</style>
       </noscript>
-      <Head>
-        <meta property="og:type" content="article" />
-      </Head>
 
       <article ref={letter} className="letter letter-intro">
         <div className="letter-fold letter-fold-top" aria-hidden="true" />

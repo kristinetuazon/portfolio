@@ -182,7 +182,7 @@ body {
 .blog .alert > :last-child { margin-bottom: 0; }
 .blog .alert-title {
   color: var(--alert-color);
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.85em;
@@ -316,7 +316,7 @@ body {
   border-radius: 50%;
   transform: rotate(-14deg);
   color: rgba(160, 75, 98, 0.75);
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: clamp(0.45rem, 1.2vw, 0.62rem);
   letter-spacing: 0.08em;
   text-align: center;
@@ -343,13 +343,13 @@ body {
 }
 .env-from {
   display: block;
-  font-family: Petrona_Italic, serif;
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
   font-size: 0.8rem;
   color: #8b7568;
 }
 .env-title {
   margin-top: 0.15rem;
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: clamp(1rem, 2.6vw, 1.35rem);
   line-height: 1.15;
   letter-spacing: 0.06em;
@@ -365,7 +365,7 @@ body {
   border-radius: 0.25rem;
   background: #dd8e58;
   color: #2b2129;
-  font-family: Petrona_Regular, serif;
+  font-family: Petrona_Regular, "Zen Maru Gothic", serif;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -559,7 +559,7 @@ body {
   right: calc(100% + 0.75rem);
   transform: translateY(-50%);
   white-space: nowrap;
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -583,7 +583,7 @@ body {
   }
 }
 .rice-blog {
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -737,7 +737,7 @@ body {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(246, 251, 244, 0.12);
   color: #f6fbf4;
-  font-family: Petrona_Regular, serif;
+  font-family: Petrona_Regular, "Zen Maru Gothic", serif;
   font-size: 0.85rem;
   line-height: 1.1;
   pointer-events: none;
@@ -763,14 +763,14 @@ body {
 .pop-counter-number {
   display: inline-block;
   min-width: 1ch;
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 1.05rem;
   letter-spacing: 0.04em;
 }
 .pop-counter-total {
   display: block;
   margin-top: 0.1rem;
-  font-family: Petrona_Italic, serif;
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
   font-size: 0.7rem;
   color: #c2956e;
 }
@@ -783,7 +783,7 @@ body {
   border-radius: 9999px;
   background: #f6fbf4;
   color: #2b2129;
-  font-family: Audrey_Medium, serif;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
@@ -850,4 +850,73 @@ body {
 .lz-timeline ol,
 .lz-card {
   overflow: visible;
+}
+
+/* ---------- Language switch (EN / 日本語) ---------- */
+
+.lang-switch {
+  position: fixed;
+  z-index: 45; /* same layer as the pop counter */
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  background: rgba(43, 33, 41, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(246, 251, 244, 0.12);
+}
+.lang-option {
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  color: #f6fbf4;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  transition: background-color 0.2s;
+}
+a.lang-option:hover,
+a.lang-option:focus-visible {
+  background: rgba(246, 251, 244, 0.14);
+}
+.lang-option.is-current {
+  background: #f2a7b6;
+  color: #2b2129;
+}
+
+/* ---------- Japanese pages ---------- */
+
+/* Break lines between phrases rather than mid-word, and loosen the very wide
+   tracking meant for Latin capitals. */
+:lang(ja) {
+  word-break: auto-phrase;
+  line-break: strict;
+}
+:lang(ja) .tracking-widest {
+  letter-spacing: 0.08em;
+}
+
+/* ---------- 404: the eaten page ---------- */
+
+.nf-onigiri .onigiri-face {
+  opacity: 1;
+}
+.nf-crumbs {
+  position: absolute;
+  left: 50%;
+  bottom: 0.4rem;
+}
+.nf-crumb {
+  position: absolute;
+  left: var(--x);
+  bottom: 0;
+  width: 0.45rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #f5f1e8;
+  box-shadow: inset -1px -1px 0 #d6ccba;
+  transform: rotate(var(--r));
 }

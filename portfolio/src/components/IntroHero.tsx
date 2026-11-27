@@ -2,10 +2,12 @@ import { useRef } from "react";
 import Image from "next/image";
 import { gsap, reducedMotion, ScrollTrigger, SplitText, useGSAP } from "../lib/gsap";
 import Dango, { BALLS, biteTransform } from "./Dango";
+import { useT } from "../i18n";
 import onigiri from "../../public/rice-ball-svgrepo-com.svg";
 
 /** First screen: bouncy name, a dango you can poke, and a nudge to scroll. */
 const IntroHero = () => {
+  const t = useT();
   const root = useRef<HTMLElement>(null);
   const dango = useRef<HTMLButtonElement>(null);
 
@@ -162,21 +164,21 @@ const IntroHero = () => {
         onClick={jiggle}
         onPointerEnter={(e) => e.pointerType === "mouse" && jiggle(e)}
         className="hero-dango"
-        aria-label="Poke the dango"
+        aria-label={t.intro.poke}
       >
         <Dango className="hero-dango-img h-[200px] w-[200px]" />
       </button>
 
       <h1 className="hello mt-10 text-center font-audreyMedium text-3xl uppercase text-white">
-        <span className="font-bodyRegular text-5xl">{"<"}</span> Hi, my name is Kristine{" "}
+        <span className="font-bodyRegular text-5xl">{"<"}</span> {t.intro.hello}{" "}
         <span className="font-bodyRegular text-5xl">{"/>"}</span>
       </h1>
       <p className="hero-sub mt-4 max-w-xl text-center font-bodyThin text-2xl text-white">
-        and I&apos;m a software engineer based in Yokohama, Japan.
+        {t.intro.sub}
       </p>
 
       <div id="scroll-title" className="mt-28 font-audreyNormal uppercase text-mint">
-        Scroll
+        {t.intro.scroll}
       </div>
       <div className="gelatine flex flex-col items-center" aria-hidden="true">
         {[10, 20, 30].map((h) => (

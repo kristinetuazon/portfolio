@@ -5,14 +5,20 @@ import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
 import OnigiriNav from "../components/OnigiriNav";
 import SoapBubbles from "../components/SoapBubbles";
 import BubbleCounter from "../components/BubbleCounter";
+import LanguageSwitch from "../components/LanguageSwitch";
 import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
 import EarlierWork from "../components/EarlierWork";
 import OffHours from "../components/OffHours";
 import ContactMe from "../components/ContactMe";
+import Seo from "../components/Seo";
+import { useLocale, useT } from "../i18n";
+import { ogImage, PERSON, SITE_NAME, SITE_URL } from "../lib/site";
 
 const Home: NextPage = () => {
+  const t = useT();
+  const locale = useLocale();
   useGSAP(() => {
     // In the story, highlight key phrases as they scroll past the middle of the screen.
     gsap.utils.toArray<HTMLElement>(".story span").forEach((span) => {
@@ -25,18 +31,37 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Seo
+        title={t.meta.title}
+        description={t.meta.description}
+        path="/"
+        locale={locale}
+        hasJapanese
+        image={ogImage()}
+        imageAlt={t.meta.imageAlt}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@graph": [
+            { ...PERSON, description: t.meta.description },
+            {
+              "@type": "WebSite",
+              "@id": `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              inLanguage: ["en", "ja"],
+              author: { "@id": PERSON["@id"] },
+            },
+          ],
+        }}
+      />
       <Head>
-        <title>kristineCodes;</title>
-        <meta
-          name="description"
-          content="Kristine Tuazon, software engineer in Japan: portfolio and mailbox."
-        />
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <OnigiriNav />
       <SoapBubbles />
       <BubbleCounter />
+      <LanguageSwitch />
       <IntroHero />
       <LazuliSection />
 

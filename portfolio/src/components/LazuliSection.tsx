@@ -1,45 +1,16 @@
 import { useRef, useSyncExternalStore } from "react";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
 import BeyondTests from "./BeyondTests";
-
-const START = { year: 2023, month: 6 }; // June 2023
-
-/** "3 years 6 months" since joining, worked out on the visitor's device. */
-function timeAtLazuli(now = new Date()) {
-  // Counts the starting month too, the way LinkedIn does (Jun–Nov = 6 months).
-  const months = (now.getFullYear() - START.year) * 12 + (now.getMonth() + 1 - START.month) + 1;
-  const years = Math.floor(months / 12);
-  const rest = months % 12;
-  const y = `${years} year${years === 1 ? "" : "s"}`;
-  return rest ? `${y} ${rest} month${rest === 1 ? "" : "s"}` : y;
-}
+import { timeAtLazuli, useLocale, useT } from "../i18n";
 
 const noop = () => () => {};
 
 // Her three years at Lazuli, one dango each, left to right along the skewer.
+// (The words for each year live in src/i18n.)
 const ROLES = [
-  {
-    color: "#f2a7b6",
-    shades: ["#fde4ea", "#efa3b3", "#b86a7c"],
-    tag: "Year 1 · 2023–24",
-    title: "Filters, lists & search",
-    text: "Frontend for the first version of Lazuli's Product Data Platform: the filters, product lists and product search.",
-  },
-  {
-    color: "#e9e2d4",
-    shades: ["#ffffff", "#ebe4d6", "#a99f8c"],
-    tag: "Year 2 · 2024–25",
-    title: "Translations & an admin tool",
-    text: "More frontend, including the language toggle for translations, plus an internal admin tool in Ruby for managing customer data.",
-  },
-  {
-    color: "#a3c46f",
-    shades: ["#e3f0c9", "#9cbd63", "#5b7a33"],
-    tag: "Year 3 · 2025–now",
-    title: "QA & end-to-end testing",
-    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in three browsers. CI checks stop a broken test from being merged, and I tracked down the race condition behind random test failures.",
-    now: true,
-  },
+  { color: "#f2a7b6", shades: ["#fde4ea", "#efa3b3", "#b86a7c"] },
+  { color: "#e9e2d4", shades: ["#ffffff", "#ebe4d6", "#a99f8c"] },
+  { color: "#a3c46f", shades: ["#e3f0c9", "#9cbd63", "#5b7a33"], now: true },
 ];
 
 // The headline numbers; they count up as the section comes in.
@@ -76,10 +47,12 @@ const COLS = [189, 600, 1011];
 const LazuliSection = () => {
   const root = useRef<HTMLElement>(null);
   // Server render says "3+ years"; the browser fills in the exact time.
+  const t = useT();
+  const locale = useLocale();
   const tenure = useSyncExternalStore(
     noop,
-    () => timeAtLazuli(),
-    () => "3+ years",
+    () => timeAtLazuli(locale),
+    () => t.lazuli.tenureFallback,
   );
 
   /**
@@ -226,23 +199,23 @@ const LazuliSection = () => {
         <div className="lz-intro mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.15fr_1fr] lg:items-end">
           <div>
             <p className="lz-intro-item font-bodyRegularItalic text-lg text-creme">
-              these days, I&apos;m a
+              {t.lazuli.lead}
             </p>
             <h2 className="lz-intro-item mt-2 overflow-visible font-heading text-4xl uppercase leading-tight tracking-widest text-white sm:text-5xl">
-              Software Engineer
+              {t.lazuli.titleLine1}
               <br />
-              at Lazuli
+              {t.lazuli.titleLine2}
             </h2>
             <p className="lz-intro-item mt-5 font-bodyRegular text-sm uppercase tracking-widest text-coffee">
-              June 2023 – now · <span className="text-orange">{tenure}</span> · Tokyo, hybrid
+              {t.lazuli.since} · <span className="text-orange">{tenure}</span> · {t.lazuli.place}
             </p>
             <p className="lz-intro-item mt-8 font-bodyRegularItalic text-2xl text-creme">
-              mostly QA, with a frontend heart
+              {t.lazuli.tagline}
             </p>
             <p className="lz-intro-item mt-5 max-w-xl font-bodyLight text-lg leading-relaxed text-white">
-              Lazuli is a Japanese SaaS startup. Its{" "}
-              <strong className="font-bodyRegular">Product Data Platform</strong> helps companies
-              collect, clean and put their product data to work.
+              {t.lazuli.blurbBefore}{" "}
+              <strong className="font-bodyRegular">{t.lazuli.blurbProduct}</strong>{" "}
+              {t.lazuli.blurbAfter}
             </p>
             <a
               href="https://lazuli.ninja/"
@@ -254,9 +227,9 @@ const LazuliSection = () => {
 
           <div>
             <dl className="lz-stats grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
-              {STATS.map(({ value, prefix, suffix, label }) => (
-                <div key={label} className="lz-intro-item">
-                  <dt className="sr-only">{label}</dt>
+              {STATS.map(({ value, prefix, suffix }, i) => (
+                <div key={STATS[i]!.label} className="lz-intro-item">
+                  <dt className="sr-only">{t.lazuli.stats[i]}</dt>
                   <dd>
                     <span className="block font-audreyMedium text-4xl text-white">
                       {/* The heading font has no "~", so the extras use the body font */}
@@ -265,14 +238,14 @@ const LazuliSection = () => {
                       {suffix && <span className="font-bodyRegular">{suffix}</span>}
                     </span>
                     <span className="mt-1 block font-bodyRegular text-xs uppercase leading-tight tracking-widest text-coffee">
-                      {label}
+                      {t.lazuli.stats[i]}
                     </span>
                   </dd>
                 </div>
               ))}
             </dl>
 
-            <ul className="mt-10 flex flex-wrap gap-2" aria-label="Tools I use">
+            <ul className="mt-10 flex flex-wrap gap-2" aria-label={t.lazuli.toolsLabel}>
               {TOOLS.map((tool) => (
                 <li
                   key={tool}
@@ -288,7 +261,7 @@ const LazuliSection = () => {
         {/* Part 2: the three years, one dango each */}
         <div className="lz-timeline mx-auto mt-24 max-w-6xl lg:mt-32">
           <p className="mb-2 text-center font-bodyRegularItalic text-lg text-creme">
-            three years, three dango
+            {t.lazuli.timeline}
           </p>
           <div className="overflow-hidden">
             <svg
@@ -447,7 +420,7 @@ const LazuliSection = () => {
           <ol className="mt-6 grid gap-6 lg:mt-0 lg:grid-cols-3 lg:gap-8">
             {ROLES.map((role, i) => (
               <li
-                key={role.title}
+                key={t.lazuli.years[i]!.title}
                 className={`lz-card lz-card-${i} rounded-3xl border-2 bg-charcoal/80 p-7 backdrop-blur`}
                 style={{ borderColor: role.color }}
               >
@@ -462,18 +435,18 @@ const LazuliSection = () => {
                       background: `radial-gradient(circle at 36% 30%, ${role.shades[0]}, ${role.shades[1]} 45%, ${role.shades[2]})`,
                     }}
                   />
-                  {role.tag}
+                  {t.lazuli.years[i]!.tag}
                   {"now" in role && (
                     <span className="rounded-full bg-[#a3c46f] px-2 py-px text-[0.65rem] tracking-wider text-charcoal">
-                      now
+                      {t.lazuli.now}
                     </span>
                   )}
                 </p>
                 <h3 className="mt-3 font-audreyMedium text-2xl uppercase leading-snug tracking-wide text-white">
-                  {role.title}
+                  {t.lazuli.years[i]!.title}
                 </h3>
                 <p className="mt-3 font-bodyLight text-lg leading-relaxed text-creme">
-                  {role.text}
+                  {t.lazuli.years[i]!.text}
                 </p>
               </li>
             ))}

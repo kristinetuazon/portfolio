@@ -82,7 +82,16 @@ const STEAM = [
  * soft sheen, and a different topping per kind. It also carries hidden parts
  * the nav animates: two bite marks, steam, and a little face. Decorative.
  */
-const Onigiri = ({ kind, className }: { kind: OnigiriKind; className?: string }) => {
+const Onigiri = ({
+  kind,
+  className,
+  bitten = false,
+}: {
+  kind: OnigiriKind;
+  className?: string;
+  /** Start with both bites already taken (the 404 page). */
+  bitten?: boolean;
+}) => {
   const id = useId().replace(/:/g, "");
   const yaki = kind === "yaki";
   const ink = yaki ? "#3a1d08" : "#2b2129";
@@ -161,11 +170,15 @@ const Onigiri = ({ kind, className }: { kind: OnigiriKind; className?: string })
         <filter id={`${id}-steam`} x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="1.1" />
         </filter>
-        {/* Everything is drawn through this mask; both chomps start at scale 0 (no bite). */}
+        {/* Everything is drawn through this mask; the chomps start at scale 0 (no bite) unless bitten. */}
         <mask id={`${id}-bite`} maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
           <rect x="-10" y="-10" width="120" height="120" fill="#fff" />
           {CHOMPS.map(({ circles }, i) => (
-            <g key={i} className={`onigiri-chomp-${i}`} transform={chompTransform(i, 0)}>
+            <g
+              key={i}
+              className={`onigiri-chomp-${i}`}
+              transform={chompTransform(i, bitten ? 1 : 0)}
+            >
               {circles.map(([cx, cy, r], j) => (
                 <circle key={j} cx={cx} cy={cy} r={r} fill="#000" />
               ))}
@@ -304,7 +317,11 @@ const Onigiri = ({ kind, className }: { kind: OnigiriKind; className?: string })
           {/* Bite edges: the rice just inside the tooth marks is a little darker */}
           <g clipPath={`url(#${id}-clip)`}>
             {CHOMPS.map(({ circles }, i) => (
-              <g key={i} className={`onigiri-chomp-${i}`} transform={chompTransform(i, 0)}>
+              <g
+                key={i}
+                className={`onigiri-chomp-${i}`}
+                transform={chompTransform(i, bitten ? 1 : 0)}
+              >
                 {circles.map(([cx, cy, r], j) => (
                   <circle
                     key={j}

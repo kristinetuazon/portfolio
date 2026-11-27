@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
+import { useT, type Dict } from "../i18n";
 import camera from "../../public/DSCF0571.jpg";
 import walking from "../../public/DSCF0598.jpg";
 
 type Item = {
-  title: string;
-  text?: string;
+  /** Its title and text live in src/i18n under offhours.items. */
+  id: keyof Dict["offhours"]["items"];
   /** A photo makes it a polaroid; otherwise it's a paper note with an emoji. */
   photo?: { src: StaticImageData; alt: string };
   emoji?: string;
@@ -22,58 +23,50 @@ const ITEMS: Item[] = [
       src: camera,
       alt: "Kristine taking a photo with a film camera on an old wooden street",
     },
-    title: "Photos & videos",
-    text: "Taking photos and videos. Lately: wedding photos for friends.",
+    id: "photos",
     tilt: -3,
     tape: "#f2a7b6",
   },
   {
     emoji: "🎬",
-    title: "Quiet vlogs",
-    text: "Small, non-talking vlogs. Maybe a future YouTube channel?",
+    id: "vlogs",
     tilt: 1.5,
     tape: "#708a81",
   },
   {
     emoji: "💌",
-    title: "Wedding invites",
-    text: "Making wedding invitations for friends, too.",
+    id: "invites",
     tilt: 2.5,
     tape: "#a3c46f",
   },
   {
     emoji: "✉️",
-    title: "Letters, journals & scrapbooks",
-    text: "Handwritten letters, journaling and scrapbooking (yes, like this page).",
+    id: "letters",
     tilt: -1.5,
     tape: "#f6c177",
   },
   {
     photo: { src: walking, alt: "Kristine walking away down a narrow stone alley" },
-    title: "Long walks",
-    text: "Recently walked the whole Yamanote line loop, all 30 stations.",
+    id: "walks",
     loop: true,
     tilt: 2,
     tape: "#9acd32",
   },
   {
     emoji: "🎨",
-    title: "Painting & cross-stitch",
-    text: "My most complicated patterns so far: Van Gogh's Sunflowers and Monet's Young Girls in the Rowing Boat.",
+    id: "painting",
     tilt: -2.5,
     tape: "#c88e95",
   },
   {
     emoji: "🧵",
-    title: "Sewing",
-    text: "My COVID hobby: pillow covers and such. Currently in need of a new sewing machine.",
+    id: "sewing",
     tilt: 1.5,
     tape: "#e9e2d4",
   },
   {
     emoji: "🍞",
-    title: "Bread",
-    text: "I started baking bread because I like soup. Favorite add-ins: cheese or dried cranberries.",
+    id: "bread",
     tilt: -2,
     tape: "#dd8e58",
   },
@@ -93,7 +86,7 @@ const withHyphens = (text: string) =>
   );
 
 /** A tiny Yamanote line: the green loop with 30 stations and a walker going round. */
-const YamanoteLoop = () => (
+const YamanoteLoop = ({ onFoot }: { onFoot: string }) => (
   <svg viewBox="0 0 120 120" className="oh-loop h-24 w-24" aria-hidden="true">
     <circle cx="60" cy="60" r="44" fill="none" stroke="#9acd32" strokeWidth="6" />
     {Array.from({ length: 30 }, (_, i) => {
@@ -125,17 +118,18 @@ const YamanoteLoop = () => (
       x="60"
       y="74"
       textAnchor="middle"
-      fontFamily="Petrona_Italic, serif"
+      fontFamily="Petrona_Italic, Zen Maru Gothic, serif"
       fontSize="11"
       fill="#7a675f"
     >
-      on foot ✓
+      {onFoot}
     </text>
   </svg>
 );
 
 /** "Off the clock": hobbies as a scrapbook page of polaroids and notes. */
 const OffHours = () => {
+  const t = useT();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -173,59 +167,58 @@ const OffHours = () => {
       aria-labelledby="offhours-title"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="font-bodyRegularItalic text-lg text-creme">
-          when I&apos;m not writing tests, I&apos;m usually making something
-        </p>
+        <p className="font-bodyRegularItalic text-lg text-creme">{t.offhours.lead}</p>
         <h2
           id="offhours-title"
           className="mt-2 overflow-visible font-heading text-4xl uppercase tracking-widest text-white sm:text-5xl"
         >
-          off the clock;
+          {t.offhours.title}
         </h2>
 
         <ul className="mt-16 columns-1 gap-10 sm:columns-2 lg:columns-3">
-          {ITEMS.map((item) => (
-            <li key={item.title} className="oh-item mb-12 break-inside-avoid">
-              <div
-                className={item.photo ? "oh-polaroid" : "oh-note"}
-                style={
-                  {
-                    "--tilt": `${item.tilt}deg`,
-                    "--tape": item.tape,
-                  } as React.CSSProperties
-                }
-              >
-                <span className="oh-tape" aria-hidden="true" />
-                {item.photo && (
-                  <Image
-                    src={item.photo.src}
-                    alt={item.photo.alt}
-                    sizes="(min-width: 976px) 340px, (min-width: 400px) 45vw, 90vw"
-                    className="aspect-[4/3] w-full object-cover"
-                    placeholder="blur"
-                  />
-                )}
-                {item.emoji && (
-                  <p className="text-4xl" aria-hidden="true">
-                    {item.emoji}
-                  </p>
-                )}
-                <h3 className="mt-3 font-audreyMedium text-xl uppercase tracking-wide text-charcoal">
-                  {withHyphens(item.title)}
-                </h3>
-                {item.text && (
+          {ITEMS.map((item) => {
+            const { title, text } = t.offhours.items[item.id];
+            return (
+              <li key={item.id} className="oh-item mb-12 break-inside-avoid">
+                <div
+                  className={item.photo ? "oh-polaroid" : "oh-note"}
+                  style={
+                    {
+                      "--tilt": `${item.tilt}deg`,
+                      "--tape": item.tape,
+                    } as React.CSSProperties
+                  }
+                >
+                  <span className="oh-tape" aria-hidden="true" />
+                  {item.photo && (
+                    <Image
+                      src={item.photo.src}
+                      alt={item.photo.alt}
+                      sizes="(min-width: 976px) 340px, (min-width: 400px) 45vw, 90vw"
+                      className="aspect-[4/3] w-full object-cover"
+                      placeholder="blur"
+                    />
+                  )}
+                  {item.emoji && (
+                    <p className="text-4xl" aria-hidden="true">
+                      {item.emoji}
+                    </p>
+                  )}
+                  <h3 className="mt-3 font-audreyMedium text-xl uppercase tracking-wide text-charcoal">
+                    {withHyphens(title)}
+                  </h3>
                   <p className="mt-1 font-bodyRegularItalic text-lg leading-snug text-[#5a4a45]">
-                    {item.text}
+                    {text}
                   </p>
-                )}
-                {item.loop && (
-                  <div className="mt-3 flex justify-center">
-                    <YamanoteLoop />
-                  </div>
-                )}
-              </div>
-            </li>
-          ))}
+                  {item.loop && (
+                    <div className="mt-3 flex justify-center">
+                      <YamanoteLoop onFoot={t.offhours.onFoot} />
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
