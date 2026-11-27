@@ -1100,3 +1100,16 @@ a.lang-option:focus-visible {
 :root[data-theme="light"] .soap-drop {
   background: rgba(105, 90, 145, 0.5);
 }
+:root[data-theme="light"] #scroll-title {
+  color: rgb(var(--c-coffee));
+}
+/* Japanese has no italics; a slanted fake looks wrong. */
+:lang(ja) em,
+:lang(ja) .now-items em {
+  font-style: normal;
+}
+:root[data-theme="light"] .nf-crumb {
+  box-shadow:
+    inset -1px -1px 0 #d6ccba,
+    0 0 0 0.6px rgba(43, 33, 41, 0.45);
+}

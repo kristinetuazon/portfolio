@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { loadPosts } from "../loader";
-import { renderMarkdown } from "../markdown";
+import { readingMinutes, renderMarkdown } from "../markdown";
 import { BlogContentError } from "../types";
 
 // --- The real posts -------------------------------------------------------
@@ -123,5 +123,22 @@ describe("renderMarkdown", () => {
     expect(html).toContain("<table>");
     expect(html).toContain('href="https://example.com" target="_blank" rel="noopener noreferrer"');
     expect(html).toContain('<a href="/blog">int</a>');
+  });
+
+  it("letters are English unless they say lang: ja", async () => {
+    write("english", post(valid));
+    write("japanese", post(`${valid}\nlang: ja`));
+    const bySlug = Object.fromEntries((await load()).map((p) => [p.slug, p.lang]));
+    expect(bySlug).toEqual({ english: "en", japanese: "ja" });
+  });
+
+  it("rejects an unknown language", async () => {
+    write("french", post(`${valid}\nlang: fr`));
+    await expect(load()).rejects.toThrow(/lang/);
+  });
+
+  it("estimates reading time for Japanese by characters, not spaces", () => {
+    expect(readingMinutes("あ".repeat(1500))).toBe(3);
+    expect(readingMinutes("word ".repeat(440))).toBe(2);
   });
 });
