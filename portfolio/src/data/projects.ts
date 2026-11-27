@@ -12,6 +12,8 @@ export type Project = {
   title: string;
   /** One sentence, in English and Japanese. */
   description: { en: string; ja: string };
+  /** What she built on it. */
+  part: { en: string; ja: string };
   links: ProjectLink[];
   /** Card image: one screenshot, ideally 16:9. */
   image: StaticImageData;
@@ -29,6 +31,10 @@ export const projects: Project[] = [
       en: "A gamified pomodoro web application for game-lovers.",
       ja: "ゲーム好きのための、ゲーム感覚で集中できるポモドーロWebアプリ。",
     },
+    part: {
+      en: "Team project: Firebase sign-in, page layouts and the dashboard.",
+      ja: "チームで開発。Firebaseのログイン、ページレイアウト、ダッシュボード。",
+    },
     links: [
       { kind: "github", href: "https://github.com/Ghost-Pepper-Greenfield/study-hero" },
       { kind: "youtube", href: "https://youtu.be/W3A1CalxAh8" },
@@ -43,6 +49,10 @@ export const projects: Project[] = [
       en: "A legacy project that helps people find their next home within their budget.",
       ja: "予算内で次の住まいを見つける手助けをする、レガシープロジェクト。",
     },
+    part: {
+      en: "Team project, built on an existing codebase: Firebase sign-in, page layouts and the dashboard.",
+      ja: "既存のコードを引き継いだチーム開発。Firebaseのログイン、ページレイアウト、ダッシュボード。",
+    },
     links: [{ kind: "youtube", href: "https://youtu.be/iHT86r0FjlU" }],
     image: costOfLiving,
     color: "#dae3ea",
@@ -53,6 +63,10 @@ export const projects: Project[] = [
     description: {
       en: "A tinder-style decluttering application. Both version one and version two exists.",
       ja: "Tinder風にスワイプして片づける、断捨離アプリ。バージョン1と2があります。",
+    },
+    part: {
+      en: "My own app, 37 pull requests: a Next.js frontend with Firebase sign-in and Redux, an Express server, and a second server in Java.",
+      ja: "自分ひとりで作ったアプリ（プルリクエスト37件）。FirebaseログインとReduxを使ったNext.jsのフロントエンド、Expressのサーバー、さらにJava版のサーバーも。",
     },
     links: [
       { kind: "github", href: "https://github.com/kristinetuazon/minimize" },
@@ -68,6 +82,10 @@ export const projects: Project[] = [
     description: {
       en: "A geo-location, narrative based game platform and editor.",
       ja: "位置情報を使った、物語ベースのゲームプラットフォームとエディター。",
+    },
+    part: {
+      en: "Team project, where I was the main contributor to the TypeScript client (161 commits): sign-in, game progression, and a drag-and-drop editor for building games.",
+      ja: "チーム開発で、TypeScriptのクライアントのメイン担当（コミット161件）。ログイン、ゲームの進行、ゲームを作るためのドラッグ＆ドロップのエディターを作りました。",
     },
     links: [
       { kind: "github", href: "https://github.com/TokyoNoire" },

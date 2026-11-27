@@ -55,16 +55,36 @@ const en = {
         tag: "Year 1 · 2023–24",
         title: "Filters, lists & search",
         text: "Frontend for the first version of Lazuli's Product Data Platform: the filters, product lists and product search.",
+        highlights: [
+          "Rebuilt the product catalogue and shipped it to production",
+          "UIs for AI features: colour estimation, hashtags and product descriptions",
+          "Early platform screens: sign-in, tables, an in-browser SQL editor and the task scheduler",
+          "The app's frontend test setup",
+        ],
       },
       {
         tag: "Year 2 · 2024–25",
         title: "Translations & an admin tool",
         text: "More frontend, including the language toggle for translations, plus an internal admin tool in Ruby for managing customer data.",
+        highlights: [
+          "English and Japanese localisation of the whole app",
+          "The admin tool: organisations, users, roles, invites and an audit log",
+          "Data connectors (SFTP, S3) and scheduled data sync",
+          "A digital asset manager: folders, tags, uploads and history",
+          "Sorting, filtering and pagination across every list",
+        ],
       },
       {
         tag: "Year 3 · 2025–now",
         title: "QA & end-to-end testing",
         text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in three browsers. CI checks stop a broken test from being merged, and I tracked down the race condition behind random test failures.",
+        highlights: [
+          "Accuracy tests that score PDF and Excel extraction against real product catalogues",
+          "Regression tests written from bug tickets, part of every release",
+          "Moved the whole suite over to the new version of the product before launch",
+          "Lint rules that block flaky patterns, and a fix for random sign-outs mid-run",
+          "Rewrote the help centre for the new product",
+        ],
       },
     ],
   },
@@ -126,19 +146,59 @@ const en = {
   story: {
     startedWith: "It all started with a",
     hooked: "and I knew I was hooked.",
-    p1: {
-      before: "On October 2020, I began learning how to code with the intention of being a ",
-      highlight: "software engineer",
-      middle:
-        ". After a pandemic, a Javascript foundations course, a couple years of saving and an intensive software engineering course later, ",
-      highlight2:
-        "I have created several projects that I want to share to the world that I said hello to.",
-    },
-    p2: {
-      before:
-        "As a growing software developer with a background in literature and a deep appreciation of art and design, ",
-      highlight:
-        "I wanted a space to visually and dynamically showcase and tell the stories of the projects that I've been working on using the technologies I have learned, and continue to learn about.",
+    history: {
+      lead: "the commit history so far",
+      chartTitle: "merged pull requests at Lazuli, per year",
+      chartNote: "2026 so far",
+      stats: [
+        { value: "710", label: "pull requests merged" },
+        { value: "42", label: "repositories" },
+        { value: "2020", label: "first hello, world" },
+      ],
+      chapters: [
+        {
+          id: "hello",
+          date: "Oct 2020",
+          title: "hello, world",
+          text: "I was teaching English in Tokyo with time on my hands during the pandemic, so I started a JavaScript foundations course, aiming to become a software engineer.",
+          tags: ["JavaScript"],
+        },
+        {
+          id: "bootcamp",
+          date: "Aug 2022",
+          title: "Code Chrysalis",
+          text: "A full-stack bootcamp in Tokyo, and four apps in three months: from Minimize, which I built on my own, to Tokyo Noire, a location-based story game built as a team (more in earlier work, below).",
+          tags: ["Node / Express", "SQL", "React", "Firebase"],
+        },
+        {
+          id: "lazuli",
+          date: "Jun 2023",
+          title: "joined Lazuli",
+          text: "Frontend engineer at a product-data startup. First up: rebuilding the product catalogue and shipping it to production, UIs for AI features like product-description generation, and the app's frontend test setup.",
+          tags: ["Next.js", "TypeScript"],
+        },
+        {
+          id: "platform",
+          date: "2023 – 25",
+          title: "building the platform",
+          text: "Two years on the Product Data Platform's frontend: data connectors and sync schedules, an internal admin console, a digital asset manager, and the full English and Japanese localisation.",
+          tags: ["React", "Auth0", "i18n"],
+        },
+        {
+          id: "qa",
+          date: "2025 – now",
+          title: "into QA",
+          text: "I moved into quality engineering and built Lazuli's end-to-end test platform almost from scratch: Playwright suites across every product area, run on dev, staging and production, with CI rules that keep the tests reliable.",
+          tags: ["Playwright", "GitHub Actions", "GritQL"],
+        },
+        {
+          id: "now",
+          date: "now",
+          title: "still saying hello",
+          text: "Learning how to make AI-written code trustworthy enough to merge, and practising on this website, which is tested with Robot Framework on every change.",
+          tags: [],
+        },
+      ],
     },
     readStory: "Why programming? Read the story →",
     photos: {
@@ -218,6 +278,9 @@ const en = {
     lead: "and before that, my",
     title: "earlier work",
     sub: "a few things I built before joining Lazuli",
+    story:
+      "Starting in August 2022: three months of full-stack bootcamp at Code Chrysalis in Tokyo, learning data structures, REST APIs, SQL, React and TypeScript. About 120 pull requests later I had four apps, three built with teammates and one of my own, plus my first open-source pull request, to mymizu's website.",
+    myPart: "my part",
     links: { github: "code on GitHub", website: "live site", youtube: "demo video" },
     screenshot: (title: string) => `${title} screenshot`,
   },
@@ -293,16 +356,36 @@ const ja: Dict = {
         tag: "1年目 · 2023–24",
         title: "フィルター・一覧・検索",
         text: "Product Data Platform最初のバージョンのフロントエンドを担当。フィルター、商品一覧、商品検索をつくりました。",
+        highlights: [
+          "商品カタログを作り直し、本番までリリース",
+          "AI機能のUI：色の推定、ハッシュタグや商品説明文の生成",
+          "プラットフォーム初期の画面：ログイン、テーブル、ブラウザ上のSQLエディター、タスクスケジューラー",
+          "アプリのフロントエンドのテスト基盤",
+        ],
       },
       {
         tag: "2年目 · 2024–25",
         title: "多言語対応と管理ツール",
-        text: "引き続きフロントエンドを担当し、翻訳の言語切り替えを実装。顧客データを管理する社内向けの管理ツールもRubyで開発しました。",
+        text: "引き続きフロントエンドを担当し、言語切り替え機能を実装。顧客データを管理する社内向けの管理ツールもRubyで開発しました。",
+        highlights: [
+          "アプリ全体の英語・日本語対応",
+          "管理ツール：組織、ユーザー、権限、招待、監査ログ",
+          "データ連携（SFTP、S3）と定期的なデータ同期",
+          "デジタルアセット管理：フォルダー、タグ、アップロード、履歴",
+          "すべての一覧での並べ替え・絞り込み・ページ送り",
+        ],
       },
       {
         tag: "3年目 · 2025–現在",
         title: "QA・E2Eテスト",
-        text: "LazuliのE2Eテストスイートをゼロから構築し、オーナーとして運用しています。3つのプロダクトにわたる約390件のPlaywrightテストを、開発・ステージング・本番の各環境で3種類のブラウザに対して実行。壊れたテストがマージされないようCIでチェックし、テストがランダムに失敗する原因だった競合状態も突き止めました。",
+        text: "LazuliのE2Eテストスイートをゼロから構築し、責任者として運用しています。3つのプロダクトにわたる約390件のPlaywrightテストを、開発・ステージング・本番の各環境で3種類のブラウザに対して実行。壊れたテストがマージされないようCIでチェックし、テストがランダムに失敗する原因だった競合状態も突き止めました。",
+        highlights: [
+          "実際の商品カタログを使って、PDFやExcelからの抽出精度を測るテスト",
+          "バグのチケットをもとにした回帰テストを、リリースのたびに実行",
+          "新バージョンのリリースに先がけて、テスト一式を移行",
+          "不安定なテストの書き方を防ぐLintルールと、テストの途中でログアウトされてしまう不具合の修正",
+          "新しいプロダクトに合わせてヘルプセンターを書き直し",
+        ],
       },
     ],
   },
@@ -364,18 +447,59 @@ const ja: Dict = {
   story: {
     startedWith: "すべては、この一行から",
     hooked: "その瞬間、すっかりとりこになりました。",
-    p1: {
-      before: "2020年10月、",
-      highlight: "ソフトウェアエンジニア",
-      middle:
-        "を目指して、プログラミングを学びはじめました。パンデミック、JavaScriptの基礎講座、数年間の貯金、そして集中的なソフトウェアエンジニアリング講座を経て、",
-      highlight2:
-        "「こんにちは」とあいさつしたこの世界に見てほしい作品を、いくつもつくってきました。",
-    },
-    p2: {
-      before: "文学を学び、アートとデザインが大好きな、成長中の開発者として。",
-      highlight:
-        "学んできた技術、そしてこれから学ぶ技術でつくってきた作品の物語を、目で見て、動きで感じてもらえる場所がほしいと思いました。",
+    history: {
+      lead: "これまでのコミット履歴",
+      chartTitle: "LazuliでマージしたPR（年ごと）",
+      chartNote: "2026年は途中まで",
+      stats: [
+        { value: "710", label: "マージしたPR" },
+        { value: "42", label: "リポジトリ" },
+        { value: "2020", label: "はじめての hello, world" },
+      ],
+      chapters: [
+        {
+          id: "hello",
+          date: "2020年10月",
+          title: "hello, world",
+          text: "東京で英語を教えていたころ、コロナ禍で時間ができたので、ソフトウェアエンジニアを目指してJavaScriptの基礎講座を始めました。",
+          tags: ["JavaScript"],
+        },
+        {
+          id: "bootcamp",
+          date: "2022年8月",
+          title: "Code Chrysalis",
+          text: "東京のフルスタック・ブートキャンプへ。3か月で4つのアプリを作りました。ひとりで作ったMinimizeから、チームで作った位置情報の物語ゲームTokyo Noireまで（くわしくは下の「作品たち」で）。",
+          tags: ["Node / Express", "SQL", "React", "Firebase"],
+        },
+        {
+          id: "lazuli",
+          date: "2023年6月",
+          title: "Lazuliへ",
+          text: "商品データを扱うスタートアップに、フロントエンドエンジニアとして入社。最初の仕事は、商品カタログを作り直して本番リリースすること、商品説明文の生成などAI機能のUI、そしてフロントエンドのテスト基盤づくりでした。",
+          tags: ["Next.js", "TypeScript"],
+        },
+        {
+          id: "platform",
+          date: "2023〜25年",
+          title: "プラットフォームを育てる",
+          text: "Product Data Platformのフロントエンドを2年間担当。データ連携と同期スケジュール、社内向けの管理ツール、デジタルアセット管理、そしてアプリ全体の英語・日本語対応を作りました。",
+          tags: ["React", "Auth0", "i18n"],
+        },
+        {
+          id: "qa",
+          date: "2025年〜現在",
+          title: "QAの道へ",
+          text: "品質エンジニアリングに移り、LazuliのE2Eテスト基盤をほぼゼロから構築。すべてのプロダクト領域をカバーするPlaywrightのテストを開発・ステージング・本番で実行し、テストを安定させるCIのルールも整えました。",
+          tags: ["Playwright", "GitHub Actions", "GritQL"],
+        },
+        {
+          id: "now",
+          date: "いま",
+          title: "まだまだ hello",
+          text: "AIが書いたコードを安心してマージできるようにする方法を勉強中。練習台はこのウェブサイトで、変更のたびにRobot Frameworkでテストしています。",
+          tags: [],
+        },
+      ],
     },
     readStory: "なぜプログラミング？ 英語のお手紙を読む →",
     photos: {
@@ -459,6 +583,9 @@ const ja: Dict = {
     lead: "Lazuliよりも前の",
     title: "作品たち",
     sub: "学びながらつくった、思い出のプロジェクト",
+    story:
+      "2022年8月から3か月間、東京のCode Chrysalisでフルスタックのブートキャンプに参加。データ構造、REST API、SQL、React、TypeScriptを学びました。約120件のプルリクエストを経て、チームで3つ、ひとりで1つのアプリが完成。はじめてのオープンソースへのプルリクエスト（mymizuのウェブサイト）もこのころです。",
+    myPart: "担当",
     links: { github: "GitHubのコード", website: "サイトを見る", youtube: "デモ動画" },
     screenshot: (title: string) => `${title}のスクリーンショット`,
   },

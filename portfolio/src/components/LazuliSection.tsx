@@ -17,7 +17,7 @@ const ROLES = [
 const STATS = [
   { value: 390, prefix: "~", suffix: "", label: "tests" },
   { value: 3, prefix: "", suffix: "", label: "products" },
-  { value: 170, prefix: "", suffix: "+", label: "PRs merged" },
+  { value: 580, prefix: "", suffix: "+", label: "PRs merged" },
   { value: 100, prefix: "", suffix: "+", label: "tickets covered" },
   { value: 22, prefix: "", suffix: "", label: "bugs filed" },
 ];
@@ -448,6 +448,13 @@ const LazuliSection = () => {
                 <p className="mt-3 font-bodyLight text-lg leading-relaxed text-creme">
                   {t.lazuli.years[i]!.text}
                 </p>
+                <ul className="lz-highlights mt-4">
+                  {t.lazuli.years[i]!.highlights.map((h) => (
+                    <li key={h} style={{ "--dot": role.color } as React.CSSProperties}>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ol>

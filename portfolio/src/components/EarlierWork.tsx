@@ -53,6 +53,9 @@ const EarlierWork = () => {
         {t.earlier.title}
       </h2>
       <p className="mt-3 max-w-md text-center font-bodyThinItalic text-white">{t.earlier.sub}</p>
+      <p className="ew-story mt-8 max-w-2xl text-center font-bodyLight text-lg leading-relaxed text-white">
+        {t.earlier.story}
+      </p>
 
       <ul className="ew-grid mt-14 grid w-full max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {projects.map((p) => (
@@ -77,8 +80,14 @@ const EarlierWork = () => {
                   />
                   {p.title}
                 </h3>
-                <p className="mt-2 flex-1 font-bodyLight leading-relaxed text-creme">
+                <p className="mt-2 font-bodyLight leading-relaxed text-creme">
                   {p.description[locale]}
+                </p>
+                <p className="ew-part mt-3 flex-1 font-bodyRegular text-sm leading-relaxed text-white">
+                  <span className="mr-1 font-audreyMedium text-xs uppercase tracking-widest text-coffee">
+                    {t.earlier.myPart}
+                  </span>{" "}
+                  {p.part[locale]}
                 </p>
                 <div className="mt-4 flex gap-3">
                   {p.links.map(({ kind, href }) => {
