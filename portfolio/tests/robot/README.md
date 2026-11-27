@@ -6,6 +6,7 @@ and the [Browser library](https://robotframework-browser.org/) (Playwright under
 | Suite | Covers |
 | --- | --- |
 | `home.robot` | Intro, onigiri nav (sections, bites), Lazuli timeline, bubble counter, earlier work and scrapbook, plus layout regressions (inner scrollbars, sideways scrolling, clipped washi tape) |
+| `i18n_seo.robot` | Japanese page and the EN / 日本語 switch, Japanese layout on a phone, the 404 page in both languages, canonical/hreflang links, schema.org data, link-preview tags and images, sitemap and robots.txt |
 | `mailbox.robot` | `/blog` redirects, envelopes, opening a letter, the envelope after Back, flap layering, RSS feed, reduced motion |
 
 Shared keywords live in `resources/common.resource`. Tests tagged `regression` guard bugs that were

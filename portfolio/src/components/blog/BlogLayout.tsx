@@ -1,23 +1,51 @@
 import type { ReactNode } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Seo from "../Seo";
+import { absolute, ogImage } from "../../lib/site";
 
 type Props = {
   title: string;
   description: string;
+  /** Path of this page, e.g. "/mailbox/why-programming". */
+  path: string;
+  /** Title drawn on the link-preview card; leave out for the mailbox itself. */
+  letterTitle?: string;
+  /** Cover image to use as the link preview instead of the drawn card. */
   image?: string;
+  imageAlt?: string;
+  jsonLd?: object;
   children: ReactNode;
 };
 
 /** Shell for the blog pages: a quiet top bar back to the portfolio, then the content. */
-const BlogLayout = ({ title, description, image, children }: Props) => (
+const BlogLayout = ({
+  title,
+  description,
+  path,
+  letterTitle,
+  image,
+  imageAlt,
+  jsonLd,
+  children,
+}: Props) => (
   <div className="blog min-h-screen bg-charcoal text-white">
+    <Seo
+      title={title}
+      description={description}
+      path={path}
+      type={letterTitle ? "article" : "website"}
+      image={image ? absolute(image) : ogImage(letterTitle, letterTitle ? "letter" : "home")}
+      imageAlt={
+        image && imageAlt
+          ? imageAlt
+          : letterTitle
+            ? `${letterTitle}: a letter from Kristine Tuazon`
+            : "Kristine Tuazon's mailbox"
+      }
+      jsonLd={jsonLd}
+    />
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      {image && <meta property="og:image" content={image} />}
       <link rel="icon" href="/favicon.svg" />
       <link
         rel="alternate"

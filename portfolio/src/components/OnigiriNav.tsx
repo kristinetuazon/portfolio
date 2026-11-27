@@ -2,9 +2,10 @@ import { useRef } from "react";
 import Link from "next/link";
 import { gsap, reducedMotion, ScrollTrigger, useGSAP } from "../lib/gsap";
 import Onigiri, { chompTransform, type OnigiriKind } from "./Onigiri";
+import { useT, type Dict } from "../i18n";
 
 // One onigiri per section.
-export const SECTIONS: { id: string; label: string; kind: OnigiriKind }[] = [
+export const SECTIONS: { id: keyof Dict["nav"]; label: string; kind: OnigiriKind }[] = [
   { id: "hi", label: "Hi", kind: "classic" },
   { id: "lazuli", label: "Lazuli", kind: "sesame" },
   { id: "about", label: "Story", kind: "ume" },
@@ -51,6 +52,7 @@ function burst(btn: HTMLElement, kind: "crumb" | "sparkle", count: number) {
  */
 const OnigiriNav = () => {
   const nav = useRef<HTMLElement>(null);
+  const t = useT();
 
   const { contextSafe } = useGSAP(
     () => {
@@ -237,9 +239,9 @@ const OnigiriNav = () => {
   };
 
   return (
-    <nav ref={nav} aria-label="Sections" className="rice-nav">
+    <nav ref={nav} aria-label={t.nav.sections} className="rice-nav">
       <ol className="rice-list">
-        {SECTIONS.map(({ id, label, kind }, i) => (
+        {SECTIONS.map(({ id, kind }, i) => (
           <li key={id}>
             <button
               type="button"
@@ -250,13 +252,14 @@ const OnigiriNav = () => {
               onPointerLeave={onLeave}
             >
               <Onigiri kind={kind} className="rice-icon" />
-              <span className="rice-label">{label}</span>
+              <span className="rice-label">{t.nav[id]}</span>
             </button>
           </li>
         ))}
       </ol>
-      <Link href="/mailbox" className="rice-blog">
-        mailbox
+      {/* The letters are in English, so the mailbox link always goes to the English pages. */}
+      <Link href="/mailbox" locale="en" className="rice-blog">
+        {t.nav.mailbox}
       </Link>
     </nav>
   );

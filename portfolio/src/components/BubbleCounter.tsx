@@ -1,17 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, reducedMotion } from "../lib/gsap";
 import { BUBBLE_POP_EVENT } from "./SoapBubbles";
+import { useT, type Dict } from "../i18n";
 
 const STORAGE_KEY = "bubbles-popped-all-time";
 
-// Little cheers at certain counts.
-const MILESTONES: Record<number, string> = {
-  10: "nice! ✨",
-  25: "bubble pro",
-  50: "unstoppable!",
-  100: "bubble legend 👑",
-  250: "…do you need a break? 🍵",
-};
+// Little cheers at certain counts (the words are in src/i18n, under counter.cheers).
+type Milestone = keyof Dict["counter"]["cheers"];
+const isMilestone = (n: number, t: Dict): n is Milestone => n in t.counter.cheers;
 
 const readTotal = () => {
   try {
@@ -33,9 +29,10 @@ const saveTotal = (n: number) => {
  * total remembered in this browser. Just for fun.
  */
 const BubbleCounter = () => {
+  const t = useT();
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(0);
-  const [cheer, setCheer] = useState<string | null>(null);
+  const [cheer, setCheer] = useState<Milestone | null>(null);
   const number = useRef<HTMLSpanElement>(null);
   const cheerEl = useRef<HTMLSpanElement>(null);
 
@@ -43,8 +40,7 @@ const BubbleCounter = () => {
     const onPop = () => {
       setCount((c) => {
         const next = c + 1;
-        const milestone = MILESTONES[next];
-        if (milestone) setCheer(milestone);
+        if (isMilestone(next, t)) setCheer(next);
         return next;
       });
       setTotal((t) => {
@@ -55,7 +51,7 @@ const BubbleCounter = () => {
     };
     window.addEventListener(BUBBLE_POP_EVENT, onPop);
     return () => window.removeEventListener(BUBBLE_POP_EVENT, onPop);
-  }, []);
+  }, [t]);
 
   // A jelly bump on every pop.
   useEffect(() => {
@@ -96,18 +92,22 @@ const BubbleCounter = () => {
   }, [cheer]);
 
   return (
-    <div className="pop-counter" title="Soap bubbles you've popped">
+    <div className="pop-counter" title={t.counter.title}>
       <span className="pop-counter-bubble" aria-hidden="true" />
       <span>
         <span ref={number} className="pop-counter-number">
           {count}
         </span>{" "}
-        popped
-        {total > count && <span className="pop-counter-total">{total} all-time</span>}
+        {t.counter.popped}
+        {total > count && (
+          <span className="pop-counter-total">
+            {total} {t.counter.allTime}
+          </span>
+        )}
       </span>
       {cheer && (
         <span ref={cheerEl} className="pop-counter-cheer" aria-live="polite">
-          {cheer}
+          {t.counter.cheers[cheer]}
         </span>
       )}
     </div>

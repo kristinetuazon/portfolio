@@ -14,6 +14,15 @@ The app lives in [`portfolio/`](portfolio).
 - **Mailbox (`/mailbox`)**: the blog. Posts are written in Markdown and kept in
   this repo, shown as sealed envelopes that open into letters, with an RSS feed
   at `/mailbox/rss.xml`. Old `/blog` links redirect here.
+- **日本語 (`/ja`)**: the home page in Japanese, switched with the EN / 日本語
+  pill in the bottom-right corner. All the words live in
+  `portfolio/src/i18n/index.ts`; TypeScript fails the build if a Japanese
+  string is missing. The letters stay in English.
+- **404**: "This page got eaten 🍙", with a bitten onigiri.
+- **Search and link previews**: `/sitemap.xml`, `robots.txt`, canonical and
+  language links, schema.org data (Person on the home page, BlogPosting on each
+  letter), and a drawn 1200×630 preview card from `/api/og` for Slack,
+  LinkedIn and friends.
 
 ## Tech stack
 
@@ -56,10 +65,12 @@ portfolio/
 ├── public/                  Photos, project screenshots, blog images (public/blog/<slug>/)
 ├── Assets/Fonts/            Audrey, Petrona, Bargemo and Holipop font files
 └── src/
-    ├── pages/               index.tsx (home), mailbox/ (list, post, RSS), _app, _document
+    ├── pages/               index.tsx (home), 404, mailbox/ (list, post, RSS), sitemap.xml, api/og (preview cards)
+    ├── i18n/index.ts        English and Japanese copy
     ├── components/          OnigiriNav, Onigiri, IntroHero, LazuliSection, EarlierWork, ContactMe, …
     ├── data/projects.ts     The "earlier work" projects
     ├── lib/gsap.ts          Shared scroll-animation helpers (reveal, fadeInOn)
+    ├── lib/site.ts          Site URL, preview-card URLs, schema.org Person
     ├── services/blog/       Post loader, frontmatter schema, Markdown renderer, tests
     └── styles/globals.css   Fonts, cursor, bubbles, blog styles
 ```
@@ -124,7 +135,9 @@ the draft post `how-to-write-a-post` shows every feature.
 
 The site is deployed on Vercel. Because the app is in a subfolder, the Vercel
 project's **Root Directory** must be set to `portfolio`. No environment
-variables are needed. With Vercel's default Git settings, pushing to `main`
+variables are needed. Links for search engines and previews point to
+`https://www.kristinecodes.dev`; set `NEXT_PUBLIC_SITE_URL` to use another
+domain (and update the `Sitemap:` line in `public/robots.txt`). With Vercel's default Git settings, pushing to `main`
 deploys to production and other branches get preview deployments.
 
 ## License

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useT } from "../i18n";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "./icons";
 
 const CONTACTS = [
@@ -21,22 +22,27 @@ const CONTACTS = [
   },
 ];
 
-const ContactMe = () => (
-  <>
-    <p className="overflow-hidden font-audreyNormal text-4xl uppercase text-white">contact me</p>
-    <p className="overflow-hidden text-center font-audreyNormal text-3xl uppercase text-white">
-      and let&apos;s collaborate ✨
-    </p>
-    {CONTACTS.map(({ href, Icon, label, extra }) => (
-      <Link
-        key={href}
-        href={href}
-        className={`${extra ?? "mt-5"} font-bodyRegular text-xl text-white`}
-      >
-        <Icon /> {label}
-      </Link>
-    ))}
-  </>
-);
+const ContactMe = () => {
+  const t = useT();
+  return (
+    <>
+      <p className="overflow-hidden font-audreyNormal text-4xl uppercase text-white">
+        {t.contact.title}
+      </p>
+      <p className="overflow-hidden text-center font-audreyNormal text-3xl uppercase text-white">
+        {t.contact.sub}
+      </p>
+      {CONTACTS.map(({ href, Icon, label, extra }) => (
+        <Link
+          key={href}
+          href={href}
+          className={`${extra ?? "mt-5"} font-bodyRegular text-xl text-white`}
+        >
+          <Icon /> {label}
+        </Link>
+      ))}
+    </>
+  );
+};
 
 export default ContactMe;
