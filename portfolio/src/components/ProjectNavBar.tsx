@@ -1,115 +1,59 @@
-import React, { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useRef } from "react";
+import { gsap, useGSAP } from "../lib/gsap";
+import { projects } from "../data/projects";
 
+// Three floating bubbles per project.
+const BUBBLES = [0, 1, 2].flatMap(() => projects);
+
+/** Floating bubbles that each jump to a project when clicked. */
 const ProjectNavBar = () => {
-  gsap.registerPlugin(ScrollTrigger);
+  const area = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    gsap.utils.toArray(".ball").forEach((circle) => {
-      console.log(circle) 
-      tweenProperty(circle, "scale", 1, 2);
-      tweenProperty(circle, "x", 0, 1200);
-      tweenProperty(circle, "y", 0, 600);
-    });
+  useGSAP(
+    () => {
+      const balls = gsap.utils.toArray<HTMLElement>(".ball");
 
-
-    function tweenProperty(
-      target: any,
-      prop: string,
-      min: number,
-      max: number
-    ) {
-      const randomDur = gsap.utils.random(10, 10, 0.2, true);
-      const randomDelay = gsap.utils.random(0.6, 2, 0.2, true);
-
-      gsap.to(target, {
-        [prop]: gsap.utils.random(min, max),
-        duration: randomDur(),
-        delay: randomDelay(),
-        ease: "none",
-        onComplete: tweenProperty,
-        onCompleteParams: [target, prop, min, max],
+      // Drift each bubble to a random spot, then pick a new one, forever.
+      const wander = (target: HTMLElement, prop: string, min: number, max: number) => {
+        gsap.to(target, {
+          [prop]: gsap.utils.random(min, max),
+          duration: 10,
+          delay: gsap.utils.random(0.6, 2, 0.2),
+          ease: "none",
+          onComplete: wander,
+          onCompleteParams: [target, prop, min, max],
+        });
+      };
+      balls.forEach((ball) => {
+        wander(ball, "scale", 1, 2);
+        wander(ball, "x", 0, 1200);
+        wander(ball, "y", 0, 600);
       });
-    }
 
-    // function background() {
-    //   const opa = gsap.utils.random(0.2, 1, 0.1, true);
-
-    //   gsap.to("#background", { opacity: opa, duration: 3, ease: "none" });
-    // }
-
-    // background();
-
-    document.querySelectorAll(".item").forEach((item) => {
-      gsap.fromTo(
-        item,
-        { opacity: 0.1 },
-        {
-          scrollTrigger: {
-            trigger: item,
-            start: "top center",
-            end: "20% center",
-            scrub: true,
-          },
-          duration: 0.8,
-          opacity: 1,
-          immediateRender: false,
-        }
-      );
-
-      gsap.fromTo(
-        item,
-        { opacity: 1 },
-        {
-          scrollTrigger: {
-            trigger: item,
-            start: "80% center",
-            end: "bottom center",
-            scrub: true,
-          },
-          duration: 0.8,
-          opacity: 0.1,
-          immediateRender: false,
-        }
-      );
-    });
-  }, []);
+      return () => gsap.killTweensOf(balls);
+    },
+    { scope: area },
+  );
 
   return (
     <>
       <p id="projects" className="mt-56 font-bodyRegularItalic">
         Introducing my
       </p>
-      <span
-        id="about"
-        className="mb-3 text-center font-heading text-4xl uppercase tracking-widest text-white hover:tracking-wide overflow-hidden"
-      >
+      <span className="mb-3 overflow-hidden text-center font-heading text-4xl uppercase tracking-widest text-white hover:tracking-wide">
         Projects
       </span>
       <p className="text-center font-bodyRegularItalic">
-        ~click a bubble to land on a random project or go with the flow by
-        scrolling down~
+        ~click a bubble to land on a random project or go with the flow by scrolling down~
       </p>
 
-
-      <div id="background" className="relative w-screen h-[90vh]">
-      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
-      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
-      <a className="bubble" href="#minimize"><div className="ball"></div></a>
-      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
-      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
-      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
-      <a className="bubble" href="#minimize"><div className="ball"></div></a>
-      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
-      <a className="bubble" href="#studyhero"><div className="ball"></div></a>
-      <a className="bubble" href="#costofliving"><div className="ball"></div></a>
-      <a className="bubble" href="#minimize"><div className="ball"></div></a>
-      <a className="bubble" href="#tokyonoire"><div className="ball"></div></a>
+      <div ref={area} className="relative h-[90vh] w-screen">
+        {BUBBLES.map((project, i) => (
+          <a key={i} className="bubble" href={`#${project.id}`} aria-label={project.title}>
+            <div className="ball" />
+          </a>
+        ))}
       </div>
-
-      
-  
     </>
   );
 };

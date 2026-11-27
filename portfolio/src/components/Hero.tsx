@@ -1,147 +1,70 @@
-import React, { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import picture1 from "/public/DSCF0639.jpg";
-import picture2 from "/public/IMG_0536.jpg";
-import picture4 from "/public/reload.jpg";
-import picture5 from "/public/DSCF0609.jpg";
-import picture6 from "/public/GP_3_TokyoNoire_eedited.jpeg";
+import { useRef } from "react";
 import Image from "next/image";
+import { reveal, useGSAP } from "../lib/gsap";
+import picture1 from "../../public/DSCF0639.jpg";
+import picture2 from "../../public/IMG_0536.jpg";
+import picture4 from "../../public/reload.jpg";
+import picture5 from "../../public/DSCF0609.jpg";
+import picture6 from "../../public/GP_3_TokyoNoire_eedited.jpeg";
 
+const SIZES = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
+
+/** Photo collage that assembles itself from both sides as you scroll. */
 const Hero = () => {
-  gsap.registerPlugin(ScrollTrigger);
-  useEffect(() => {
-    gsap.fromTo(
-      "#picture1",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture2",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture3",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
+  const grid = useRef<HTMLDivElement>(null);
 
-    gsap.fromTo(
-      ".picture5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      ".picture4",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#picture1",
-          start: "top 50%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-  }, []);
+  useGSAP(
+    () => {
+      reveal(".picture1", "left", grid.current);
+      reveal(".picture2", "right", grid.current);
+      reveal(".picture3", "left", grid.current);
+      reveal(".picture5", "right", grid.current);
+      reveal(".picture4", "scale", grid.current, { start: "top 50%" });
+    },
+    { scope: grid },
+  );
 
   return (
-    <>
-      <div className="mt-36 grid h-fit grid-cols-3">
+    <div ref={grid} className="mt-36 grid h-fit grid-cols-3">
+      <Image
+        className="picture1 col-span-2 h-full"
+        sizes={SIZES}
+        alt="Kristine taking a photo on a street in Japan"
+        src={picture1}
+        priority
+        placeholder="blur"
+      />
+      <div>
         <Image
-          className="col-span-2 h-full"
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          id="picture1"
-          alt="picture1"
-          src={picture1}
-          priority
-          placeholder="blur"
-        />
-        <div>
-          <Image
-            className="picture2 object-cover"
-            sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            alt="picture6"
-            src={picture6}
-            priority
-            placeholder="blur"
-          />
-        </div>
-        <Image
-          className="picture3"
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          alt="picture2"
-          src={picture2}
-          priority
-          placeholder="blur"
-        />
-        <Image
-          className="picture5 h-full"
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          alt="picture5"
-          src={picture5}
-          priority
-          placeholder="blur"
-        />
-        <Image
-          className="picture4 h-full"
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          alt="picture4"
-          src={picture4}
-          priority
+          className="picture2 object-cover"
+          sizes={SIZES}
+          alt="Photo booth snapshot with friends"
+          src={picture6}
           placeholder="blur"
         />
       </div>
-    </>
+      <Image
+        className="picture3"
+        sizes={SIZES}
+        alt="Kristine with classmates in matching team shirts"
+        src={picture2}
+        placeholder="blur"
+      />
+      <Image
+        className="picture5 h-full"
+        sizes={SIZES}
+        alt="Kristine in a kimono by a canal"
+        src={picture5}
+        placeholder="blur"
+      />
+      <Image
+        className="picture4 h-full"
+        sizes={SIZES}
+        alt="Group photo with classmates"
+        src={picture4}
+        placeholder="blur"
+      />
+    </div>
   );
 };
 

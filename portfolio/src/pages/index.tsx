@@ -1,225 +1,33 @@
 import { type NextPage } from "next";
-import { useEffect } from "react";
 import Head from "next/head";
-import ProgressBar from "react-progressbar-on-scroll";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
+import { projects } from "../data/projects";
 import NavBar from "../components/NavBar";
+import ScrollProgress from "../components/ScrollProgress";
 import Hero from "../components/Hero";
-import StudyHero from "../components/StudyHero";
-import CostOfLiving from "../components/CostOfLiving";
-import Minimize from "../components/Minimize";
-import TokyoNoire from "../components/TokyoNoire";
-import ContactMe from "../components/ContactMe";
-import odango from "/public/dango-svgrepo-com.svg";
-import onigiri from "/public/rice-ball-svgrepo-com.svg";
-import YouTube, { YouTubeProps } from "react-youtube";
 import ProjectNavBar from "../components/ProjectNavBar";
+import Project from "../components/Project";
+import ContactMe from "../components/ContactMe";
+import odango from "../../public/dango-svgrepo-com.svg";
+import onigiri from "../../public/rice-ball-svgrepo-com.svg";
 
 const Home: NextPage = () => {
-  gsap.registerPlugin(ScrollTrigger);
-
-  useEffect(() => {
-    gsap.fromTo(
-      "#portfolio1",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#portfolio",
-          start: "top 60%",
-          end: "top 40%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.utils.toArray("span").forEach((span) => {
-      ScrollTrigger.create({
-        // @ts-expect-error gsap utils
-        trigger: span,
-        start: "top center",
-        toggleClass: "active",
-        // onEnter: () => span.classList.add("active"),
-        scrub: true,
-      });
+  useGSAP(() => {
+    // Highlight every <span> as it scrolls past the middle of the screen.
+    gsap.utils.toArray<HTMLElement>("span").forEach((span) => {
+      ScrollTrigger.create({ trigger: span, start: "top center", toggleClass: "active" });
     });
 
-    gsap.fromTo(
-      "#about1",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#about1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#about2",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#about1",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-    gsap.fromTo(
-      "#about3",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#about2",
-          start: "top 60%",
-          end: "top 40%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#about4",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#about3",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#about5",
-      { x: 10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#about4",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#about6",
-      { scale: 0 },
-      {
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          trigger: "#about6",
-          start: "top 60%",
-          end: "top 40%",
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      "#about7",
-      { x: -10000 },
-      {
-        x: 0,
-        duration: 9,
-        scrollTrigger: {
-          trigger: "#about6",
-          start: "top 60%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
-    // gsap.fromTo(
-    //   "#studyHeroVideo",
-    //   { scale: 0 },
-    //   {
-    //     scale: 1,
-    //     duration: 3,
-    //     scrollTrigger: {
-    //       trigger: "#studyHeroVideoPane",
-    //       start: "top 40%",
-    //       end: "top 30%",
-    //       scrub: true,
-    //       markers: true,
-    //     },
-    //   }
-    // );
-
-    // gsap.fromTo(
-    //   "#costOfLivingVideo",
-    //   { scale: 0 },
-    //   {
-    //     scale: 1,
-    //     duration: 3,
-    //     scrollTrigger: {
-    //       trigger: "#costOfLivingVideoPane",
-    //       start: "top 40%",
-    //       end: "top 30%",
-    //       scrub: true,
-    //     },
-    //   }
-    // );
-
-    // gsap.fromTo(
-    //   "#minimizeVideo",
-    //   { scale: 0 },
-    //   {
-    //     scale: 1,
-    //     duration: 3,
-    //     scrollTrigger: {
-    //       trigger: "#minimizeVideoPane",
-    //       start: "top 40%",
-    //       end: "top 30%",
-    //       scrub: true,
-    //     },
-    //   }
-    // );
-
-    //     gsap.fromTo(
-    //   "#tokyoNoireVideo",
-    //   { scale: 0 },
-    //   {
-    //     scale: 1,
-    //     duration: 3,
-    //     scrollTrigger: {
-    //       trigger: "#tokyoNoireVideoPane",
-    //       start: "top 40%",
-    //       end: "top 30%",
-    //       scrub: true,
-    //     },
-    //   }
-    // );
-  }, []);
-
-  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
-
-  const opts: YouTubeProps["opts"] = {
-    height: "400",
-    width: "420",
-  };
+    reveal("#portfolio1", "scale", "#portfolio", { start: "top 60%", end: "top 40%" });
+    reveal("#about1", "left", "#about1");
+    reveal("#about2", "right", "#about1");
+    reveal("#about3", "scale", "#about2", { start: "top 60%", end: "top 40%" });
+    reveal("#about4", "left", "#about3");
+    reveal("#about5", "right", "#about4");
+    reveal("#about6", "scale", "#about6", { start: "top 60%", end: "top 40%" });
+    reveal("#about7", "left", "#about6");
+  });
 
   return (
     <>
@@ -230,18 +38,11 @@ const Home: NextPage = () => {
       </Head>
       <NavBar />
 
-      <ProgressBar
-        color="#F6FBF4"
-        height={10}
-        direction="right"
-        position="top"
-        gradient={true}
-        gradientColor="#2B2129"
-      />
+      <ScrollProgress />
       <div className="flex w-screen flex-col items-center justify-center bg-charcoal">
         <p id="name" className="mt-20 text-center  text-3xl">
           <Image
-            alt="dangoLogo"
+            alt="Dango logo"
             height="200"
             src={odango}
             id="dango"
@@ -270,25 +71,22 @@ const Home: NextPage = () => {
         </div>
         <div className="gelatine flex w-screen flex-col items-center justify-center">
           <Image
-            alt="onigiriArrow"
+            alt=""
             className="mt-2 rotate-180"
             height="10"
             src={onigiri}
-            id="onigiri"
           ></Image>
           <Image
-            alt="onigiriArrow"
+            alt=""
             className="mt-2 rotate-180"
             height="20"
             src={onigiri}
-            id="onigiri"
           ></Image>
           <Image
-            alt="onigiriArrow"
+            alt=""
             className="mt-2 rotate-180"
             height="30"
             src={onigiri}
-            id="onigiri"
           ></Image>
         </div>
       </div>
@@ -438,83 +236,9 @@ const Home: NextPage = () => {
         <ProjectNavBar />
       </div>
 
-      <div
-        id="studyhero"
-        className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-mint to-creme"
-      >
-        <StudyHero />
-      </div>
-      <div
-        id="studyHeroVideoPane"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-creme"
-      >
-        <YouTube
-          id="studyHeroVideo"
-          videoId="W3A1CalxAh8"
-          opts={opts}
-          loading={"lazy"}
-          onReady={onPlayerReady}
-        />
-      </div>
-      <div
-        id="costofliving"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-creme to-coffee"
-      >
-        <CostOfLiving />
-      </div>
-      <div
-        id="costOfLivingVideoPane"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-coffee"
-      >
-        <YouTube
-          id="costOfLivingVideo"
-          className="mt-10"
-          videoId="iHT86r0FjlU"
-          opts={opts}
-          loading={"lazy"}
-          // onReady={onPlayerReady}
-        />
-      </div>
-
-      <div
-        id="minimize"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-coffee to-pink"
-      >
-        <Minimize />
-      </div>
-      <div
-        id="minimizeVideoPane"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-pink to-charcoal"
-      >
-        <YouTube
-          id="minimizeVideo"
-          className="mt-10"
-          videoId="w1CIF_Wsj-Y"
-          opts={opts}
-          loading={"lazy"}
-          // onReady={onPlayerReady}
-        />
-      </div>
-
-      <div
-        id="tokyonoire"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal"
-      >
-        <TokyoNoire />
-      </div>
-      <div
-        id="tokyoNoireVideoPane"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal"
-      >
-        <YouTube
-          id="tokyoNoireVideo"
-          className="mt-10"
-          videoId="biS2DXEf2As"
-          opts={opts}
-          loading={"lazy"}
-          // onReady={onPlayerReady}
-        />
-      </div>
+      {projects.map((project, i) => (
+        <Project key={project.id} project={project} isFirst={i === 0} />
+      ))}
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-charcoal to-charcoal">
         <ContactMe />
       </div>

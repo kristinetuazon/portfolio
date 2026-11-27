@@ -1,70 +1,27 @@
-import React, { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "./icons";
 
-const ContactMe = () => {
+const CONTACTS = [
+  { href: "https://github.com/kristinetuazon", Icon: GitHubIcon, label: "@kristinetuazon", extra: "mt-10 lowercase" },
+  { href: "https://www.linkedin.com/in/kristinejanetuazon/", Icon: LinkedInIcon, label: "@kristinejanetuazon" },
+  { href: "mailto:kristine.jane.tuazon@gmail.com", Icon: EmailIcon, label: "email" },
+  { href: "https://www.instagram.com/kristinetuazon/", Icon: InstagramIcon, label: "@kristinetuazon" },
+];
 
-  //   useEffect(() => {
-  //     gsap.fromTo(
-  //       "#navStart",
-  //       { opacity: 0.1 },
-  //       {
-  //         scrollTrigger: {
-  //           trigger: "#name",
-  //           start: "top center",
-  //           end: "20% center",
-  //           scrub: true,
-  //         },
-  //         duration: 0.8,
-  //         opacity: 1,
-  //         immediateRender: false,
-  //       })
-
-  //   }, [])
-
-  return (
-    <>
-      <p id="contact" className="font-audreyNormal uppercase text-4xl text-white overflow-hidden">
-        contact me
-      </p>
-      <p className="text-center font-audreyNormal uppercase text-3xl text-white overflow-hidden">
-        and let&apos;s collaborate ✨
-      </p>
-      <Link
-        href="https://github.com/kristinetuazon"
-        className="mt-10 font-bodyRegular text-xl lowercase text-white"
-      >
-        <GitHubIcon /> @kristinetuazon
+const ContactMe = () => (
+  <>
+    <p id="contact" className="overflow-hidden font-audreyNormal text-4xl uppercase text-white">
+      contact me
+    </p>
+    <p className="overflow-hidden text-center font-audreyNormal text-3xl uppercase text-white">
+      and let&apos;s collaborate ✨
+    </p>
+    {CONTACTS.map(({ href, Icon, label, extra }) => (
+      <Link key={href} href={href} className={`${extra ?? "mt-5"} font-bodyRegular text-xl text-white`}>
+        <Icon /> {label}
       </Link>
-
-      <Link
-        href="https://www.linkedin.com/in/kristinejanetuazon/"
-        className="mt-5 font-bodyRegular text-xl text-white"
-      >
-        <LinkedInIcon /> @kristinejanetuazon
-      </Link>
-
-      <Link
-        href="mailto:kristine.jane.tuazon@gmail.com"
-        className="mt-5 font-bodyRegular text-xl text-white"
-      >
-        {" "}
-        <EmailTwoToneIcon /> email
-      </Link>
-
-      <Link
-        href="https://www.instagram.com/kristinetuazon/"
-        className="mt-5 font-bodyRegular text-xl text-white"
-      >
-        <InstagramIcon /> @kristinetuazon
-      </Link>
-    </>
-  );
-};
+    ))}
+  </>
+);
 
 export default ContactMe;
