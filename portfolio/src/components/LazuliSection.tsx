@@ -1,5 +1,6 @@
 import { useRef, useSyncExternalStore } from "react";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
+import BeyondTests from "./BeyondTests";
 
 const START = { year: 2023, month: 6 }; // June 2023
 
@@ -15,29 +16,50 @@ function timeAtLazuli(now = new Date()) {
 
 const noop = () => () => {};
 
-// The three things she does, as three dango on a skewer.
+// What she does, as three dango on a skewer.
 const ROLES = [
   {
     color: "#f2a7b6",
     shades: ["#fde4ea", "#efa3b3", "#b86a7c"],
-    title: "Frontend",
-    tag: "mainly",
-    text: "Most of my work: building the web apps for Lazuli's products.",
+    title: "QA & end-to-end testing",
+    tag: "mainly, these days",
+    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in Chromium, Firefox and WebKit.",
   },
   {
     color: "#e9e2d4",
     shades: ["#ffffff", "#ebe4d6", "#a99f8c"],
-    title: "QA & end-to-end testing",
-    tag: "spearheading",
-    text: "Leading QA with end-to-end tests across all of Lazuli's products.",
+    title: "CI & reliability",
+    tag: "keeping it green",
+    text: "GitHub Actions checks so a broken test can't be merged, every regression test linked to its Jira ticket, and a fix for a hidden race condition that made test runs fail at random.",
   },
   {
     color: "#a3c46f",
     shades: ["#e3f0c9", "#9cbd63", "#5b7a33"],
-    title: "Backend",
-    tag: "exploring",
-    text: "Toying with the backend too, and getting to know the rest of the stack.",
+    title: "Frontend",
+    tag: "at heart",
+    text: "I still think like a frontend developer. When the product's UI was redesigned, I moved the whole suite over and kept it passing.",
   },
+];
+
+// The headline numbers; they count up as the section comes in.
+const STATS = [
+  { value: 390, prefix: "~", suffix: "", label: "tests" },
+  { value: 3, prefix: "", suffix: "", label: "products" },
+  { value: 170, prefix: "", suffix: "+", label: "PRs merged" },
+  { value: 100, prefix: "", suffix: "+", label: "tickets covered" },
+  { value: 22, prefix: "", suffix: "", label: "bugs filed" },
+];
+
+const TOOLS = [
+  "Playwright",
+  "TypeScript",
+  "Node.js",
+  "GitHub Actions",
+  "Biome",
+  "GritQL",
+  "REST APIs",
+  "Bash",
+  "Claude Code (skills, MCP)",
 ];
 
 // Three dango snug against each other on a bamboo skewer, one per role.
@@ -100,13 +122,34 @@ const LazuliSection = () => {
     }
   };
 
+  /** Count each stat up from zero (added to a timeline so it can be scrubbed). */
+  const countUp = (tl: gsap.core.Timeline, at: number) => {
+    gsap.utils.toArray<HTMLElement>(".lz-stat-num").forEach((el, i) => {
+      const { value } = STATS[i]!;
+      const n = { v: 0 };
+      tl.fromTo(
+        n,
+        { v: 0 },
+        {
+          v: value,
+          duration: 0.8,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = String(Math.round(n.v));
+          },
+        },
+        at + i * 0.08,
+      );
+    });
+  };
+
   useGSAP(
     () => {
       if (reducedMotion()) return;
       const mm = gsap.matchMedia();
 
       // Laptops and up: pin the section and let the skewer play out as you scroll.
-      mm.add("(min-width: 976px) and (min-height: 640px)", () => {
+      mm.add("(min-width: 976px) and (min-height: 760px)", () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: root.current,
@@ -116,11 +159,12 @@ const LazuliSection = () => {
             scrub: 0.6,
           },
         });
-        tl.from(".lz-intro > *", { y: 40, opacity: 0, stagger: 0.15, duration: 0.6 }).from(
+        tl.from(".lz-intro > *", { y: 40, opacity: 0, stagger: 0.12, duration: 0.6 }).from(
           ".lz-stick",
           { drawSVG: "0%", duration: 1, ease: "none" },
           0.2,
         );
+        countUp(tl, 0.5);
         ROLES.forEach((_, i) => {
           landBall(tl, i, 0.6 + i * 0.8);
           tl.from(
@@ -132,12 +176,16 @@ const LazuliSection = () => {
         tl.to({}, { duration: 0.4 }); // a beat to read before un-pinning
       });
 
-      // Phones and short screens: no pinning. Dango pop on, then each card as it arrives.
-      mm.add("(max-width: 975px), (max-height: 639px)", () => {
+      // Phones and shorter screens: no pinning. Dango pop on, then each card as it arrives.
+      mm.add("(max-width: 975px), (max-height: 759px)", () => {
         const drop = gsap.timeline({
           scrollTrigger: { trigger: ".lz-skewer", start: "top 85%" },
         });
         ROLES.forEach((_, i) => landBall(drop, i, i * 0.55));
+        const stats = gsap.timeline({
+          scrollTrigger: { trigger: ".lz-stats", start: "top 85%" },
+        });
+        countUp(stats, 0);
         gsap.utils.toArray<HTMLElement>(".lz-card").forEach((card) => {
           gsap.from(card, {
             y: 50,
@@ -171,12 +219,45 @@ const LazuliSection = () => {
             <p className="mt-4 font-bodyRegular text-sm uppercase tracking-widest text-coffee">
               June 2023 – now · <span className="text-orange">{tenure}</span> · Tokyo, hybrid
             </p>
-            <p className="mt-6 max-w-lg font-bodyLight text-lg leading-relaxed text-white">
-              Lazuli is a Japanese SaaS startup with a global vision. Its{" "}
-              <strong className="font-bodyRegular">Lazuli Product Data Platform</strong> helps
-              companies spend less on collecting and managing product data, and put that data to
-              work for analysis, search and recommendations.
+            <p className="mt-5 font-bodyRegularItalic text-xl text-creme">
+              mostly QA, with a frontend heart
             </p>
+            <p className="mt-4 max-w-lg font-bodyLight leading-relaxed text-white">
+              Lazuli is a Japanese SaaS startup. Its{" "}
+              <strong className="font-bodyRegular">Product Data Platform</strong> helps companies
+              collect, clean and put their product data to work.
+            </p>
+
+            <dl className="lz-stats mt-7 grid max-w-lg grid-cols-3 gap-x-4 gap-y-4 sm:grid-cols-5">
+              {STATS.map(({ value, prefix, suffix, label }) => (
+                <div key={label}>
+                  <dt className="sr-only">{label}</dt>
+                  <dd>
+                    <span className="block font-audreyMedium text-2xl text-white">
+                      {/* The heading font has no "~", so the extras use the body font */}
+                      {prefix && <span className="font-bodyRegular">{prefix}</span>}
+                      <span className="lz-stat-num">{value}</span>
+                      {suffix && <span className="font-bodyRegular">{suffix}</span>}
+                    </span>
+                    <span className="block font-bodyRegular text-xs uppercase leading-tight tracking-wider text-coffee">
+                      {label}
+                    </span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <ul className="mt-6 flex max-w-lg flex-wrap gap-2" aria-label="Tools I use">
+              {TOOLS.map((tool) => (
+                <li
+                  key={tool}
+                  className="rounded-full border border-mint/70 px-3 py-0.5 font-bodyRegular text-sm text-creme"
+                >
+                  {tool}
+                </li>
+              ))}
+            </ul>
+
             <a
               href="https://lazuli.ninja/"
               className="mt-6 inline-block font-audreyMedium uppercase tracking-widest text-creme decoration-orange underline-offset-4 hover:underline"
@@ -335,6 +416,7 @@ const LazuliSection = () => {
           </div>
         </div>
       </section>
+      <BeyondTests />
     </div>
   );
 };
