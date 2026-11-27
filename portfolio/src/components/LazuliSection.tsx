@@ -1,5 +1,6 @@
 import { useRef, useSyncExternalStore } from "react";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
+import BeyondTests from "./BeyondTests";
 
 const START = { year: 2023, month: 6 }; // June 2023
 
@@ -55,8 +56,10 @@ const TOOLS = [
   "Node.js",
   "GitHub Actions",
   "Biome",
+  "GritQL",
   "REST APIs",
-  "Claude Code",
+  "Bash",
+  "Claude Code (skills, MCP)",
 ];
 
 // Three dango snug against each other on a bamboo skewer, one per role.
@@ -413,6 +416,7 @@ const LazuliSection = () => {
           </div>
         </div>
       </section>
+      <BeyondTests />
     </div>
   );
 };
