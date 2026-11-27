@@ -172,14 +172,7 @@ const IntroHero = () => {
         <span className="font-bodyRegular text-5xl">{"/>"}</span>
       </h1>
       <p className="hero-sub mt-4 max-w-xl text-center font-bodyThin text-2xl text-white">
-        and I&apos;m a software engineer at{" "}
-        <a
-          href="https://lazuli.ninja/"
-          className="font-bodyRegular decoration-orange underline-offset-4 hover:underline"
-        >
-          Lazuli
-        </a>
-        , based in Yokohama, Japan.
+        and I&apos;m a software engineer based in Yokohama, Japan.
       </p>
 
       <div id="scroll-title" className="mt-28 font-audreyNormal uppercase text-mint">
