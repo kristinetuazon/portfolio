@@ -358,3 +358,59 @@
     scroll-behavior: auto;
   }
 }
+
+/* ---------- Bubble playground ---------- */
+
+.pg-area {
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 120%, rgba(246, 251, 244, 0.08), transparent 70%);
+}
+.pg-bubble {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  touch-action: none;
+}
+.pg-bubble:focus-visible {
+  outline: 2px dashed #f6fbf4;
+  outline-offset: 4px;
+}
+.pg-float {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 70% 28%,
+    #f6fbf4 6px,
+    color-mix(in srgb, var(--tint) 55%, #fff) 14%,
+    color-mix(in srgb, var(--tint) 70%, transparent) 55%,
+    color-mix(in srgb, var(--tint) 35%, transparent) 100%
+  );
+  box-shadow:
+    inset 0 0 10px rgba(255, 255, 255, 0.8),
+    inset -12px -18px 30px rgba(255, 255, 255, 0.25),
+    0 0 40px color-mix(in srgb, var(--tint) 45%, transparent);
+}
+.pg-label {
+  font-family: Audrey_Medium, serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  color: #2b2129;
+  padding: 0 0.6rem;
+  pointer-events: none;
+  user-select: none;
+}
+.pg-drop {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  pointer-events: none;
+}

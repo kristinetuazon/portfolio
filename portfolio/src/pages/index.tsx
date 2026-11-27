@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
 import DangoNav from "../components/DangoNav";
 import IntroHero from "../components/IntroHero";
@@ -17,9 +18,6 @@ const Home: NextPage = () => {
 
     reveal("#about1", "left", "#about1");
     reveal("#about2", "right", "#about1");
-    reveal("#about3", "scale", "#about2", { start: "top 60%", end: "top 40%" });
-    reveal("#about4", "left", "#about3");
-    reveal("#about5", "right", "#about4");
   });
 
   return (
@@ -74,42 +72,12 @@ const Home: NextPage = () => {
           </span>
         </p>
 
-        <p
-          id="about3"
-          className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-charcoal hover:tracking-wide"
+        <Link
+          href="/blog/why-programming"
+          className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-charcoal decoration-charcoal underline-offset-8 transition-[letter-spacing] hover:tracking-wide hover:underline"
         >
-          {" "}
-          Why programming?
-        </p>
-
-        <p
-          id="about4"
-          className="2xl:mx-96 mx-10 mt-10 text-center font-bodyRegular leading-relaxed text-white md:mx-36 lg:mx-60 xl:mx-72"
-        >
-          2020 was a tough year for most—the pandemic broke loose and shut down our societies and
-          forced us at home. However, this surplus of time{" "}
-          <span>got me thinking of learning something or doing something new again</span>. I did my
-          research, and looked at my current situation at that time: I live in Tokyo, and I teach
-          English to cute Japanese children. While I don&apos;t particularly dislike my job,{" "}
-          <span>I always dreamed to do something creative and highly innovative</span>. So I chose
-          to start learning how to code and found the perfect program for my rather unconventional
-          schedule.
-        </p>
-
-        <p
-          id="about5"
-          className="2xl:mx-96 mx-10 mt-10 text-center font-bodyRegular leading-relaxed text-white md:mx-36 lg:mx-60 xl:mx-72"
-        >
-          I wanted to learn something dynamic and ever-changing, yet a highly well-sought skill set.
-          I wanted to create, design, collaborate, and help other people in the process. I wanted to
-          challenge myself, not to stay stagnant and comfortable, to seek better ways to live and be
-          more flexible. I also had to come face to face with myself: my weaknesses, insecurities,
-          and the reality that nothing will ever change if I don&apos;t do something about it.{" "}
-          <span>
-            In short, I wanted to do something for myself that I geniunely enjoy and I am passionate
-            about.
-          </span>
-        </p>
+          Why programming? Read the story →
+        </Link>
       </section>
 
       <EarlierWork />
