@@ -9,7 +9,7 @@ type Item = {
   /** Its title and text live in src/i18n under offhours.items. */
   id: keyof Dict["offhours"]["items"];
   /** A photo makes it a polaroid; otherwise it's a paper note with an emoji. */
-  photo?: { src: StaticImageData; alt: string };
+  photo?: { src: StaticImageData; alt: keyof Dict["offhours"]["photoAlts"] };
   emoji?: string;
   /** Show the little Yamanote-line loop. */
   loop?: boolean;
@@ -19,10 +19,7 @@ type Item = {
 
 const ITEMS: Item[] = [
   {
-    photo: {
-      src: camera,
-      alt: "Kristine taking a photo with a film camera on an old wooden street",
-    },
+    photo: { src: camera, alt: "camera" },
     id: "photos",
     tilt: -3,
     tape: "#f2a7b6",
@@ -46,7 +43,7 @@ const ITEMS: Item[] = [
     tape: "#f6c177",
   },
   {
-    photo: { src: walking, alt: "Kristine walking away down a narrow stone alley" },
+    photo: { src: walking, alt: "walking" },
     id: "walks",
     loop: true,
     tilt: 2,
@@ -193,7 +190,7 @@ const OffHours = () => {
                   {item.photo && (
                     <Image
                       src={item.photo.src}
-                      alt={item.photo.alt}
+                      alt={t.offhours.photoAlts[item.photo.alt]}
                       sizes="(min-width: 976px) 340px, (min-width: 400px) 45vw, 90vw"
                       className="aspect-[4/3] w-full object-cover"
                       placeholder="blur"

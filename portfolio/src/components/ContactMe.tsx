@@ -14,7 +14,7 @@ const CONTACTS = [
     Icon: LinkedInIcon,
     label: "@kristinejanetuazon",
   },
-  { href: "mailto:kristine.jane.tuazon@gmail.com", Icon: EmailIcon, label: "email" },
+  { href: "mailto:kristine.jane.tuazon@gmail.com", Icon: EmailIcon, label: "email" as const },
   {
     href: "https://www.instagram.com/kristinetuazon/",
     Icon: InstagramIcon,
@@ -38,7 +38,7 @@ const ContactMe = () => {
           href={href}
           className={`${extra ?? "mt-5"} font-bodyRegular text-xl text-white`}
         >
-          <Icon /> {label}
+          <Icon /> {label === "email" ? t.contact.email : label}
         </Link>
       ))}
     </>

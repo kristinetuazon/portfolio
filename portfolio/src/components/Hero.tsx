@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { reveal, useGSAP } from "../lib/gsap";
+import { useT } from "../i18n";
 import picture1 from "../../public/DSCF0639.jpg";
 import picture2 from "../../public/IMG_0536.jpg";
 import picture4 from "../../public/reload.jpg";
@@ -11,6 +12,7 @@ const SIZES = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
 
 /** Photo collage that assembles itself from both sides as you scroll. */
 const Hero = () => {
+  const t = useT();
   const grid = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -29,7 +31,7 @@ const Hero = () => {
       <Image
         className="picture1 col-span-2 h-full"
         sizes={SIZES}
-        alt="Kristine taking a photo on a street in Japan"
+        alt={t.story.photos.camera}
         src={picture1}
         priority
         placeholder="blur"
@@ -38,7 +40,7 @@ const Hero = () => {
         <Image
           className="picture2 object-cover"
           sizes={SIZES}
-          alt="Photo booth snapshot with friends"
+          alt={t.story.photos.photobooth}
           src={picture6}
           placeholder="blur"
         />
@@ -46,21 +48,21 @@ const Hero = () => {
       <Image
         className="picture3"
         sizes={SIZES}
-        alt="Kristine with classmates in matching team shirts"
+        alt={t.story.photos.classmates}
         src={picture2}
         placeholder="blur"
       />
       <Image
         className="picture5 h-full"
         sizes={SIZES}
-        alt="Kristine in a kimono by a canal"
+        alt={t.story.photos.kimono}
         src={picture5}
         placeholder="blur"
       />
       <Image
         className="picture4 h-full"
         sizes={SIZES}
-        alt="Group photo with classmates"
+        alt={t.story.photos.group}
         src={picture4}
         placeholder="blur"
       />

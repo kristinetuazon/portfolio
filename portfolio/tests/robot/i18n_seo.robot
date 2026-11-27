@@ -14,8 +14,24 @@ Japanese Home Page Is In Japanese
     Text Should Contain    h1.hello    こんにちは、クリスティンです
     Text Should Contain    \#lazuli h2    ソフトウェアエンジニア
     Text Should Contain    .lz-card-2    QA・E2Eテスト
-    Text Should Contain    \#offhours-title    オフの日
-    Text Should Contain    [data-section="offhours"] .rice-label    オフの日
+    Text Should Contain    \#offhours-title    おやすみの日
+    Text Should Contain    [data-section="offhours"] .rice-label    おやすみの日
+    Text Should Contain    \#beyond-title    テストの、その先
+    Text Should Contain    \#learning-title    いま勉強中
+    Text Should Contain    \#about    すべては、この一行から
+    Text Should Contain    \#projects h2    作品たち
+    Text Should Contain    \#studyhero    ポモドーロ
+    Text Should Contain    .rice-blog    ポスト
+
+Japanese Image Descriptions Are In Japanese
+    [Documentation]    Screen readers read the alt text, so it is translated too.
+    [Tags]    i18n    accessibility
+    Open Site    /ja
+    ${english}=    Evaluate JavaScript    ${None}
+    ...    () => [...document.querySelectorAll("img[alt]")]
+    ...      .map((img) => img.alt)
+    ...      .filter((alt) => alt && !/[\u3040-\u30ff\u4e00-\u9fff]/.test(alt))
+    Should Be Empty    ${english}    English alt text on the Japanese page: ${english}
 
 English Is Still The Default
     [Tags]    smoke    i18n
@@ -66,7 +82,7 @@ Missing Japanese Pages Get Eaten In Japanese
     [Tags]    404    i18n
     New Context
     New Page    ${BASE_URL}/ja/this-page-does-not-exist
-    Text Should Contain    h1    このページは食べられちゃいました
+    Text Should Contain    h1    このページ、食べられちゃいました
 
 Home Page Tells Search Engines Who Kristine Is
     [Tags]    smoke    seo
