@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "./icons";
+import CvDownload from "./CvDownload";
 
 const CONTACTS = [
   {
@@ -36,6 +37,7 @@ const ContactMe = () => (
         <Icon /> {label}
       </Link>
     ))}
+    <CvDownload className="mt-10 flex flex-col items-center text-center" />
   </>
 );
 

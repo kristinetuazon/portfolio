@@ -126,6 +126,29 @@ project's **Root Directory** must be set to `portfolio`. No environment
 variables are needed. With Vercel's default Git settings, pushing to `main`
 deploys to production and other branches get preview deployments.
 
+## The CV download
+
+The "Download CV" button in the contact section fetches the CV from
+`/api/cv` (`portfolio/src/pages/api/cv.ts`). This repository is public, so
+**the CV file is never committed** (`.gitignore` blocks `*CV*.pdf`). It lives
+in private storage, and the server fetches it from a secret URL.
+
+Guardrails: POST only, same-origin only, a hidden honeypot field, a per-visitor
+rate limit, [Vercel BotID](https://vercel.com/docs/botid) (an invisible bot
+check, on Vercel only), and no-cache / no-index headers. `robots.txt` also tells
+crawlers to stay out of `/api/`. The public copy leaves out the phone number.
+
+To set it up or replace the CV:
+
+1. Upload the PDF to private storage, such as a Vercel Blob store connected to
+   the project.
+2. In Vercel, go to **Project → Settings → Environment Variables** and set
+   `CV_FILE_URL` to the file's URL for Production (and Preview, if you want).
+3. Redeploy.
+
+For local testing, set `CV_FILE_PATH` to the absolute path of a PDF outside
+the repo. If neither variable is set, the button shows an "email me" message.
+
 ## License
 
 Code is [MIT](LICENSE). The fonts in `portfolio/Assets/Fonts/` come with their
