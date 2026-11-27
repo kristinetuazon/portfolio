@@ -16,28 +16,29 @@ function timeAtLazuli(now = new Date()) {
 
 const noop = () => () => {};
 
-// What she does, as three dango on a skewer.
+// Her three years at Lazuli, one dango each, left to right along the skewer.
 const ROLES = [
   {
     color: "#f2a7b6",
     shades: ["#fde4ea", "#efa3b3", "#b86a7c"],
-    title: "QA & end-to-end testing",
-    tag: "mainly, these days",
-    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in Chromium, Firefox and WebKit.",
+    tag: "Year 1 · 2023–24",
+    title: "Filters, lists & search",
+    text: "Frontend for the first version of Lazuli's Product Data Platform: the filters, product lists and product search.",
   },
   {
     color: "#e9e2d4",
     shades: ["#ffffff", "#ebe4d6", "#a99f8c"],
-    title: "CI & reliability",
-    tag: "keeping it green",
-    text: "GitHub Actions checks so a broken test can't be merged, every regression test linked to its Jira ticket, and a fix for a hidden race condition that made test runs fail at random.",
+    tag: "Year 2 · 2024–25",
+    title: "Translations & an admin tool",
+    text: "More frontend, including the language toggle for translations, plus an internal admin tool in Ruby for managing customer data.",
   },
   {
     color: "#a3c46f",
     shades: ["#e3f0c9", "#9cbd63", "#5b7a33"],
-    title: "Frontend",
-    tag: "at heart",
-    text: "I still think like a frontend developer. When the product's UI was redesigned, I moved the whole suite over and kept it passing.",
+    tag: "Year 3 · 2025–now",
+    title: "QA & end-to-end testing",
+    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in three browsers. CI checks stop a broken test from being merged, and I tracked down the race condition behind random test failures.",
+    now: true,
   },
 ];
 
@@ -401,10 +402,15 @@ const LazuliSection = () => {
                 />
                 <div>
                   <p
-                    className="font-bodyRegular text-xs uppercase tracking-widest"
+                    className="flex items-center gap-2 font-bodyRegular text-xs uppercase tracking-widest"
                     style={{ color: role.color }}
                   >
                     {role.tag}
+                    {"now" in role && (
+                      <span className="rounded-full bg-[#a3c46f] px-2 py-px font-bodyRegular text-[0.65rem] tracking-wider text-charcoal">
+                        now
+                      </span>
+                    )}
                   </p>
                   <h3 className="mt-1 font-audreyMedium text-xl uppercase tracking-wide text-white">
                     {role.title}
