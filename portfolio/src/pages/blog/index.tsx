@@ -17,7 +17,7 @@ const BlogIndex: NextPage<Props> = ({ posts }) => (
     {posts.length === 0 ? (
       <p className="mt-16 font-bodyThin text-xl text-creme">First post coming soon ✨</p>
     ) : (
-      <ol className="mt-16 grid gap-x-10 gap-y-16 sm:grid-cols-2">
+      <ol className="mt-28 grid gap-x-10 gap-y-28 sm:grid-cols-2">
         {posts.map((post) => (
           <li key={post.slug}>
             <Envelope post={post} />

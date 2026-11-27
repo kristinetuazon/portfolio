@@ -100,10 +100,12 @@ const Envelope = ({ post }: { post: PostSummary }) => {
       )
       // ...the flap swings up and over...
       .to(q(".env-flap"), { rotationX: 180, duration: 0.5, ease: "power2.inOut" }, 0.22)
-      .set(q(".env-flap"), { zIndex: 1 }, 0.47)
+      // Once it is past upright, the flap goes behind the letter.
+      .set(q(".env-flap"), { zIndex: 0 }, 0.47)
       // ...and the letter slides out. The post starts loading while it does.
       .to(q(".env-letter"), { yPercent: -58, duration: 0.55, ease: "power2.out" }, 0.62)
-      .to(el, { y: 12, duration: 0.55, ease: "power2.out" }, 0.62)
+      // The envelope dips as the letter rises, keeping clear of the heading above.
+      .to(el, { y: 40, duration: 0.55, ease: "power2.out" }, 0.4)
       .call(go, [], 0.85)
       .to(el, { opacity: 0, scale: 0.97, duration: 0.25, ease: "power1.in" }, 1.05);
 
