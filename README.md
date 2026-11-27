@@ -8,9 +8,9 @@ The app lives in [`portfolio/`](portfolio).
 
 ## What's on the site
 
-- **Home (`/`)**: an intro, a photo collage and an "about me" story that
-  animate in as you scroll. After that come the project showcases (title,
-  links, screenshots and a demo video for each) and contact links.
+- **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
+  Lazuli, the story of how she got into code, a row of earlier projects, and
+  contact links. A dango-skewer nav on the side fills up as you scroll.
 - **Blog (`/blog`)**: posts written in Markdown and kept in this repo, with an
   RSS feed at `/blog/rss.xml`.
 
@@ -20,7 +20,7 @@ The app lives in [`portfolio/`](portfolio).
 | --- | --- |
 | Framework | Next.js 16 (pages router), React 19, TypeScript |
 | Styling | Tailwind CSS 3, `@tailwindcss/typography` for blog posts |
-| Animation | GSAP + ScrollTrigger (`@gsap/react`) |
+| Animation | GSAP: ScrollTrigger, SplitText, DrawSVG (`@gsap/react`), with reduced-motion support |
 | Blog | Markdown → HTML at build time (unified / remark / rehype), Zod-checked frontmatter |
 | Tests | Vitest |
 | Hosting | Vercel (with Vercel Analytics) |
@@ -55,8 +55,8 @@ portfolio/
 ├── Assets/Fonts/            Audrey, Petrona, Bargemo and Holipop font files
 └── src/
     ├── pages/               index.tsx (home), blog/ (list, post, RSS), _app, _document
-    ├── components/          Hero, NavBar, Project, ContactMe, Cursor, icons, blog/…
-    ├── data/projects.ts     The projects shown on the home page
+    ├── components/          DangoNav, IntroHero, LazuliSection, EarlierWork, ContactMe, …
+    ├── data/projects.ts     The "earlier work" projects
     ├── lib/gsap.ts          Shared scroll-animation helpers (reveal, fadeInOn)
     ├── services/blog/       Post loader, frontmatter schema, Markdown renderer, tests
     └── styles/globals.css   Fonts, cursor, bubbles, blog styles
@@ -67,14 +67,14 @@ Colors and font names are defined in `portfolio/tailwind.config.cjs`
 
 ## Adding a project
 
-1. Put its screenshots in `portfolio/public/<ProjectName>/`. Around 1920px wide
-   is plenty.
-2. Import them at the top of `portfolio/src/data/projects.ts` and add an entry
-   to the `projects` list:
+The home page's "earlier work" row reads from `portfolio/src/data/projects.ts`.
+
+1. Put a screenshot (16:9 works best) in `portfolio/public/<ProjectName>/`.
+2. Import it at the top of `projects.ts` and add an entry:
 
    ```ts
    {
-     id: "my-project",                    // URL anchor: /#my-project
+     id: "my-project",
      title: "my project",
      description: "One line about what it does.",
      links: [
@@ -82,16 +82,14 @@ Colors and font names are defined in `portfolio/tailwind.config.cjs`
        { kind: "website", href: "https://…" },
        { kind: "youtube", href: "https://youtu.be/…" },
      ],
-     images: [myProject1, myProject2],    // fly in one after another as you scroll
-     youtubeId: "…",                      // demo video shown below the project
-     sectionBg: "from-charcoal to-mint",  // Tailwind gradient for the section
-     videoBg: "from-mint to-mint",        // …and for the video section
+     image: myProject,
+     color: "#ff99ad", // card border, from the dango palette
    },
    ```
 
-The project shows up on the page and in the floating "project bubbles"
-automatically. Keep the gradients flowing: each section's `from-` color should
-match the previous section's `to-` color.
+The Lazuli section's text lives in `portfolio/src/components/LazuliSection.tsx`
+(the `ROLES` list), and its "3 years 6 months" counts up from June 2023
+automatically.
 
 ## Writing a blog post
 

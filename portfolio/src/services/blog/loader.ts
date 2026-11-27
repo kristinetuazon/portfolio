@@ -18,9 +18,11 @@ import { BlogContentError, frontmatterSchema, type Post, type PostSummary } from
 
 export type BlogDirs = { contentDir: string; publicDir: string };
 
+// turbopackIgnore stops the bundler from shipping the whole project with the
+// RSS function; the folders it needs are listed in next.config.mjs instead.
 export const defaultDirs = (): BlogDirs => ({
-  contentDir: path.join(process.cwd(), "content", "blog"),
-  publicDir: path.join(process.cwd(), "public", "blog"),
+  contentDir: path.join(/* turbopackIgnore: true */ process.cwd(), "content", "blog"),
+  publicDir: path.join(/* turbopackIgnore: true */ process.cwd(), "public", "blog"),
 });
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;

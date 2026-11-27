@@ -98,14 +98,14 @@
   transform: rotate(90deg);
   margin-bottom: 45px;
 }
-span {
+.story span {
   background-image: linear-gradient(#2b2129, #2b2129);
   background-size: 0% 100%;
   background-repeat: no-repeat;
   transition: background-size 1s ease-in;
 }
 
-.active {
+.story .active {
   background-size: 100% 100%;
   /* transition: color 1s ease-in;
   color: black; */
@@ -205,3 +205,156 @@ span {
 .blog .alert-important { --alert-color: #c88e95; }
 .blog .alert-warning { --alert-color: #DD8E58; }
 .blog .alert-caution { --alert-color: #e07a6b; }
+
+/* ---------- Dango skewer nav ---------- */
+
+.dango-nav {
+  position: fixed;
+  z-index: 50;
+  /* Phones: across the top */
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: visible;
+  padding: 0.45rem 1rem 0.45rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(43, 33, 41, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.dango-nav * {
+  overflow: visible;
+}
+.skewer {
+  position: absolute;
+  left: 0.6rem;
+  right: 3.6rem;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+  background: rgba(242, 154, 46, 0.25);
+}
+.skewer-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #f29a2e;
+  transform-origin: left center;
+}
+.dango-balls {
+  position: relative;
+  display: flex;
+  gap: 0.9rem;
+}
+.dango-ball {
+  position: relative;
+  display: block;
+  width: 1.5rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  border: 2px solid var(--ball);
+  background: #2b2129;
+  cursor: none;
+}
+.ball-fill {
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--ball) 45%);
+  transform: scale(0);
+}
+.ball-label {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: Audrey_Medium, serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f6fbf4;
+  text-shadow: 0 1px 6px rgba(43, 33, 41, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+@media (max-width: 767px) {
+  .ball-label {
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+  }
+}
+.dango-ball:hover .ball-label,
+.dango-ball:focus-visible .ball-label,
+.dango-ball[aria-current] .ball-label {
+  opacity: 1;
+}
+.dango-ball:focus-visible {
+  outline: 2px dashed #f6fbf4;
+  outline-offset: 3px;
+}
+.dango-blog {
+  font-family: Audrey_Medium, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f6fbf4;
+}
+
+/* Desktop: a vertical skewer down the right edge, labels to the left */
+@media (min-width: 768px) {
+  .dango-nav {
+    top: 50%;
+    left: auto;
+    right: 1.75rem;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .skewer {
+    left: 50%;
+    right: auto;
+    top: -1.25rem;
+    bottom: 3rem;
+    width: 3px;
+    height: auto;
+    margin: 0 0 0 -1.5px;
+  }
+  .skewer-fill {
+    transform-origin: center top;
+  }
+  .dango-balls {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .dango-ball {
+    width: 1.6rem;
+    height: 1.8rem;
+  }
+  .ball-label {
+    top: 50%;
+    left: auto;
+    right: calc(100% + 0.75rem);
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gelatine {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
