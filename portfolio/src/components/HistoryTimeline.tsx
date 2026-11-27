@@ -3,10 +3,6 @@ import Image from "next/image";
 import { gsap, reducedMotion, ScrollTrigger, useGSAP } from "../lib/gsap";
 import { useT, type Dict } from "../i18n";
 import classmates from "../../public/IMG_0536.jpg";
-import studyHero from "../../public/StudyHero/StudyHero1.jpg";
-import costOfLiving from "../../public/CostOfLiving/Cost_of_Living1.jpg";
-import minimize from "../../public/Minimize/Minimize1.jpeg";
-import tokyoNoire from "../../public/TokyoNoire/TokyoNoire1.jpeg";
 
 type ChapterId = Dict["story"]["history"]["chapters"][number]["id"];
 
@@ -82,7 +78,7 @@ const HelloVisual = () => (
   </svg>
 );
 
-/** The cohort photo and the four apps. */
+/** The Code Chrysalis cohort. */
 const BootcampVisual = ({ alt }: { alt: string }) => (
   <div className="hv-bootcamp">
     <Image
@@ -92,11 +88,6 @@ const BootcampVisual = ({ alt }: { alt: string }) => (
       className="hv-photo"
       placeholder="blur"
     />
-    <div className="hv-thumbs">
-      {[studyHero, costOfLiving, minimize, tokyoNoire].map((src, i) => (
-        <Image key={i} src={src} alt="" sizes="90px" className="hv-thumb" />
-      ))}
-    </div>
   </div>
 );
 
@@ -188,7 +179,7 @@ const QA_LINES = [
 ];
 
 /** A test run turning green, line by line. */
-const QaVisual = () => (
+export const QaVisual = () => (
   <svg viewBox="0 0 220 140" className="hv-svg">
     <rect x="12" y="10" width="196" height="120" rx="8" fill="#1d171c" />
     <text x="24" y="28" fontFamily="ui-monospace, monospace" fontSize="8" fill="#9a8f95">
@@ -202,7 +193,7 @@ const QaVisual = () => (
         <text x="12" fontFamily="ui-monospace, monospace" fontSize="8" fill="#fbf6ea">
           {line}
         </text>
-        <text x="124" fontFamily="ui-monospace, monospace" fontSize="6.5" fill="#9a8f95">
+        <text x="116" fontFamily="ui-monospace, monospace" fontSize="6" fill="#9a8f95">
           dev · stg · prod
         </text>
       </g>
@@ -211,7 +202,7 @@ const QaVisual = () => (
 );
 
 /** This website, in a tiny browser, with a robot keeping an eye on it. */
-const NowVisual = () => (
+export const NowVisual = () => (
   <svg viewBox="0 0 220 140" className="hv-svg">
     <rect x="12" y="14" width="150" height="104" rx="8" fill="#2b2129" />
     <rect x="12" y="14" width="150" height="14" rx="7" fill="#3a2d37" />
@@ -379,15 +370,6 @@ const HistoryTimeline = () => {
             yoyo: true,
             duration: 0.5,
             ease: "steps(1)",
-          });
-        } else if (id === "bootcamp") {
-          tl.from(q(".hv-thumb"), {
-            y: 20,
-            scale: 0.6,
-            opacity: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "back.out(2)",
           });
         } else if (id === "lazuli") {
           tl.from(q(".hv-card"), {

@@ -23,7 +23,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           />
         </Head>
       )}
-      <CornerControls languages={pathname === "/"} />
+      <CornerControls languages={pathname === "/" || pathname === "/projects"} />
       <Analytics />
       {/* A new language means new text: start the page (and its animations) fresh. */}
       <Component key={locale} {...pageProps} />

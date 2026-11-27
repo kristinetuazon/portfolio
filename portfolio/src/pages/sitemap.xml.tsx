@@ -2,24 +2,27 @@ import type { GetServerSideProps } from "next";
 import { loadPosts } from "../services/blog/loader";
 import { absolute } from "../lib/site";
 
-/** Sitemap for search engines: the home page in both languages, the mailbox and every letter. */
+/** Sitemap for search engines: the home and projects pages in both languages, the mailbox and every letter. */
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const posts = await loadPosts({ includeDrafts: false });
   const newest = posts[0]?.updated ?? posts[0]?.publishedAt;
 
-  const home = (loc: string) => `  <url>
+  // A page that exists in English at `en` and in Japanese at `ja`.
+  const both = (loc: string, en: string, ja: string) => `  <url>
     <loc>${absolute(loc)}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="${absolute("/")}"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="${absolute("/ja")}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${absolute("/")}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${absolute(en)}"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="${absolute(ja)}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${absolute(en)}"/>
   </url>`;
   const page = (loc: string, lastmod?: string) => `  <url>
     <loc>${absolute(loc)}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ""}
   </url>`;
 
   const urls = [
-    home("/"),
-    home("/ja"),
+    both("/", "/", "/ja"),
+    both("/ja", "/", "/ja"),
+    both("/projects", "/projects", "/ja/projects"),
+    both("/ja/projects", "/projects", "/ja/projects"),
     page("/mailbox", newest),
     ...posts.map((p) => page(`/mailbox/${p.slug}`, p.updated ?? p.publishedAt)),
   ];
