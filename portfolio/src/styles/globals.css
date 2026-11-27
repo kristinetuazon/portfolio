@@ -359,44 +359,98 @@
   }
 }
 
-/* ---------- Bubble playground ---------- */
+/* ---------- Soap bubbles ---------- */
 
-.pg-area {
+.soap-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40; /* above the page, below the nav (50) and cursor */
+  pointer-events: none;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 120%, rgba(246, 251, 244, 0.08), transparent 70%);
 }
-.pg-bubble {
-  width: 6.5rem;
-  height: 6.5rem;
-  border-radius: 50%;
+.soap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
   touch-action: none;
+  border-radius: 50%;
+  will-change: transform;
 }
-.pg-bubble:focus-visible {
-  outline: 2px dashed #f6fbf4;
-  outline-offset: 4px;
-}
-.pg-float {
-  display: block;
+/* The film: clear in the middle, a faint milky edge, soft inner tints. */
+.soap-film {
+  position: relative;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background: radial-gradient(
-    circle at 70% 28%,
-    #f6fbf4 6px,
-    color-mix(in srgb, var(--tint) 55%, #fff) 14%,
-    color-mix(in srgb, var(--tint) 70%, transparent) 55%,
-    color-mix(in srgb, var(--tint) 35%, transparent) 100%
+    circle at 50% 55%,
+    transparent 0 52%,
+    rgba(255, 255, 255, 0.04) 62%,
+    rgba(255, 255, 255, 0.14) 70%,
+    rgba(255, 255, 255, 0.32) 71%,
+    transparent 72%
   );
   box-shadow:
-    inset 0 0 10px rgba(255, 255, 255, 0.8),
-    inset -12px -18px 30px rgba(255, 255, 255, 0.25),
-    0 0 40px color-mix(in srgb, var(--tint) 45%, transparent);
+    inset 0 0 6px rgba(255, 255, 255, 0.35),
+    inset 10px 8px 18px rgba(120, 210, 255, 0.14),
+    inset -10px -12px 20px rgba(255, 140, 210, 0.16),
+    0 0 10px rgba(255, 255, 255, 0.06);
 }
-.pg-drop {
+/* Iridescent rim: a rainbow ring that slowly swirls, like real soap film. */
+.soap-film::before {
+  content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
+  inset: 0;
   border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 120, 200, 0.55),
+    rgba(255, 220, 120, 0.45),
+    rgba(140, 255, 190, 0.45),
+    rgba(120, 200, 255, 0.55),
+    rgba(190, 140, 255, 0.5),
+    rgba(255, 120, 200, 0.55)
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 60%, #000 70%, transparent 71%);
+  mask: radial-gradient(circle, transparent 0 60%, #000 70%, transparent 71%);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  animation: soap-swirl 9s linear infinite;
+}
+/* Reflections: a bright window at the top left, a softer glint at the bottom right. */
+.soap-film::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 22% 13% at 32% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 9% 6% at 45% 17%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 16% 8% at 70% 80%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 100%);
+  transform: rotate(-12deg);
+}
+@keyframes soap-swirl {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.soap-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 8px rgba(190, 220, 255, 0.5);
   pointer-events: none;
+}
+.soap-drop {
+  position: absolute;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: rgba(230, 245, 255, 0.85);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .soap-film::before {
+    animation: none;
+  }
 }

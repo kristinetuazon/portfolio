@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
 import DangoNav from "../components/DangoNav";
+import SoapBubbles from "../components/SoapBubbles";
 import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
@@ -32,6 +33,7 @@ const Home: NextPage = () => {
       </Head>
 
       <DangoNav />
+      <SoapBubbles />
       <IntroHero />
       <LazuliSection />
 
