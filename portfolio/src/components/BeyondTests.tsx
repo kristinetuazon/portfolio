@@ -70,6 +70,13 @@ const LEARNING = [
     by: "— poteto's agent skills",
     href: "https://github.com/cursor/plugins/tree/main/pstack",
   },
+  {
+    icon: "🤖",
+    verb: "Trying",
+    label: "Robot Framework",
+    by: "— another way to write tests",
+    href: "https://robotframework.org/",
+  },
 ];
 
 // Compartment tints from the site palette.
