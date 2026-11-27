@@ -16,28 +16,29 @@ function timeAtLazuli(now = new Date()) {
 
 const noop = () => () => {};
 
-// What she does, as three dango on a skewer.
+// Her three years at Lazuli, one dango each, left to right along the skewer.
 const ROLES = [
   {
     color: "#f2a7b6",
     shades: ["#fde4ea", "#efa3b3", "#b86a7c"],
-    title: "QA & end-to-end testing",
-    tag: "mainly, these days",
-    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in Chromium, Firefox and WebKit.",
+    tag: "Year 1 · 2023–24",
+    title: "Filters, lists & search",
+    text: "Frontend for the first version of Lazuli's Product Data Platform: the filters, product lists and product search.",
   },
   {
     color: "#e9e2d4",
     shades: ["#ffffff", "#ebe4d6", "#a99f8c"],
-    title: "CI & reliability",
-    tag: "keeping it green",
-    text: "GitHub Actions checks so a broken test can't be merged, every regression test linked to its Jira ticket, and a fix for a hidden race condition that made test runs fail at random.",
+    tag: "Year 2 · 2024–25",
+    title: "Translations & an admin tool",
+    text: "More frontend, including the language toggle for translations, plus an internal admin tool in Ruby for managing customer data.",
   },
   {
     color: "#a3c46f",
     shades: ["#e3f0c9", "#9cbd63", "#5b7a33"],
-    title: "Frontend",
-    tag: "at heart",
-    text: "I still think like a frontend developer. When the product's UI was redesigned, I moved the whole suite over and kept it passing.",
+    tag: "Year 3 · 2025–now",
+    title: "QA & end-to-end testing",
+    text: "I built Lazuli's end-to-end test suite from scratch and I own it: about 390 Playwright tests across three products, run on dev, staging and production in three browsers. CI checks stop a broken test from being merged, and I tracked down the race condition behind random test failures.",
+    now: true,
   },
 ];
 
@@ -62,9 +63,15 @@ const TOOLS = [
   "Claude Code (skills, MCP)",
 ];
 
-// Three dango snug against each other on a bamboo skewer, one per role.
-const R = 56;
-const BALLS = [{ cx: 150 }, { cx: 150 + 2 * R - 4 }, { cx: 150 + 4 * R - 8 }];
+// The timeline drawing (SVG units). Three dango snug on a bamboo skewer in the
+// middle; a string runs from each down to its year's card below.
+const VB_W = 1200;
+const VB_H = 300;
+const CY = 110; // skewer height
+const R = 62;
+const BALLS = [{ cx: 600 - 2 * R + 6 }, { cx: 600 }, { cx: 600 + 2 * R - 6 }];
+// Centres of the three card columns (grid of 3 with gaps, max-w-6xl), in SVG units.
+const COLS = [189, 600, 1011];
 
 const LazuliSection = () => {
   const root = useRef<HTMLElement>(null);
@@ -82,10 +89,10 @@ const LazuliSection = () => {
   const landBall = (tl: gsap.core.Timeline, i: number, at: number) => {
     const ball = `.lz-ball-${i}`;
     const { cx } = BALLS[i]!;
-    const base = `${cx} ${70 + R}`; // squash from the bottom of the ball
+    const base = `${cx} ${CY + R}`; // squash from the bottom of the ball
     tl.fromTo(
       ball,
-      { y: -170, x: 30, opacity: 0 },
+      { y: -190, x: 34, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.32, ease: "power2.in" },
       at,
     )
@@ -102,7 +109,7 @@ const LazuliSection = () => {
       .to(ball, { x: 0, duration: 0.22, ease: "power3.in" }, at + 0.39);
     if (i > 0) {
       const prev = `.lz-ball-${i - 1}`;
-      const mid = `${BALLS[i - 1]!.cx} 70`;
+      const mid = `${BALLS[i - 1]!.cx} ${CY}`;
       tl.to(
         prev,
         { x: -6, scaleX: 0.92, scaleY: 1.06, svgOrigin: mid, duration: 0.07 },
@@ -122,7 +129,7 @@ const LazuliSection = () => {
     }
   };
 
-  /** Count each stat up from zero (added to a timeline so it can be scrubbed). */
+  /** Count each stat up from zero. */
   const countUp = (tl: gsap.core.Timeline, at: number) => {
     gsap.utils.toArray<HTMLElement>(".lz-stat-num").forEach((el, i) => {
       const { value } = STATS[i]!;
@@ -132,13 +139,13 @@ const LazuliSection = () => {
         { v: 0 },
         {
           v: value,
-          duration: 0.8,
+          duration: 1.1,
           ease: "power2.out",
           onUpdate: () => {
             el.textContent = String(Math.round(n.v));
           },
         },
-        at + i * 0.08,
+        at + i * 0.1,
       );
     });
   };
@@ -146,54 +153,61 @@ const LazuliSection = () => {
   useGSAP(
     () => {
       if (reducedMotion()) return;
+
+      // The intro rises in and the numbers count up as it arrives (all sizes).
+      const intro = gsap.timeline({
+        scrollTrigger: { trigger: ".lz-intro", start: "top 75%" },
+      });
+      intro.from(".lz-intro-item", {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger: 0.08,
+      });
+      countUp(intro, 0.3);
+
       const mm = gsap.matchMedia();
 
-      // Laptops and up: pin the section and let the skewer play out as you scroll.
-      mm.add("(min-width: 976px) and (min-height: 760px)", () => {
+      // Laptops and up: pin the timeline and play the years out as you scroll.
+      mm.add("(min-width: 976px) and (min-height: 780px)", () => {
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "+=170%",
+            trigger: ".lz-timeline",
+            start: "center center",
+            end: "+=160%",
             pin: true,
             scrub: 0.6,
           },
         });
-        tl.from(".lz-intro > *", { y: 40, opacity: 0, stagger: 0.12, duration: 0.6 }).from(
-          ".lz-stick",
-          { drawSVG: "0%", duration: 1, ease: "none" },
-          0.2,
-        );
-        countUp(tl, 0.5);
+        tl.from(".lz-stick", { drawSVG: "50% 50%", duration: 0.8, ease: "none" }, 0);
         ROLES.forEach((_, i) => {
-          landBall(tl, i, 0.6 + i * 0.8);
-          tl.from(
+          const at = 0.5 + i * 0.9;
+          landBall(tl, i, at);
+          tl.from(`.lz-string-${i}`, { drawSVG: "0%", duration: 0.4, ease: "none" }, at + 0.5).from(
             `.lz-card-${i}`,
-            { y: 40, opacity: 0, duration: 0.5, ease: "back.out(1.6)" },
-            0.9 + i * 0.8,
+            { y: 50, opacity: 0, duration: 0.5, ease: "back.out(1.6)" },
+            at + 0.7,
           );
         });
-        tl.to({}, { duration: 0.4 }); // a beat to read before un-pinning
+        tl.to({}, { duration: 0.5 }); // a beat to read before un-pinning
       });
 
       // Phones and shorter screens: no pinning. Dango pop on, then each card as it arrives.
-      mm.add("(max-width: 975px), (max-height: 759px)", () => {
+      mm.add("(max-width: 975px), (max-height: 779px)", () => {
         const drop = gsap.timeline({
           scrollTrigger: { trigger: ".lz-skewer", start: "top 85%" },
         });
-        ROLES.forEach((_, i) => landBall(drop, i, i * 0.55));
-        const stats = gsap.timeline({
-          scrollTrigger: { trigger: ".lz-stats", start: "top 85%" },
-        });
-        countUp(stats, 0);
+        drop.from(".lz-stick", { drawSVG: "50% 50%", duration: 0.5, ease: "none" }, 0);
+        ROLES.forEach((_, i) => landBall(drop, i, 0.2 + i * 0.55));
         gsap.utils.toArray<HTMLElement>(".lz-card").forEach((card) => {
           gsap.from(card, {
             y: 50,
-            scale: 0.9,
+            scale: 0.95,
             opacity: 0,
             duration: 0.8,
             ease: "back.out(1.8)",
-            scrollTrigger: { trigger: card, start: "top 85%" },
+            scrollTrigger: { trigger: card, start: "top 88%" },
           });
         });
       });
@@ -206,40 +220,51 @@ const LazuliSection = () => {
     <div id="lazuli">
       <section
         ref={root}
-        className="flex min-h-screen w-screen items-center bg-gradient-to-b from-charcoal to-[#3a2d37] px-6 py-20 md:pl-20 md:pr-36"
+        className="w-screen bg-gradient-to-b from-charcoal to-[#3a2d37] px-6 pb-16 pt-32 md:pl-20 md:pr-36"
       >
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-2">
-          <div className="lz-intro">
-            <p className="font-bodyRegularItalic text-creme">these days, I&apos;m a</p>
-            <h2 className="mt-2 font-heading text-3xl uppercase tracking-widest text-white sm:text-4xl">
+        {/* Part 1: who, where, and the numbers */}
+        <div className="lz-intro mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.15fr_1fr] lg:items-end">
+          <div>
+            <p className="lz-intro-item font-bodyRegularItalic text-lg text-creme">
+              these days, I&apos;m a
+            </p>
+            <h2 className="lz-intro-item mt-2 overflow-visible font-heading text-4xl uppercase leading-tight tracking-widest text-white sm:text-5xl">
               Software Engineer
               <br />
               at Lazuli
             </h2>
-            <p className="mt-4 font-bodyRegular text-sm uppercase tracking-widest text-coffee">
+            <p className="lz-intro-item mt-5 font-bodyRegular text-sm uppercase tracking-widest text-coffee">
               June 2023 – now · <span className="text-orange">{tenure}</span> · Tokyo, hybrid
             </p>
-            <p className="mt-5 font-bodyRegularItalic text-xl text-creme">
+            <p className="lz-intro-item mt-8 font-bodyRegularItalic text-2xl text-creme">
               mostly QA, with a frontend heart
             </p>
-            <p className="mt-4 max-w-lg font-bodyLight leading-relaxed text-white">
+            <p className="lz-intro-item mt-5 max-w-xl font-bodyLight text-lg leading-relaxed text-white">
               Lazuli is a Japanese SaaS startup. Its{" "}
               <strong className="font-bodyRegular">Product Data Platform</strong> helps companies
               collect, clean and put their product data to work.
             </p>
+            <a
+              href="https://lazuli.ninja/"
+              className="lz-intro-item mt-8 inline-block font-audreyMedium uppercase tracking-widest text-creme decoration-orange underline-offset-4 hover:underline"
+            >
+              lazuli.ninja ↗
+            </a>
+          </div>
 
-            <dl className="lz-stats mt-7 grid max-w-lg grid-cols-3 gap-x-4 gap-y-4 sm:grid-cols-5">
+          <div>
+            <dl className="lz-stats grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
               {STATS.map(({ value, prefix, suffix, label }) => (
-                <div key={label}>
+                <div key={label} className="lz-intro-item">
                   <dt className="sr-only">{label}</dt>
                   <dd>
-                    <span className="block font-audreyMedium text-2xl text-white">
+                    <span className="block font-audreyMedium text-4xl text-white">
                       {/* The heading font has no "~", so the extras use the body font */}
                       {prefix && <span className="font-bodyRegular">{prefix}</span>}
                       <span className="lz-stat-num">{value}</span>
                       {suffix && <span className="font-bodyRegular">{suffix}</span>}
                     </span>
-                    <span className="block font-bodyRegular text-xs uppercase leading-tight tracking-wider text-coffee">
+                    <span className="mt-1 block font-bodyRegular text-xs uppercase leading-tight tracking-widest text-coffee">
                       {label}
                     </span>
                   </dd>
@@ -247,37 +272,39 @@ const LazuliSection = () => {
               ))}
             </dl>
 
-            <ul className="mt-6 flex max-w-lg flex-wrap gap-2" aria-label="Tools I use">
+            <ul className="mt-10 flex flex-wrap gap-2" aria-label="Tools I use">
               {TOOLS.map((tool) => (
                 <li
                   key={tool}
-                  className="rounded-full border border-mint/70 px-3 py-0.5 font-bodyRegular text-sm text-creme"
+                  className="lz-intro-item rounded-full border border-mint/70 px-3 py-1 font-bodyRegular text-sm text-creme"
                 >
                   {tool}
                 </li>
               ))}
             </ul>
-
-            <a
-              href="https://lazuli.ninja/"
-              className="mt-6 inline-block font-audreyMedium uppercase tracking-widest text-creme decoration-orange underline-offset-4 hover:underline"
-            >
-              lazuli.ninja ↗
-            </a>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-4">
-            {/* The skewer, drawn on scroll, with a dango per role */}
-            <svg viewBox="0 0 520 150" className="lz-skewer -mb-1 w-full" aria-hidden="true">
+        {/* Part 2: the three years, one dango each */}
+        <div className="lz-timeline mx-auto mt-24 max-w-6xl lg:mt-32">
+          <p className="mb-2 text-center font-bodyRegularItalic text-lg text-creme">
+            three years, three dango
+          </p>
+          <div className="overflow-hidden">
+            <svg
+              viewBox={`0 0 ${VB_W} ${VB_H}`}
+              className="lz-skewer -ml-[50%] block w-[200%] max-w-none lg:ml-0 lg:w-full"
+              aria-hidden="true"
+            >
               <defs>
                 {/* Bamboo skewer: rounded, lit from above */}
                 <linearGradient
                   id="lz-bamboo"
                   gradientUnits="userSpaceOnUse"
                   x1="0"
-                  y1="66"
+                  y1={CY - 5}
                   x2="0"
-                  y2="75"
+                  y2={CY + 5}
                 >
                   <stop offset="0" stopColor="#f3e0b4" />
                   <stop offset=".45" stopColor="#d9b373" />
@@ -314,20 +341,51 @@ const LazuliSection = () => {
                   />
                 </filter>
                 <filter id="lz-blur" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="5" />
+                  <feGaussianBlur stdDeviation="6" />
                 </filter>
                 <filter id="lz-blur-sm" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2.2" />
+                  <feGaussianBlur stdDeviation="2.4" />
                 </filter>
               </defs>
 
-              <g transform="rotate(-4 260 70)">
-                {/* Shadow on the "table" */}
+              {/* Strings from each dango down to its year (wide screens only). They are
+                  dashed, so they draw in through a mask (drawing a dashed path directly
+                  would break the dashes). */}
+              <g className="hidden lg:inline" fill="none" strokeLinecap="round">
+                {BALLS.map(({ cx }, i) => {
+                  const d = `M${cx} ${CY + R - 6} C ${cx} ${CY + R + 70}, ${COLS[i]} ${VB_H - 90}, ${COLS[i]} ${VB_H}`;
+                  return (
+                    <g key={i}>
+                      <mask
+                        id={`lz-string-mask-${i}`}
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width={VB_W}
+                        height={VB_H}
+                      >
+                        <path className={`lz-string-${i}`} d={d} stroke="#fff" strokeWidth="8" />
+                      </mask>
+                      <path
+                        d={d}
+                        mask={`url(#lz-string-mask-${i})`}
+                        stroke={ROLES[i]!.color}
+                        strokeOpacity=".6"
+                        strokeWidth="2.2"
+                        strokeDasharray="2 7"
+                      />
+                    </g>
+                  );
+                })}
+              </g>
+
+              <g transform={`rotate(-3 600 ${CY})`}>
+                {/* Shadow under the skewer */}
                 <ellipse
-                  cx="262"
-                  cy="136"
-                  rx="190"
-                  ry="8"
+                  cx="600"
+                  cy={CY + R + 16}
+                  rx="230"
+                  ry="10"
                   fill="#000"
                   opacity=".35"
                   filter="url(#lz-blur)"
@@ -335,47 +393,47 @@ const LazuliSection = () => {
 
                 <line
                   className="lz-stick"
-                  x1="18"
-                  y1="70"
-                  x2="504"
-                  y2="70"
+                  x1="290"
+                  y1={CY}
+                  x2="910"
+                  y2={CY}
                   stroke="url(#lz-bamboo)"
-                  strokeWidth="8"
+                  strokeWidth="9"
                   strokeLinecap="round"
                 />
                 {/* A thread of grain along the stick */}
                 <line
-                  x1="24"
-                  y1="68.5"
-                  x2="498"
-                  y2="68.5"
+                  x1="296"
+                  y1={CY - 1.6}
+                  x2="904"
+                  y2={CY - 1.6}
                   stroke="#fff6dc"
-                  strokeWidth=".8"
+                  strokeWidth=".9"
                   opacity=".45"
                 />
 
                 {BALLS.map(({ cx }, i) => (
                   <g key={cx} className={`lz-ball lz-ball-${i}`} filter="url(#lz-cast)">
-                    <circle cx={cx} cy="70" r={R} fill={`url(#lz-mochi-${i})`} />
-                    <circle cx={cx} cy="70" r={R} fill="url(#lz-occlusion)" />
-                    <circle cx={cx} cy="70" r={R} fill="#fff" filter="url(#lz-powder)" />
+                    <circle cx={cx} cy={CY} r={R} fill={`url(#lz-mochi-${i})`} />
+                    <circle cx={cx} cy={CY} r={R} fill="url(#lz-occlusion)" />
+                    <circle cx={cx} cy={CY} r={R} fill="#fff" filter="url(#lz-powder)" />
                     {/* Soft, broad highlight and a small bright glint */}
                     <ellipse
-                      cx={cx - 18}
-                      cy="44"
-                      rx="20"
-                      ry="11"
-                      transform={`rotate(-30 ${cx - 18} 44)`}
+                      cx={cx - 20}
+                      cy={CY - 28}
+                      rx="22"
+                      ry="12"
+                      transform={`rotate(-30 ${cx - 20} ${CY - 28})`}
                       fill="#fff"
                       opacity=".45"
                       filter="url(#lz-blur)"
                     />
                     <ellipse
-                      cx={cx - 22}
-                      cy="40"
-                      rx="6"
-                      ry="3.2"
-                      transform={`rotate(-30 ${cx - 22} 40)`}
+                      cx={cx - 24}
+                      cy={CY - 32}
+                      rx="6.5"
+                      ry="3.5"
+                      transform={`rotate(-30 ${cx - 24} ${CY - 32})`}
                       fill="#fff"
                       opacity=".7"
                       filter="url(#lz-blur-sm)"
@@ -384,36 +442,42 @@ const LazuliSection = () => {
                 ))}
               </g>
             </svg>
+          </div>
 
+          <ol className="mt-6 grid gap-6 lg:mt-0 lg:grid-cols-3 lg:gap-8">
             {ROLES.map((role, i) => (
-              <article
+              <li
                 key={role.title}
-                className={`lz-card lz-card-${i} flex gap-4 rounded-3xl border-2 bg-charcoal/80 p-5 backdrop-blur`}
+                className={`lz-card lz-card-${i} rounded-3xl border-2 bg-charcoal/80 p-7 backdrop-blur`}
                 style={{ borderColor: role.color }}
               >
-                <span
-                  aria-hidden="true"
-                  className="mt-1 h-6 w-6 shrink-0 rounded-full"
-                  style={{
-                    background: `radial-gradient(circle at 36% 30%, ${role.shades[0]}, ${role.shades[1]} 45%, ${role.shades[2]})`,
-                    boxShadow: "0 3px 6px rgba(0, 0, 0, 0.35)",
-                  }}
-                />
-                <div>
-                  <p
-                    className="font-bodyRegular text-xs uppercase tracking-widest"
-                    style={{ color: role.color }}
-                  >
-                    {role.tag}
-                  </p>
-                  <h3 className="mt-1 font-audreyMedium text-xl uppercase tracking-wide text-white">
-                    {role.title}
-                  </h3>
-                  <p className="mt-1 font-bodyLight leading-relaxed text-creme">{role.text}</p>
-                </div>
-              </article>
+                <p
+                  className="flex items-center gap-2 font-bodyRegular text-xs uppercase tracking-widest"
+                  style={{ color: role.color }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-4 w-4 shrink-0 rounded-full"
+                    style={{
+                      background: `radial-gradient(circle at 36% 30%, ${role.shades[0]}, ${role.shades[1]} 45%, ${role.shades[2]})`,
+                    }}
+                  />
+                  {role.tag}
+                  {"now" in role && (
+                    <span className="rounded-full bg-[#a3c46f] px-2 py-px text-[0.65rem] tracking-wider text-charcoal">
+                      now
+                    </span>
+                  )}
+                </p>
+                <h3 className="mt-3 font-audreyMedium text-2xl uppercase leading-snug tracking-wide text-white">
+                  {role.title}
+                </h3>
+                <p className="mt-3 font-bodyLight text-lg leading-relaxed text-creme">
+                  {role.text}
+                </p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
       <BeyondTests />

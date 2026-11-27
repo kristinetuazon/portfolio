@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <title>kristineCodes;</title>
         <meta
           name="description"
-          content="Kristine Tuazon, software engineer at Lazuli in Japan: portfolio and mailbox."
+          content="Kristine Tuazon, software engineer in Japan: portfolio and mailbox."
         />
         <link rel="icon" href="/favicon.svg" />
       </Head>
