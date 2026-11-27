@@ -19,14 +19,25 @@ const BlogLayout = ({ title, description, image, children }: Props) => (
       <meta property="og:description" content={description} />
       {image && <meta property="og:image" content={image} />}
       <link rel="icon" href="/favicon.svg" />
-      <link rel="alternate" type="application/rss+xml" title="kristineCodes; blog" href="/blog/rss.xml" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="kristineCodes; blog"
+        href="/blog/rss.xml"
+      />
     </Head>
 
     <header className="mx-auto flex max-w-3xl items-center justify-between px-4 pt-8 sm:px-6">
-      <Link href="/" className="font-audreyMedium uppercase tracking-widest text-white hover:text-creme">
+      <Link
+        href="/"
+        className="font-audreyMedium uppercase tracking-widest text-white hover:text-creme"
+      >
         kristineCodes;
       </Link>
-      <Link href="/blog" className="font-audreyMedium uppercase tracking-widest text-white hover:text-creme">
+      <Link
+        href="/blog"
+        className="font-audreyMedium uppercase tracking-widest text-white hover:text-creme"
+      >
         Blog
       </Link>
     </header>

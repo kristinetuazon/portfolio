@@ -11,8 +11,8 @@ The app lives in [`portfolio/`](portfolio).
 - **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
   Lazuli, the story of how she got into code, a row of earlier projects, and
   contact links. A column of onigiri on the side lights up as you scroll.
-- **Blog (`/blog`)**: posts written in Markdown and kept in this repo, with an
-  RSS feed at `/blog/rss.xml`.
+- **Blog (`/blog`)**: posts written in Markdown and kept in this repo, shown
+  as sealed envelopes that open into letters, with an RSS feed at `/blog/rss.xml`.
 
 ## Tech stack
 
