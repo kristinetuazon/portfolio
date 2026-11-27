@@ -59,14 +59,14 @@ const ITEMS: Item[] = [
   {
     emoji: "🎨",
     title: "Painting & cross-stitch",
-    text: "My most complicated patterns so far: Van Gogh's Sunflowers and Two Women in a Boat.",
+    text: "My most complicated patterns so far: Van Gogh's Sunflowers and Monet's Young Girls in the Rowing Boat.",
     tilt: -2.5,
     tape: "#c88e95",
   },
   {
     emoji: "🧵",
     title: "Sewing",
-    text: "My COVID hobby. Currently in need of a new sewing machine.",
+    text: "My COVID hobby: pillow covers and such. Currently in need of a new sewing machine.",
     tilt: 1.5,
     tape: "#e9e2d4",
   },
