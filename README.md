@@ -10,7 +10,7 @@ The app lives in [`portfolio/`](portfolio).
 
 - **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
   Lazuli, the story of how she got into code, a row of earlier projects, and
-  contact links. A dango-skewer nav on the side fills up as you scroll.
+  contact links. A column of onigiri on the side lights up as you scroll.
 - **Blog (`/blog`)**: posts written in Markdown and kept in this repo, with an
   RSS feed at `/blog/rss.xml`.
 
@@ -55,7 +55,7 @@ portfolio/
 ├── Assets/Fonts/            Audrey, Petrona, Bargemo and Holipop font files
 └── src/
     ├── pages/               index.tsx (home), blog/ (list, post, RSS), _app, _document
-    ├── components/          DangoNav, IntroHero, LazuliSection, EarlierWork, ContactMe, …
+    ├── components/          OnigiriNav, Onigiri, IntroHero, LazuliSection, EarlierWork, ContactMe, …
     ├── data/projects.ts     The "earlier work" projects
     ├── lib/gsap.ts          Shared scroll-animation helpers (reveal, fadeInOn)
     ├── services/blog/       Post loader, frontmatter schema, Markdown renderer, tests
