@@ -4,7 +4,7 @@ import Envelope from "../../components/blog/Envelope";
 import { loadPosts, toSummary } from "../../services/blog/loader";
 import type { PostSummary } from "../../services/blog/types";
 
-type Props = { posts: PostSummary[] };
+type Props = { posts: PostSummary[]; hasJapanese: boolean };
 
 const BlogIndex: NextPage<Props> = ({ posts }) => (
   <BlogLayout
@@ -36,5 +36,6 @@ export default BlogIndex;
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = (await loadPosts()).map(toSummary);
   // Next can't serialise `undefined`; JSON round-trip drops those keys.
-  return { props: JSON.parse(JSON.stringify({ posts })) as Props };
+  const hasJapanese = posts.some((p) => p.lang === "ja");
+  return { props: JSON.parse(JSON.stringify({ posts, hasJapanese })) as Props };
 };

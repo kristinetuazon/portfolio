@@ -32,6 +32,8 @@ const en = {
     sub: "and I'm a software engineer based in Yokohama, Japan.",
     scroll: "Scroll",
     poke: "Poke the dango",
+    now: "now;",
+    nowNext: "Show the next thing I'm up to",
   },
   lazuli: {
     lead: "these days, I'm a",
@@ -219,6 +221,7 @@ const en = {
     links: { github: "code on GitHub", website: "live site", youtube: "demo video" },
     screenshot: (title: string) => `${title} screenshot`,
   },
+  theme: { toLight: "Switch to the light theme", toDark: "Switch to the dark theme" },
   contact: {
     title: "contact me",
     sub: "and let's collaborate ✨",
@@ -257,6 +260,8 @@ const ja: Dict = {
     sub: "横浜でソフトウェアエンジニアをしています。",
     scroll: "スクロール",
     poke: "お団子をつついてみて",
+    now: "いま;",
+    nowNext: "次の「いま」を見る",
   },
   lazuli: {
     lead: "いまは",
@@ -447,6 +452,7 @@ const ja: Dict = {
     links: { github: "GitHubのコード", website: "サイトを見る", youtube: "デモ動画" },
     screenshot: (title: string) => `${title}のスクリーンショット`,
   },
+  theme: { toLight: "昼のテーマにする", toDark: "夜のテーマにする" },
   contact: {
     title: "おたよりください",
     sub: "いっしょに何かつくりませんか ✨",

@@ -26,12 +26,36 @@ const ONIGIRI = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 <ellipse cx="43" cy="53" rx="1.9" ry="2.5" fill="#2b2129"/><ellipse cx="57" cy="53" rx="1.9" ry="2.5" fill="#2b2129"/>
 <path d="M47.6 57.6q2.4 2.4 4.8 0" stroke="#2b2129" stroke-width=".9" stroke-linecap="round" fill="none"/></svg>`;
 
+const JAPANESE = /[\u3000-\u30ff\u3400-\u9fff\uff00-\uffef]/;
+
+/**
+ * The site's fonts have no Japanese letters, so for a Japanese title fetch
+ * Zen Maru Gothic from Google Fonts with only the characters it needs (a few KB).
+ * Returns null if that fails; the card then leaves the title out.
+ */
+async function japaneseFont(text: string): Promise<ArrayBuffer | null> {
+  try {
+    const css = await fetch(
+      `https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&text=${encodeURIComponent(text)}`,
+      { signal: AbortSignal.timeout(4000) },
+    ).then((r) => (r.ok ? r.text() : ""));
+    const url = /src: url\(([^)]+)\) format\('(?:truetype|opentype)'\)/.exec(css)?.[1];
+    if (!url) return null;
+    const font = await fetch(url, { signal: AbortSignal.timeout(4000) });
+    return font.ok ? await font.arrayBuffer() : null;
+  } catch {
+    return null;
+  }
+}
+
 const DANGO = ["#f2a7b6", "#f5f1e8", "#a3c46f"];
 
 export default async function og(req: NextApiRequest, res: NextApiResponse) {
   const letter = req.query.kind === "letter";
-  const title = String(req.query.title ?? "").slice(0, 120);
+  let title = String(req.query.title ?? "").slice(0, 120);
   const [audrey, petrona] = await fonts;
+  const japanese = JAPANESE.test(title) ? await japaneseFont(title) : null;
+  if (JAPANESE.test(title) && !japanese) title = "";
 
   const image = new ImageResponse(
     <div
@@ -84,7 +108,7 @@ export default async function og(req: NextApiRequest, res: NextApiResponse) {
             textTransform: "uppercase",
           }}
         >
-          {letter && title ? title : "Kristine Tuazon"}
+          {letter ? title || "A letter" : "Kristine Tuazon"}
         </div>
         <div
           style={{
@@ -133,6 +157,17 @@ export default async function og(req: NextApiRequest, res: NextApiResponse) {
       fonts: [
         { name: "Audrey", data: audrey, weight: 500, style: "normal" },
         { name: "Petrona", data: petrona, weight: 400, style: "italic" },
+        // Satori falls back to this for any letter the fonts above don't have.
+        ...(japanese
+          ? [
+              {
+                name: "Zen Maru Gothic",
+                data: japanese,
+                weight: 500 as const,
+                style: "normal" as const,
+              },
+            ]
+          : []),
       ],
     },
   );

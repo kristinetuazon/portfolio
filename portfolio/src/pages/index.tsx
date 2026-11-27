@@ -5,7 +5,6 @@ import { gsap, reveal, ScrollTrigger, useGSAP } from "../lib/gsap";
 import OnigiriNav from "../components/OnigiriNav";
 import SoapBubbles from "../components/SoapBubbles";
 import BubbleCounter from "../components/BubbleCounter";
-import LanguageSwitch from "../components/LanguageSwitch";
 import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
@@ -61,13 +60,12 @@ const Home: NextPage = () => {
       <OnigiriNav />
       <SoapBubbles />
       <BubbleCounter />
-      <LanguageSwitch />
       <IntroHero />
       <LazuliSection />
 
       <section
         id="about"
-        className="story flex min-h-screen w-screen flex-col items-center bg-gradient-to-b from-[#3a2d37] via-charcoal to-mint pb-40 pt-32"
+        className="story flex min-h-screen w-screen flex-col items-center bg-gradient-to-b from-plum via-charcoal to-mint pb-40 pt-32"
       >
         <p className="font-bodyRegularItalic text-white">{t.story.startedWith}</p>
         <h2 className="mb-3 font-heading text-4xl uppercase tracking-widest text-white">
@@ -98,7 +96,7 @@ const Home: NextPage = () => {
         <Link
           href="/mailbox/why-programming"
           locale="en"
-          className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-charcoal decoration-charcoal underline-offset-8 transition-[letter-spacing] hover:tracking-wide hover:underline"
+          className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-ink decoration-ink underline-offset-8 transition-[letter-spacing] hover:tracking-wide hover:underline"
         >
           {t.story.readStory}
         </Link>

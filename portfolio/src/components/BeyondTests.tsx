@@ -70,7 +70,7 @@ const BeyondTests = () => {
   return (
     <section
       ref={root}
-      className="w-screen bg-[#3a2d37] px-6 pb-28 pt-10 md:pl-20 md:pr-36"
+      className="w-screen bg-plum px-6 pb-28 pt-10 md:pl-20 md:pr-36"
       aria-labelledby="beyond-title"
     >
       <div className="mx-auto max-w-6xl">
@@ -137,7 +137,7 @@ const BeyondTests = () => {
           <span className="oh-tape" aria-hidden="true" />
           <h3
             id="learning-title"
-            className="font-heading text-2xl uppercase tracking-widest text-charcoal"
+            className="font-heading text-2xl uppercase tracking-widest text-ink"
           >
             {t.beyond.learningTitle}
           </h3>
@@ -152,7 +152,7 @@ const BeyondTests = () => {
                   <span aria-hidden="true">{icon}</span> {verb}:{" "}
                   <a
                     href={href}
-                    className="font-bodyRegular not-italic text-[#8e3b52] underline decoration-[#dd8e58] underline-offset-4 hover:text-charcoal"
+                    className="font-bodyRegular not-italic text-[#8e3b52] underline decoration-[#dd8e58] underline-offset-4 hover:text-ink"
                   >
                     {label}
                   </a>{" "}

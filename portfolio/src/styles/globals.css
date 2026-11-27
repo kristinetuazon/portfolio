@@ -76,6 +76,37 @@
    but on every element that also turns overflow-y into "auto", so any box whose
    content poked out a few pixels grew its own little scrollbar. "clip" hides the
    sideways overflow without creating a scroll box, and only the page needs it. */
+/* ---------- Themes ----------
+   Colors as "R G B" so Tailwind can add transparency (bg-charcoal/70).
+   Dark is the default; the sun/moon button sets data-theme="light" on <html>. */
+:root {
+  color-scheme: dark;
+  --c-charcoal: 43 33 41; /* page background */
+  --c-white: 246 251 244; /* main text */
+  --c-creme: 229 209 184; /* soft text */
+  --c-coffee: 194 149 110;
+  --c-mint: 112 138 129;
+  --c-orange: 221 142 88;
+  --c-plum: 58 45 55;
+  --c-pre: 31 24 30;
+  --c-highlight: 43 33 41; /* behind highlighted words in the story */
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --c-charcoal: 245 236 220; /* cream paper */
+  --c-white: 43 33 41; /* ink */
+  --c-creme: 112 82 70;
+  --c-coffee: 150 100 62;
+  --c-mint: 196 218 204; /* pale matcha */
+  --c-orange: 184 98 46;
+  --c-plum: 238 224 206;
+  --c-pre: 43 33 41;
+  --c-highlight: 248 200 210; /* sakura highlighter */
+}
+html {
+  background: rgb(var(--c-charcoal));
+}
+
 html,
 body {
   overflow-x: hidden; /* fallback for older browsers */
@@ -106,7 +137,7 @@ body {
   margin-bottom: 45px;
 }
 .story span {
-  background-image: linear-gradient(#2b2129, #2b2129);
+  background-image: linear-gradient(rgb(var(--c-highlight)), rgb(var(--c-highlight)));
   background-size: 0% 100%;
   background-repeat: no-repeat;
   transition: background-size 1s ease-in;
@@ -165,7 +196,7 @@ body {
   overflow-x: auto;
 }
 .blog .post-body :not(pre) > code {
-  background: rgba(246, 251, 244, 0.08);
+  background: rgb(var(--c-white) / 0.08);
   border-radius: 0.25rem;
   padding: 0.1em 0.35em;
 }
@@ -203,7 +234,7 @@ body {
   cursor: none;
 }
 .envelope-link:focus-visible {
-  outline: 2px dashed #f6fbf4;
+  outline: 2px dashed rgb(var(--c-white));
   outline-offset: 6px;
 }
 .envelope {
@@ -356,6 +387,23 @@ body {
   text-transform: uppercase;
   color: #2b2129;
 }
+/* A little red hanko on letters written in Japanese */
+.env-lang {
+  position: absolute;
+  z-index: 5;
+  right: 6%;
+  top: 8%;
+  padding: 0.15rem 0.4rem;
+  border: 2px solid #c0392b;
+  border-radius: 0.3rem;
+  color: #c0392b;
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  transform: rotate(-6deg);
+  opacity: 0.85;
+}
 .env-draft {
   position: absolute;
   z-index: 5;
@@ -481,7 +529,7 @@ body {
   overflow: visible; /* labels sit outside the nav */
   padding: 0.35rem 1rem 0.35rem 0.9rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -550,7 +598,7 @@ body {
   pointer-events: none;
 }
 .rice-btn:focus-visible {
-  outline: 2px dashed #f6fbf4;
+  outline: 2px dashed rgb(var(--c-white));
   outline-offset: 3px;
 }
 .rice-label {
@@ -563,8 +611,8 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #f6fbf4;
-  text-shadow: 0 1px 6px rgba(43, 33, 41, 0.9);
+  color: rgb(var(--c-white));
+  text-shadow: 0 1px 6px rgb(var(--c-charcoal) / 0.9);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
@@ -587,7 +635,7 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #f6fbf4;
+  color: rgb(var(--c-white));
 }
 
 /* Desktop: a column down the right edge, labels to the left */
@@ -732,11 +780,11 @@ body {
   overflow: visible;
   padding: 0.4rem 0.9rem 0.4rem 0.5rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(246, 251, 244, 0.12);
-  color: #f6fbf4;
+  border: 1px solid rgb(var(--c-white) / 0.12);
+  color: rgb(var(--c-white));
   font-family: Petrona_Regular, "Zen Maru Gothic", serif;
   font-size: 0.85rem;
   line-height: 1.1;
@@ -781,8 +829,8 @@ body {
   white-space: nowrap;
   padding: 0.25rem 0.7rem;
   border-radius: 9999px;
-  background: #f6fbf4;
-  color: #2b2129;
+  background: rgb(var(--c-white));
+  color: rgb(var(--c-charcoal));
   font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
@@ -854,24 +902,49 @@ body {
 
 /* ---------- Language switch (EN / 日本語) ---------- */
 
-.lang-switch {
+.corner-controls {
   position: fixed;
   z-index: 45; /* same layer as the pop counter */
   right: 1rem;
   bottom: 1rem;
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-charcoal) / 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgb(var(--c-white) / 0.12);
+  color: rgb(var(--c-white));
+  transition: background-color 0.2s;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgb(var(--c-white) / 0.14);
+}
+.theme-toggle svg {
+  overflow: visible;
+}
+.lang-switch {
+  display: flex;
   gap: 0.2rem;
   padding: 0.25rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(246, 251, 244, 0.12);
+  border: 1px solid rgb(var(--c-white) / 0.12);
 }
 .lang-option {
   padding: 0.3rem 0.75rem;
   border-radius: 9999px;
-  color: #f6fbf4;
+  color: rgb(var(--c-white));
   font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.8rem;
   letter-spacing: 0.08em;
@@ -880,7 +953,7 @@ body {
 }
 a.lang-option:hover,
 a.lang-option:focus-visible {
-  background: rgba(246, 251, 244, 0.14);
+  background: rgb(var(--c-white) / 0.14);
 }
 .lang-option.is-current {
   background: #f2a7b6;
@@ -919,4 +992,111 @@ a.lang-option:focus-visible {
   background: #f5f1e8;
   box-shadow: inset -1px -1px 0 #d6ccba;
   transform: rotate(var(--r));
+}
+
+/* ---------- "now;" line under the intro ---------- */
+
+.now-line {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 34rem;
+  text-align: center;
+}
+.now-label {
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgb(var(--c-orange));
+}
+.now-items {
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px dashed rgb(var(--c-white) / 0.25);
+  color: rgb(var(--c-white));
+  font-family: Petrona_Light, "Zen Maru Gothic", serif;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  transition: border-color 0.2s;
+}
+.now-items:hover,
+.now-items:focus-visible {
+  border-color: rgb(var(--c-orange));
+}
+/* All items share one spot; only the current one shows. */
+.now-stack {
+  display: grid;
+}
+.now-stack > span {
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+.now-stack > span.is-current {
+  visibility: visible;
+}
+.now-items em {
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
+  color: rgb(var(--c-creme));
+}
+.now-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+.now-dots span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-white) / 0.2);
+  transition: background-color 0.3s;
+}
+.now-dots span.is-current {
+  background: rgb(var(--c-orange));
+}
+
+/* ---------- Light theme: keep white things visible on cream paper ---------- */
+
+/* Onigiri and the white dango get a thin ink outline and a soft shadow, like stickers. */
+:root[data-theme="light"] .rice-icon,
+:root[data-theme="light"] .nf-onigiri,
+:root[data-theme="light"] .hero-dango-img {
+  filter: drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.7)) drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.5))
+    drop-shadow(0 3px 4px rgba(43, 33, 41, 0.22));
+}
+/* Sections not reached yet: faded, but still clearly onigiri. */
+:root[data-theme="light"] .rice-btn:not(.is-reached):not(:hover):not(:focus-visible) .rice-icon {
+  filter: grayscale(1) drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.6))
+    drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.4));
+  opacity: 0.55;
+}
+
+/* Bubbles: on cream, white film disappears, so give them a soft violet rim
+   and let the rainbow film darken the paper (multiply) instead of lightening it. */
+:root[data-theme="light"] .soap-film {
+  background: radial-gradient(
+    circle at 50% 55%,
+    transparent 0 52%,
+    rgba(150, 140, 190, 0.06) 62%,
+    rgba(130, 115, 170, 0.2) 69%,
+    rgba(105, 90, 145, 0.45) 71%,
+    transparent 72.5%
+  );
+  box-shadow:
+    inset 0 0 6px rgba(120, 110, 170, 0.25),
+    inset 10px 8px 18px rgba(70, 160, 230, 0.2),
+    inset -10px -12px 20px rgba(230, 90, 170, 0.2),
+    0 3px 10px rgba(43, 33, 41, 0.12);
+}
+:root[data-theme="light"] .soap-film::before {
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+:root[data-theme="light"] .soap-ring {
+  border-color: rgba(105, 90, 145, 0.6);
+  box-shadow: 0 0 8px rgba(105, 90, 145, 0.3);
+}
+:root[data-theme="light"] .soap-drop {
+  background: rgba(105, 90, 145, 0.5);
 }

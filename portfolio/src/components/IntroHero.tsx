@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { gsap, reducedMotion, ScrollTrigger, SplitText, useGSAP } from "../lib/gsap";
 import Dango, { BALLS, biteTransform } from "./Dango";
+import NowLine from "./NowLine";
 import { useT } from "../i18n";
 import onigiri from "../../public/rice-ball-svgrepo-com.svg";
 
@@ -176,6 +177,7 @@ const IntroHero = () => {
       <p className="hero-sub mt-4 max-w-xl text-center font-bodyThin text-2xl text-white">
         {t.intro.sub}
       </p>
+      <NowLine />
 
       <div id="scroll-title" className="mt-28 font-audreyNormal uppercase text-mint">
         {t.intro.scroll}

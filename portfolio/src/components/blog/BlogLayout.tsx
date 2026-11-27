@@ -15,6 +15,8 @@ type Props = {
   image?: string;
   imageAlt?: string;
   jsonLd?: object;
+  /** Language of the letter on this page. */
+  lang?: "en" | "ja";
   children: ReactNode;
 };
 
@@ -27,6 +29,7 @@ const BlogLayout = ({
   image,
   imageAlt,
   jsonLd,
+  lang = "en",
   children,
 }: Props) => (
   <div className="blog min-h-screen bg-charcoal text-white">
@@ -44,6 +47,7 @@ const BlogLayout = ({
             : "Kristine Tuazon's mailbox"
       }
       jsonLd={jsonLd}
+      contentLang={lang}
     />
     <Head>
       <link rel="icon" href="/favicon.svg" />
@@ -76,13 +80,34 @@ const BlogLayout = ({
 
 export default BlogLayout;
 
-export const formatDate = (iso: string) =>
-  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
+/** "27 November 2026", or "2026年11月27日" for a Japanese letter. */
+export const formatDate = (iso: string, lang: "en" | "ja" = "en") =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString(lang === "ja" ? "ja-JP" : "en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric",
     timeZone: "UTC",
   });
+
+/** The little bits of text around a letter, in the letter's own language. */
+export const LETTER_COPY = {
+  en: {
+    from: "a letter from Kristine",
+    read: (minutes: number) => `${minutes} min read`,
+    open: (title: string) => `Open the letter: ${title}`,
+    updated: (date: string) => `Last updated ${date}`,
+    back: "← Back to all letters",
+    stamp: "",
+  },
+  ja: {
+    from: "クリスティンからの手紙",
+    read: (minutes: number) => `${minutes}分で読めます`,
+    open: (title: string) => `手紙を開く：${title}`,
+    updated: (date: string) => `${date} 更新`,
+    back: "← お手紙一覧へもどる",
+    stamp: "日本語",
+  },
+};
 
 export const Tags = ({ tags }: { tags: string[] }) =>
   tags.length ? (

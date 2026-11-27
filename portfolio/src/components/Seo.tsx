@@ -13,6 +13,8 @@ type Props = {
   locale?: "en" | "ja";
   /** The page also exists in Japanese at "/ja" + path. */
   hasJapanese?: boolean;
+  /** Language of the content, when it differs from the page's locale (a Japanese letter). */
+  contentLang?: "en" | "ja";
   /** schema.org data for search engines. */
   jsonLd?: object;
 };
@@ -30,6 +32,7 @@ const Seo = ({
   type = "website",
   locale = "en",
   hasJapanese = false,
+  contentLang = locale,
   jsonLd,
 }: Props) => {
   const url = withLocale(locale, path);
@@ -51,7 +54,7 @@ const Seo = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
-      <meta property="og:locale" content={locale === "ja" ? "ja_JP" : "en_US"} />
+      <meta property="og:locale" content={contentLang === "ja" ? "ja_JP" : "en_US"} />
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />

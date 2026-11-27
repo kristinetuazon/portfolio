@@ -201,7 +201,7 @@ const OffHours = () => {
                       {item.emoji}
                     </p>
                   )}
-                  <h3 className="mt-3 font-audreyMedium text-xl uppercase tracking-wide text-charcoal">
+                  <h3 className="mt-3 font-audreyMedium text-xl uppercase tracking-wide text-ink">
                     {withHyphens(title)}
                   </h3>
                   <p className="mt-1 font-bodyRegularItalic text-lg leading-snug text-[#5a4a45]">
