@@ -278,8 +278,9 @@
 .envelope-link:hover .env-flap {
   transform: rotateX(-14deg);
 }
-.envelope.is-opening .env-flap,
-.envelope-wrap .is-opening .env-flap {
+/* While opening, GSAP drives the flap; the CSS hover transition would fight it. */
+.envelope-wrap.is-opening .env-flap,
+.envelope-wrap.is-opening .envelope {
   transition: none;
 }
 .env-seal {
