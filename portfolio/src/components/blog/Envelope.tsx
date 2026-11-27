@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { gsap, reducedMotion, useGSAP } from "../../lib/gsap";
+import { gsap, reducedMotion } from "../../lib/gsap";
 import type { PostSummary } from "../../services/blog/types";
 import WaxSeal from "./WaxSeal";
 import { formatDate, Tags } from "./BlogLayout";
@@ -24,22 +24,56 @@ const postmark = (iso: string) =>
  * straight to the post.
  */
 const Envelope = ({ post }: { post: PostSummary }) => {
-  const root = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const href = `/blog/${post.slug}`;
-  const { contextSafe } = useGSAP({ scope: root });
+  const opening = useRef<{ tl: gsap.core.Timeline; timer: number; el: HTMLElement } | null>(null);
 
-  const open = contextSafe((e: React.MouseEvent<HTMLAnchorElement>) => {
+  // Put the envelope back the way it was (closed, sealed, fully visible).
+  const reset = () => {
+    if (!opening.current) return;
+    window.clearTimeout(opening.current.timer);
+    opening.current.tl.revert();
+    opening.current.el.classList.remove("is-opening");
+    opening.current = null;
+  };
+
+  useEffect(() => {
+    // Coming back via the browser's back/forward cache restores a snapshot of the
+    // page, mid-animation included; reset it. Same if the page change fails.
+    const onPageShow = (e: PageTransitionEvent) => e.persisted && reset();
+    window.addEventListener("pageshow", onPageShow);
+    router.events.on("routeChangeError", reset);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      router.events.off("routeChangeError", reset);
+      reset();
+    };
+    // reset only touches the ref, so it's safe to register once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const open = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0 || reducedMotion())
       return;
     e.preventDefault();
+    if (opening.current) return; // already opening
     const el = e.currentTarget.closest<HTMLElement>(".envelope-wrap")!;
-    el.classList.add("is-opening");
-    gsap
-      .timeline({ onComplete: () => void router.push(href) })
+    const q = gsap.utils.selector(el);
+    el.classList.add("is-opening"); // turns off the CSS hover transition on the flap
+
+    // If anything goes wrong with the in-app page change, do a normal page load.
+    // A full page load is the point here, as a fallback for a failed in-app navigation.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+    const hardNavigate = () => window.location.assign(href);
+    const go = () => {
+      router.push(href).then((ok) => ok || hardNavigate(), hardNavigate);
+    };
+
+    const tl = gsap
+      .timeline()
       // The seal cracks in two and falls away...
       .to(
-        ".seal-half-l",
+        q(".seal-half-l"),
         {
           rotation: -28,
           x: -10,
@@ -52,7 +86,7 @@ const Envelope = ({ post }: { post: PostSummary }) => {
         0,
       )
       .to(
-        ".seal-half-r",
+        q(".seal-half-r"),
         {
           rotation: 24,
           x: 10,
@@ -65,16 +99,26 @@ const Envelope = ({ post }: { post: PostSummary }) => {
         0.03,
       )
       // ...the flap swings up and over...
-      .to(".env-flap", { rotationX: 180, duration: 0.5, ease: "power2.inOut" }, 0.22)
-      .set(".env-flap", { zIndex: 1 }, 0.47)
-      // ...and the letter slides out.
-      .to(".env-letter", { yPercent: -58, duration: 0.55, ease: "power2.out" }, 0.62)
+      .to(q(".env-flap"), { rotationX: 180, duration: 0.5, ease: "power2.inOut" }, 0.22)
+      .set(q(".env-flap"), { zIndex: 1 }, 0.47)
+      // ...and the letter slides out. The post starts loading while it does.
+      .to(q(".env-letter"), { yPercent: -58, duration: 0.55, ease: "power2.out" }, 0.62)
       .to(el, { y: 12, duration: 0.55, ease: "power2.out" }, 0.62)
+      .call(go, [], 0.85)
       .to(el, { opacity: 0, scale: 0.97, duration: 0.25, ease: "power1.in" }, 1.05);
-  });
+
+    // Safety net: if we're somehow still here, tidy up and load the post normally.
+    const timer = window.setTimeout(() => {
+      if (window.location.pathname !== href) {
+        reset();
+        hardNavigate();
+      }
+    }, 2500);
+    opening.current = { tl, timer, el };
+  };
 
   return (
-    <div ref={root} className="envelope-wrap">
+    <div className="envelope-wrap">
       <Link
         href={href}
         onClick={open}
