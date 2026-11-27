@@ -22,8 +22,8 @@ const BlogLayout = ({ title, description, image, children }: Props) => (
       <link
         rel="alternate"
         type="application/rss+xml"
-        title="kristineCodes; blog"
-        href="/blog/rss.xml"
+        title="kristineCodes; mailbox"
+        href="/mailbox/rss.xml"
       />
     </Head>
 
@@ -35,10 +35,10 @@ const BlogLayout = ({ title, description, image, children }: Props) => (
         kristineCodes;
       </Link>
       <Link
-        href="/blog"
+        href="/mailbox"
         className="font-audreyMedium uppercase tracking-widest text-white hover:text-creme"
       >
-        Blog
+        Mailbox
       </Link>
     </header>
 

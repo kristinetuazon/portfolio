@@ -1,7 +1,7 @@
 # kristineCodes; — portfolio
 
 Kristine's personal site: a scroll-driven portfolio of her software projects,
-plus a blog. Built with [Next.js](https://nextjs.org), Tailwind CSS and
+plus a blog called the mailbox. Built with [Next.js](https://nextjs.org), Tailwind CSS and
 [GSAP](https://gsap.com).
 
 The app lives in [`portfolio/`](portfolio).
@@ -11,8 +11,9 @@ The app lives in [`portfolio/`](portfolio).
 - **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
   Lazuli, the story of how she got into code, a row of earlier projects, and
   contact links. A column of onigiri on the side lights up as you scroll.
-- **Blog (`/blog`)**: posts written in Markdown and kept in this repo, shown
-  as sealed envelopes that open into letters, with an RSS feed at `/blog/rss.xml`.
+- **Mailbox (`/mailbox`)**: the blog. Posts are written in Markdown and kept in
+  this repo, shown as sealed envelopes that open into letters, with an RSS feed
+  at `/mailbox/rss.xml`. Old `/blog` links redirect here.
 
 ## Tech stack
 
@@ -54,7 +55,7 @@ portfolio/
 ├── public/                  Photos, project screenshots, blog images (public/blog/<slug>/)
 ├── Assets/Fonts/            Audrey, Petrona, Bargemo and Holipop font files
 └── src/
-    ├── pages/               index.tsx (home), blog/ (list, post, RSS), _app, _document
+    ├── pages/               index.tsx (home), mailbox/ (list, post, RSS), _app, _document
     ├── components/          OnigiriNav, Onigiri, IntroHero, LazuliSection, EarlierWork, ContactMe, …
     ├── data/projects.ts     The "earlier work" projects
     ├── lib/gsap.ts          Shared scroll-animation helpers (reveal, fadeInOn)
@@ -91,10 +92,10 @@ The Lazuli section's text lives in `portfolio/src/components/LazuliSection.tsx`
 (the `ROLES` list), and its "3 years 6 months" counts up from June 2023
 automatically.
 
-## Writing a blog post
+## Writing a post for the mailbox
 
 1. Create `portfolio/content/blog/<post-slug>/index.md`. The folder name
-   becomes the URL, `/blog/<post-slug>`.
+   becomes the URL, `/mailbox/<post-slug>`.
 2. Start it with frontmatter:
 
    ```yaml

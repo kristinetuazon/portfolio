@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <title>kristineCodes;</title>
         <meta
           name="description"
-          content="Kristine Tuazon, software engineer at Lazuli in Japan: portfolio and blog."
+          content="Kristine Tuazon, software engineer at Lazuli in Japan: portfolio and mailbox."
         />
         <link rel="icon" href="/favicon.svg" />
       </Head>
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
         </p>
 
         <Link
-          href="/blog/why-programming"
+          href="/mailbox/why-programming"
           className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-charcoal decoration-charcoal underline-offset-8 transition-[letter-spacing] hover:tracking-wide hover:underline"
         >
           Why programming? Read the story →
