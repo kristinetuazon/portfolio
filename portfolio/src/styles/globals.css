@@ -144,25 +144,6 @@
   pointer-events: none;
 }
 
-.ball {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  position: absolute;
-
-  background: radial-gradient(
-    circle at 75% 30%,
-    #F6FBF4 7px,
-    #DD8E58 8%,
-    #c88e95 60%,
-    #C2956E 100%
-  );
-  box-shadow: inset 0 0 10px #fff, inset 10px 0 30px #eaf5fc,
-    inset 10px 0px 29px #E5D1B8, inset -20px -60px 100px #fde9ea,
-    inset 0 50px 140px #fde9ea, 0 0 90px #fff; 
-}
-
-
 /* ---------- Blog ---------- */
 
 /* The portfolio sets overflow-x: hidden on every element for its slide-in
@@ -206,75 +187,101 @@
 .blog .alert-warning { --alert-color: #DD8E58; }
 .blog .alert-caution { --alert-color: #e07a6b; }
 
-/* ---------- Dango skewer nav ---------- */
+/* ---------- Onigiri nav ---------- */
 
-.dango-nav {
+.rice-nav {
   position: fixed;
   z-index: 50;
-  /* Phones: across the top */
-  top: 0.75rem;
+  /* Phones: a pill across the top */
+  top: 0.6rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 1rem;
-  overflow: visible;
-  padding: 0.45rem 1rem 0.45rem 1.25rem;
+  gap: 0.9rem;
+  overflow: visible; /* labels sit outside the nav */
+  padding: 0.35rem 1rem 0.35rem 0.9rem;
   border-radius: 9999px;
   background: rgba(43, 33, 41, 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-.dango-nav * {
+.rice-nav * {
   overflow: visible;
 }
-.skewer {
-  position: absolute;
-  left: 0.6rem;
-  right: 3.6rem;
-  top: 50%;
-  height: 3px;
-  margin-top: -1.5px;
-  border-radius: 2px;
-  background: rgba(242, 154, 46, 0.25);
-}
-.skewer-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: #f29a2e;
-  transform-origin: left center;
-}
-.dango-balls {
-  position: relative;
+.rice-list {
   display: flex;
-  gap: 0.9rem;
+  gap: 0.55rem;
 }
-.dango-ball {
+.rice-btn {
   position: relative;
   display: block;
-  width: 1.5rem;
-  height: 1.35rem;
-  border-radius: 50%;
-  border: 2px solid var(--ball);
-  background: #2b2129;
   cursor: none;
+  border-radius: 0.5rem;
 }
-.ball-fill {
-  position: absolute;
-  inset: 1px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--ball) 45%);
-  transform: scale(0);
+.rice-icon {
+  display: block;
+  width: 1.9rem;
+  height: 1.9rem;
+  /* Quiet until its section is reached */
+  filter: grayscale(1) brightness(0.75);
+  opacity: 0.45;
+  transition: filter 0.5s ease, opacity 0.5s ease;
 }
-.ball-label {
+.rice-btn.is-reached .rice-icon,
+.rice-btn:hover .rice-icon,
+.rice-btn:focus-visible .rice-icon {
+  filter: none;
+  opacity: 1;
+}
+.rice-crumb {
   position: absolute;
-  top: calc(100% + 0.4rem);
   left: 50%;
-  transform: translateX(-50%);
+  top: 18%;
+  width: 3px;
+  height: 2px;
+  margin-left: -1.5px;
+  border-radius: 50%;
+  background: #f5f1e8;
+  pointer-events: none;
+}
+.hero-dango {
+  position: relative;
+  overflow: visible;
+}
+.mochi-crumb {
+  position: absolute;
+  left: 18%;
+  top: 18%;
+  width: 5px;
+  height: 4px;
+  border-radius: 50%;
+  background: #efa3b3;
+  pointer-events: none;
+}
+.rice-sparkle {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -4px;
+  font-size: 9px;
+  line-height: 1;
+  color: #fff3c4;
+  text-shadow: 0 0 4px rgba(255, 230, 160, 0.9);
+  pointer-events: none;
+}
+.rice-btn:focus-visible {
+  outline: 2px dashed #f6fbf4;
+  outline-offset: 3px;
+}
+.rice-label {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 0.75rem);
+  transform: translateY(-50%);
   white-space: nowrap;
   font-family: Audrey_Medium, serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #f6fbf4;
@@ -283,23 +290,20 @@
   pointer-events: none;
   transition: opacity 0.2s;
 }
+.rice-btn:hover .rice-label,
+.rice-btn:focus-visible .rice-label,
+.rice-btn[aria-current] .rice-label {
+  opacity: 1;
+}
+/* Phones: labels stay readable to screen readers but aren't drawn */
 @media (max-width: 767px) {
-  .ball-label {
+  .rice-label {
     clip-path: inset(50%);
     width: 1px;
     height: 1px;
   }
 }
-.dango-ball:hover .ball-label,
-.dango-ball:focus-visible .ball-label,
-.dango-ball[aria-current] .ball-label {
-  opacity: 1;
-}
-.dango-ball:focus-visible {
-  outline: 2px dashed #f6fbf4;
-  outline-offset: 3px;
-}
-.dango-blog {
+.rice-blog {
   font-family: Audrey_Medium, serif;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
@@ -307,46 +311,27 @@
   color: #f6fbf4;
 }
 
-/* Desktop: a vertical skewer down the right edge, labels to the left */
+/* Desktop: a column down the right edge, labels to the left */
 @media (min-width: 768px) {
-  .dango-nav {
+  .rice-nav {
     top: 50%;
     left: auto;
-    right: 1.75rem;
+    right: 1.5rem;
     transform: translateY(-50%);
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     padding: 0;
     background: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
-  .skewer {
-    left: 50%;
-    right: auto;
-    top: -1.25rem;
-    bottom: 3rem;
-    width: 3px;
-    height: auto;
-    margin: 0 0 0 -1.5px;
-  }
-  .skewer-fill {
-    transform-origin: center top;
-  }
-  .dango-balls {
+  .rice-list {
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.9rem;
   }
-  .dango-ball {
-    width: 1.6rem;
-    height: 1.8rem;
-  }
-  .ball-label {
-    top: 50%;
-    left: auto;
-    right: calc(100% + 0.75rem);
-    transform: translateY(-50%);
-    font-size: 0.8rem;
+  .rice-icon {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 

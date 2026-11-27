@@ -18,27 +18,31 @@ const noop = () => () => {};
 // The three things she does, as three dango on a skewer.
 const ROLES = [
   {
-    color: "#ff99ad",
+    color: "#f2a7b6",
+    shades: ["#fde4ea", "#efa3b3", "#b86a7c"],
     title: "Frontend",
     tag: "mainly",
     text: "Most of my work: building the web apps for Lazuli's products.",
   },
   {
-    color: "#dae3ea",
+    color: "#e9e2d4",
+    shades: ["#ffffff", "#ebe4d6", "#a99f8c"],
     title: "QA & end-to-end testing",
     tag: "spearheading",
     text: "Leading QA with end-to-end tests across all of Lazuli's products.",
   },
   {
-    color: "#8cc63e",
+    color: "#a3c46f",
+    shades: ["#e3f0c9", "#9cbd63", "#5b7a33"],
     title: "Backend",
     tag: "exploring",
     text: "Toying with the backend too, and getting to know the rest of the stack.",
   },
 ];
 
-// Three dango along a gently tilted skewer, one per role.
-const BALLS = [{ cx: 110 }, { cx: 260 }, { cx: 410 }];
+// Three dango snug against each other on a bamboo skewer, one per role.
+const R = 56;
+const BALLS = [{ cx: 150 }, { cx: 150 + 2 * R - 4 }, { cx: 150 + 4 * R - 8 }];
 
 const LazuliSection = () => {
   const root = useRef<HTMLElement>(null);
@@ -48,6 +52,53 @@ const LazuliSection = () => {
     () => timeAtLazuli(),
     () => "3+ years",
   );
+
+  /**
+   * A dango drops onto the skewer, squashes as it lands, slides along it and
+   * bumps into its neighbour, which jiggles.
+   */
+  const landBall = (tl: gsap.core.Timeline, i: number, at: number) => {
+    const ball = `.lz-ball-${i}`;
+    const { cx } = BALLS[i]!;
+    const base = `${cx} ${70 + R}`; // squash from the bottom of the ball
+    tl.fromTo(
+      ball,
+      { y: -170, x: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.32, ease: "power2.in" },
+      at,
+    )
+      .to(
+        ball,
+        { scaleX: 1.16, scaleY: 0.8, svgOrigin: base, duration: 0.07, ease: "power1.out" },
+        at + 0.32,
+      )
+      .to(
+        ball,
+        { scaleX: 1, scaleY: 1, svgOrigin: base, duration: 0.45, ease: "elastic.out(1.3, 0.35)" },
+        at + 0.39,
+      )
+      .to(ball, { x: 0, duration: 0.22, ease: "power3.in" }, at + 0.39);
+    if (i > 0) {
+      const prev = `.lz-ball-${i - 1}`;
+      const mid = `${BALLS[i - 1]!.cx} 70`;
+      tl.to(
+        prev,
+        { x: -6, scaleX: 0.92, scaleY: 1.06, svgOrigin: mid, duration: 0.07 },
+        at + 0.61,
+      ).to(
+        prev,
+        {
+          x: 0,
+          scaleX: 1,
+          scaleY: 1,
+          svgOrigin: mid,
+          duration: 0.5,
+          ease: "elastic.out(1.2, 0.3)",
+        },
+        at + 0.68,
+      );
+    }
+  };
 
   useGSAP(
     () => {
@@ -71,14 +122,11 @@ const LazuliSection = () => {
           0.2,
         );
         ROLES.forEach((_, i) => {
+          landBall(tl, i, 0.6 + i * 0.8);
           tl.from(
-            `.lz-ball-${i}`,
-            { scale: 0, y: -40, transformOrigin: "50% 50%", duration: 0.5, ease: "back.out(3)" },
-            0.6 + i * 0.7,
-          ).from(
             `.lz-card-${i}`,
             { y: 40, opacity: 0, duration: 0.5, ease: "back.out(1.6)" },
-            0.7 + i * 0.7,
+            0.9 + i * 0.8,
           );
         });
         tl.to({}, { duration: 0.4 }); // a beat to read before un-pinning
@@ -86,15 +134,10 @@ const LazuliSection = () => {
 
       // Phones and short screens: no pinning. Dango pop on, then each card as it arrives.
       mm.add("(max-width: 975px), (max-height: 639px)", () => {
-        gsap.from(".lz-ball", {
-          scale: 0,
-          y: -30,
-          transformOrigin: "50% 50%",
-          duration: 0.8,
-          ease: "back.out(3)",
-          stagger: 0.15,
+        const drop = gsap.timeline({
           scrollTrigger: { trigger: ".lz-skewer", start: "top 85%" },
         });
+        ROLES.forEach((_, i) => landBall(drop, i, i * 0.55));
         gsap.utils.toArray<HTMLElement>(".lz-card").forEach((card) => {
           gsap.from(card, {
             y: 50,
@@ -144,29 +187,117 @@ const LazuliSection = () => {
 
           <div className="flex flex-col gap-4">
             {/* The skewer, drawn on scroll, with a dango per role */}
-            <svg viewBox="0 0 520 120" className="lz-skewer -mb-1 w-full" aria-hidden="true">
-              <g transform="rotate(-4 260 60)">
+            <svg viewBox="0 0 520 150" className="lz-skewer -mb-1 w-full" aria-hidden="true">
+              <defs>
+                {/* Bamboo skewer: rounded, lit from above */}
+                <linearGradient
+                  id="lz-bamboo"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="66"
+                  x2="0"
+                  y2="75"
+                >
+                  <stop offset="0" stopColor="#f3e0b4" />
+                  <stop offset=".45" stopColor="#d9b373" />
+                  <stop offset="1" stopColor="#9c7036" />
+                </linearGradient>
+                {/* Mochi body: soft light from the top left, rolling into shadow */}
+                {ROLES.map((role, i) => (
+                  <radialGradient key={i} id={`lz-mochi-${i}`} cx="38%" cy="30%" r="78%">
+                    <stop offset="0" stopColor={role.shades[0]} />
+                    <stop offset=".42" stopColor={role.shades[1]} />
+                    <stop offset=".85" stopColor={role.shades[1]} stopOpacity=".95" />
+                    <stop offset="1" stopColor={role.shades[2]} />
+                  </radialGradient>
+                ))}
+                {/* Bottom-up occlusion so they sit heavy, like real mochi */}
+                <linearGradient id="lz-occlusion" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset=".45" stopColor="#000" stopOpacity="0" />
+                  <stop offset="1" stopColor="#000" stopOpacity=".28" />
+                </linearGradient>
+                {/* Faint powdery surface texture */}
+                <filter id="lz-powder" x="0" y="0" width="100%" height="100%">
+                  <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="2" seed="11" />
+                  <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.32" />
+                  <feComposite in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Each ball casts a soft shadow onto its neighbour */}
+                <filter id="lz-cast" x="-20%" y="-20%" width="140%" height="150%">
+                  <feDropShadow
+                    dx="-3"
+                    dy="4"
+                    stdDeviation="4"
+                    floodColor="#1a1218"
+                    floodOpacity=".45"
+                  />
+                </filter>
+                <filter id="lz-blur" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="5" />
+                </filter>
+                <filter id="lz-blur-sm" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2.2" />
+                </filter>
+              </defs>
+
+              <g transform="rotate(-4 260 70)">
+                {/* Shadow on the "table" */}
+                <ellipse
+                  cx="262"
+                  cy="136"
+                  rx="190"
+                  ry="8"
+                  fill="#000"
+                  opacity=".35"
+                  filter="url(#lz-blur)"
+                />
+
                 <line
                   className="lz-stick"
-                  x1="12"
-                  y1="60"
-                  x2="508"
-                  y2="60"
-                  stroke="#f29a2e"
-                  strokeWidth="6"
+                  x1="18"
+                  y1="70"
+                  x2="504"
+                  y2="70"
+                  stroke="url(#lz-bamboo)"
+                  strokeWidth="8"
                   strokeLinecap="round"
                 />
+                {/* A thread of grain along the stick */}
+                <line
+                  x1="24"
+                  y1="68.5"
+                  x2="498"
+                  y2="68.5"
+                  stroke="#fff6dc"
+                  strokeWidth=".8"
+                  opacity=".45"
+                />
+
                 {BALLS.map(({ cx }, i) => (
-                  <g key={cx} className={`lz-ball lz-ball-${i}`}>
-                    <ellipse cx={cx} cy="60" rx="52" ry="46" fill={ROLES[i]!.color} />
+                  <g key={cx} className={`lz-ball lz-ball-${i}`} filter="url(#lz-cast)">
+                    <circle cx={cx} cy="70" r={R} fill={`url(#lz-mochi-${i})`} />
+                    <circle cx={cx} cy="70" r={R} fill="url(#lz-occlusion)" />
+                    <circle cx={cx} cy="70" r={R} fill="#fff" filter="url(#lz-powder)" />
+                    {/* Soft, broad highlight and a small bright glint */}
                     <ellipse
                       cx={cx - 18}
-                      cy="40"
-                      rx="12"
-                      ry="7"
-                      transform={`rotate(-25 ${cx - 18} 40)`}
+                      cy="44"
+                      rx="20"
+                      ry="11"
+                      transform={`rotate(-30 ${cx - 18} 44)`}
                       fill="#fff"
-                      opacity=".6"
+                      opacity=".45"
+                      filter="url(#lz-blur)"
+                    />
+                    <ellipse
+                      cx={cx - 22}
+                      cy="40"
+                      rx="6"
+                      ry="3.2"
+                      transform={`rotate(-30 ${cx - 22} 40)`}
+                      fill="#fff"
+                      opacity=".7"
+                      filter="url(#lz-blur-sm)"
                     />
                   </g>
                 ))}
@@ -183,7 +314,8 @@ const LazuliSection = () => {
                   aria-hidden="true"
                   className="mt-1 h-6 w-6 shrink-0 rounded-full"
                   style={{
-                    background: `radial-gradient(circle at 35% 30%, #fff 0 12%, ${role.color} 45%)`,
+                    background: `radial-gradient(circle at 36% 30%, ${role.shades[0]}, ${role.shades[1]} 45%, ${role.shades[2]})`,
+                    boxShadow: "0 3px 6px rgba(0, 0, 0, 0.35)",
                   }}
                 />
                 <div>
