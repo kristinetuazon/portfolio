@@ -54,6 +54,31 @@ const AI = [
   },
 ];
 
+// Resources for the "currently learning" note.
+const LEARNING = [
+  {
+    icon: "📺",
+    verb: "Watching",
+    label: "All Code Is Slop (Except Mine)",
+    by: "by Lauren Tan",
+    href: "https://www.youtube.com/watch?v=O_zcc6Xl12g",
+  },
+  {
+    icon: "🧰",
+    verb: "Exploring",
+    label: "pstack",
+    by: "— poteto's agent skills",
+    href: "https://github.com/cursor/plugins/tree/main/pstack",
+  },
+  {
+    icon: "🤖",
+    verb: "Trying",
+    label: "Robot Framework",
+    by: "— another way to write tests",
+    href: "https://robotframework.org/",
+  },
+];
+
 // Compartment tints from the site palette.
 const TINTS = ["#f2a7b6", "#e9e2d4", "#a3c46f", "#f6c177", "#c88e95", "#708a81"];
 
@@ -72,6 +97,14 @@ const BeyondTests = () => {
         ease: "back.out(1.7)",
         stagger: 0.08,
         scrollTrigger: { trigger: ".bt-bento", start: "top 80%" },
+      });
+      gsap.from(".bt-learning", {
+        y: -50,
+        rotation: 6,
+        opacity: 0,
+        duration: 0.9,
+        ease: "back.out(1.6)",
+        scrollTrigger: { trigger: ".bt-learning", start: "top 88%" },
       });
       gsap.from(".bt-ai > *", {
         y: 30,
@@ -140,6 +173,41 @@ const BeyondTests = () => {
             ))}
           </dl>
         </div>
+
+        {/* What she's learning right now, as a taped-down note */}
+        <aside
+          className="bt-learning oh-note mx-auto mt-20 max-w-3xl"
+          style={{ "--tilt": "-1deg", "--tape": "#9acd32" } as React.CSSProperties}
+          aria-labelledby="learning-title"
+        >
+          <span className="oh-tape" aria-hidden="true" />
+          <h3
+            id="learning-title"
+            className="font-heading text-2xl uppercase tracking-widest text-charcoal"
+          >
+            currently learning;
+          </h3>
+          <p className="mt-3 font-bodyRegular text-lg leading-relaxed text-[#3d322f]">
+            We ship really quickly at a startup, and the product is still very fluid, with lots of
+            changes and requests. So I&apos;m learning how to make agent-written code trustworthy
+            enough to auto-merge: getting types, tests and automatic checks good enough that AI
+            agents can open pull requests, and eventually merge them on their own.
+          </p>
+          <ul className="mt-5 space-y-2 font-bodyRegularItalic text-lg text-[#5a4a45]">
+            {LEARNING.map(({ icon, verb, label, by, href }) => (
+              <li key={href}>
+                <span aria-hidden="true">{icon}</span> {verb}:{" "}
+                <a
+                  href={href}
+                  className="font-bodyRegular not-italic text-[#8e3b52] underline decoration-[#dd8e58] underline-offset-4 hover:text-charcoal"
+                >
+                  {label}
+                </a>{" "}
+                {by}
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
     </section>
   );
