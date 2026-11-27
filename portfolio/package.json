@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:robot": "robot --outputdir tests/robot/results tests/robot"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

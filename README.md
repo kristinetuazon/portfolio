@@ -46,6 +46,7 @@ Then open http://localhost:3000.
 | `npm test` | Check every blog post and the Markdown pipeline |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript, no output |
+| `npm run test:robot` | Robot Framework end-to-end tests (needs the site running; see `portfolio/tests/robot/README.md`) |
 
 ## Project structure
 

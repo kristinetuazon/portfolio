@@ -40,3 +40,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# Robot Framework: local Python environment and test results
+/tests/robot/.venv/
+/tests/robot/results/
