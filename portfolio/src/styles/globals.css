@@ -1714,6 +1714,12 @@ a.lang-option:focus-visible {
   background: #fbf6ea;
   border-bottom: 2px dashed rgba(194, 149, 110, 0.6);
 }
+.pj-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 2px dashed rgba(194, 149, 110, 0.6);
+}
 .pj-link {
   display: inline-flex;
   align-items: center;

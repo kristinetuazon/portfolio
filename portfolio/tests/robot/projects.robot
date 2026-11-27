@@ -25,8 +25,8 @@ Projects Page Lists Every Project With Its Links
     Text Should Contain    h1    projects;
     Get Element Count    .pj-card    ==    3
     Get Attribute    \#minimize-v2 a    href    ==    https://minimize-v2.vercel.app/
-    Text Should Contain    \#lazuli-e2e    the code is private
-    Get Element Count    \#lazuli-e2e a    ==    0
+    Get Attribute    \#tokyonoire a >> nth=0    href    ==    https://tokyonoire.com/
+    Get Element Count    \#tokyonoire a    ==    3
 
 Projects Page In Japanese, And The Switch Stays On It
     [Tags]    projects    i18n

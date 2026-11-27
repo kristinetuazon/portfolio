@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { useLocale, useT } from "../i18n";
 import type { Project } from "../data/projects";
 import { NowVisual, QaVisual } from "./HistoryTimeline";
-import { GitHubIcon, WebIcon } from "./icons";
+import { GitHubIcon, WebIcon, YouTubeIcon } from "./icons";
 
 /** Cards to swipe: keep (♡) or let go (✕). */
 const SwipeVisual = () => (
@@ -28,7 +29,7 @@ const SwipeVisual = () => (
   </svg>
 );
 
-const VISUALS: Record<Project["visual"], () => React.ReactNode> = {
+const VISUALS: Record<NonNullable<Project["visual"]>, () => React.ReactNode> = {
   swipe: () => <SwipeVisual />,
   site: () => <NowVisual />,
   tests: () => <QaVisual />,
@@ -43,9 +44,21 @@ const ProjectCard = ({ project: p, full = false }: { project: Project; full?: bo
   const locale = useLocale();
   return (
     <article className="pj-card" style={{ "--accent": p.color } as React.CSSProperties}>
-      <div className="pj-visual" aria-hidden="true">
-        {VISUALS[p.visual]()}
-      </div>
+      {p.image ? (
+        <Image
+          src={p.image}
+          alt={t.projects.screenshot(p.title)}
+          sizes="(min-width: 976px) 380px, (min-width: 768px) 45vw, 90vw"
+          className="pj-image"
+          placeholder="blur"
+        />
+      ) : (
+        p.visual && (
+          <div className="pj-visual" aria-hidden="true">
+            {VISUALS[p.visual]()}
+          </div>
+        )
+      )}
       <div className="flex flex-1 flex-col p-5">
         <h3 className="flex items-center gap-2 font-audreyMedium text-xl uppercase tracking-wide text-white">
           <span
@@ -78,6 +91,8 @@ const ProjectCard = ({ project: p, full = false }: { project: Project; full?: bo
             <a key={href} href={href} className="pj-link" target="_blank" rel="noopener noreferrer">
               {kind === "github" ? (
                 <GitHubIcon className="h-5 w-5" />
+              ) : kind === "video" ? (
+                <YouTubeIcon className="h-5 w-5" />
               ) : (
                 <WebIcon className="h-5 w-5" />
               )}

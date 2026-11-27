@@ -1,9 +1,12 @@
+import type { StaticImageData } from "next/image";
+import tokyoNoire from "../../public/TokyoNoire/TokyoNoire1.jpeg";
+
 /**
  * Projects, shown as cards on the home page and in full on /projects.
  * To add one: add an entry here (newest first). `visual` picks the little
- * drawing on its card (see ProjectVisual).
+ * drawing on its card (see ProjectCard); or give an `image` (a screenshot) instead.
  */
-export type ProjectLink = { kind: "live" | "github"; href: string };
+export type ProjectLink = { kind: "live" | "github" | "video"; href: string };
 
 export type Project = {
   id: string;
@@ -16,7 +19,9 @@ export type Project = {
   links: ProjectLink[];
   /** Shown when there's no public link (work projects). */
   note?: { en: string; ja: string };
-  visual: "swipe" | "site" | "tests";
+  visual?: "swipe" | "site" | "tests";
+  /** A screenshot to show instead of a drawing. */
+  image?: StaticImageData;
   /** Card accent, from the dango palette. */
   color: string;
 };
@@ -58,20 +63,23 @@ export const projects: Project[] = [
     color: "#f2a7b6",
   },
   {
-    id: "lazuli-e2e",
-    title: "Lazuli's end-to-end tests",
+    id: "tokyonoire",
+    title: "Tokyo Noire",
     summary: {
-      en: "The Playwright test platform I built at work: about 390 tests across 3 products.",
-      ja: "仕事で構築したPlaywrightのテスト基盤。3つのプロダクトで約390件のテスト。",
+      en: "A location-based story game platform and editor, built as a team at Code Chrysalis.",
+      ja: "位置情報を使った物語ゲームのプラットフォームとエディター。Code Chrysalisでチーム開発。",
     },
     details: {
-      en: "Built almost from scratch and owned end to end: suites for every product area run on dev, staging and production in three browsers, with CI checks and lint rules that keep flaky or untraceable tests from being merged.",
-      ja: "ほぼゼロから構築し、責任者として運用。すべてのプロダクト領域のテストを開発・ステージング・本番の各環境で3種類のブラウザに対して実行し、不安定なテストや出どころのわからないテストがマージされないよう、CIのチェックとLintルールで守っています。",
+      en: "Real-life mysteries you solve by walking around the city, plus an editor for writing your own. I was the main contributor to the TypeScript client (161 commits): sign-in, game progression, and the drag-and-drop editor for building games.",
+      ja: "街を歩きながら謎を解く、リアルな物語ゲームと、自分でゲームを作れるエディター。TypeScriptのクライアントのメイン担当（コミット161件）として、ログイン、ゲームの進行、ゲームを作るためのドラッグ＆ドロップのエディターを作りました。",
     },
-    tags: ["Playwright", "TypeScript", "GitHub Actions", "GritQL"],
-    links: [],
-    note: { en: "Work project: the code is private.", ja: "仕事のプロジェクトのため、コードは非公開です。" },
-    visual: "tests",
+    tags: ["TypeScript", "Geolocation"],
+    links: [
+      { kind: "live", href: "https://tokyonoire.com/" },
+      { kind: "github", href: "https://github.com/TokyoNoire" },
+      { kind: "video", href: "https://youtu.be/biS2DXEf2As" },
+    ],
+    image: tokyoNoire,
     color: "#f6c177",
   },
 ];

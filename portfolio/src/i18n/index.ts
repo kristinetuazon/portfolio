@@ -277,11 +277,13 @@ const en = {
   projects: {
     lead: "things I've made",
     title: "projects;",
-    sub: "side projects, and what I build at work",
+    sub: "things I've built, on my own and in teams",
     seeAll: "all projects",
-    links: { live: "visit the site", github: "code on GitHub" },
+    links: { live: "visit the site", github: "code on GitHub", video: "demo video" },
+    screenshot: (title: string) => `${title} screenshot`,
     metaTitle: "Projects · kristineCodes;",
-    metaDescription: "Projects by Kristine Tuazon, software engineer in Yokohama: Minimize v2, this website, and Lazuli's end-to-end test platform.",
+    metaDescription:
+      "Projects by Kristine Tuazon, software engineer in Yokohama: Minimize v2, this website, and Tokyo Noire.",
   },
   theme: { toLight: "Switch to the light theme", toDark: "Switch to the dark theme" },
   contact: {
@@ -581,11 +583,13 @@ const ja: Dict = {
   projects: {
     lead: "つくったもの",
     title: "作品たち",
-    sub: "個人の作品と、仕事でつくっているもの",
+    sub: "ひとりで、チームで、つくってきたもの",
     seeAll: "作品をすべて見る",
-    links: { live: "サイトを見る", github: "GitHubのコード" },
+    links: { live: "サイトを見る", github: "GitHubのコード", video: "デモ動画" },
+    screenshot: (title: string) => `${title}のスクリーンショット`,
     metaTitle: "作品 · kristineCodes;",
-    metaDescription: "横浜のソフトウェアエンジニア、Kristine Tuazonの作品：Minimize v2、このウェブサイト、LazuliのE2Eテスト基盤。",
+    metaDescription:
+      "横浜のソフトウェアエンジニア、Kristine Tuazonの作品：Minimize v2、このウェブサイト、Tokyo Noire。",
   },
   theme: { toLight: "昼のテーマにする", toDark: "夜のテーマにする" },
   contact: {
