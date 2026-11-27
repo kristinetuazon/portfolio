@@ -169,9 +169,7 @@ const BubblePlayground = () => {
             aria-label={`Pop the ${p.title} bubble`}
             onClick={(e) => pop(e.currentTarget, p.id)}
           >
-            <span className="pg-float">
-              <span className="pg-label">{p.title}</span>
-            </span>
+            <span className="pg-float" />
           </button>
         ))}
       </div>
