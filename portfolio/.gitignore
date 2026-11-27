@@ -40,3 +40,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# The CV never goes in this public repo: it is served from private storage (see src/pages/api/cv.ts)
+*CV*.pdf
+*CV*.docx
+/private/

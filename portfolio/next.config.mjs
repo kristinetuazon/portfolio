@@ -1,3 +1,5 @@
+import { withBotId } from "botid/next/config";
+
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -22,4 +24,5 @@ const config = {
   },
 };
 
-export default config;
+// withBotId adds the routes Vercel BotID needs (see src/instrumentation-client.ts).
+export default withBotId(config);
