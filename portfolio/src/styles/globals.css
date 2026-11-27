@@ -1339,3 +1339,8 @@ a.lang-option:focus-visible {
   transform: rotate(-10deg);
   pointer-events: none;
 }
+/* Let the two halves shrink to the card (a long email would otherwise push them wider). */
+.pc-message,
+.pc-address {
+  min-width: 0;
+}
