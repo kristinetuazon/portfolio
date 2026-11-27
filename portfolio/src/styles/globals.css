@@ -245,6 +245,31 @@
   background: #f5f1e8;
   pointer-events: none;
 }
+.hero-dango {
+  position: relative;
+  overflow: visible;
+}
+.mochi-crumb {
+  position: absolute;
+  left: 18%;
+  top: 18%;
+  width: 5px;
+  height: 4px;
+  border-radius: 50%;
+  background: #efa3b3;
+  pointer-events: none;
+}
+.rice-sparkle {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -4px;
+  font-size: 9px;
+  line-height: 1;
+  color: #fff3c4;
+  text-shadow: 0 0 4px rgba(255, 230, 160, 0.9);
+  pointer-events: none;
+}
 .rice-btn:focus-visible {
   outline: 2px dashed #f6fbf4;
   outline-offset: 3px;

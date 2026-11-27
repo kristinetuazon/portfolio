@@ -8,17 +8,30 @@ const MOCHI = [
 ];
 
 // Ball centres on the diagonal, snug against each other.
-const R = 30;
-const BALLS = [
+export const R = 30;
+export const BALLS = [
   { cx: 58, cy: 58 },
   { cx: 99, cy: 99 },
   { cx: 140, cy: 140 },
 ];
 
+// A bite out of the pink ball's outer (top-left) edge.
+const BITE_ORIGIN: [number, number] = [38, 38];
+const BITE: [number, number, number][] = [
+  [35, 45, 8],
+  [39, 37, 8.5],
+  [46, 32, 8],
+  [31, 31, 11],
+];
+/** The SVG transform for the bite at a given size (0 = whole, 1 = bitten). */
+export const biteTransform = (s: number) =>
+  `translate(${BITE_ORIGIN[0]} ${BITE_ORIGIN[1]}) scale(${s}) translate(${-BITE_ORIGIN[0]} ${-BITE_ORIGIN[1]})`;
+
 /**
  * A realistic hanami dango on a diagonal bamboo skewer: soft mochi shading,
  * a powdery texture, highlights, and each ball casting a shadow on the next.
- * Lit from the top left. Decorative.
+ * Lit from the top left. Each ball is its own group (`.dango-ball-0..2`) so it
+ * can jiggle, and the pink one carries a hidden bite (`.dango-bite`). Decorative.
  */
 const Dango = ({ className }: { className?: string }) => {
   const id = useId().replace(/:/g, "");
@@ -71,6 +84,17 @@ const Dango = ({ className }: { className?: string }) => {
         <filter id={`${id}-blur-sm`} x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="1.4" />
         </filter>
+        <mask id={`${id}-bite`} maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+          <rect width="200" height="200" fill="#fff" />
+          <g className="dango-bite" transform={biteTransform(0)}>
+            {BITE.map(([cx, cy, r], i) => (
+              <circle key={i} cx={cx} cy={cy} r={r} fill="#000" />
+            ))}
+          </g>
+        </mask>
+        <clipPath id={`${id}-pink`}>
+          <circle cx={BALLS[0]!.cx} cy={BALLS[0]!.cy} r={R} />
+        </clipPath>
       </defs>
 
       {/* Skewer, with a thread of grain; the handle pokes out at the bottom right */}
@@ -99,30 +123,50 @@ const Dango = ({ className }: { className?: string }) => {
       {[2, 1, 0].map((i) => {
         const { cx, cy } = BALLS[i]!;
         return (
-          <g key={i} filter={`url(#${id}-cast)`}>
-            <circle cx={cx} cy={cy} r={R} fill={`url(#${id}-mochi-${i})`} />
-            <circle cx={cx} cy={cy} r={R} fill={`url(#${id}-occ)`} />
-            <circle cx={cx} cy={cy} r={R} fill="#fff" filter={`url(#${id}-powder)`} />
-            <ellipse
-              cx={cx - 10}
-              cy={cy - 13}
-              rx="11"
-              ry="6"
-              transform={`rotate(-30 ${cx - 10} ${cy - 13})`}
-              fill="#fff"
-              opacity=".45"
-              filter={`url(#${id}-blur)`}
-            />
-            <ellipse
-              cx={cx - 12}
-              cy={cy - 15}
-              rx="3.5"
-              ry="2"
-              transform={`rotate(-30 ${cx - 12} ${cy - 15})`}
-              fill="#fff"
-              opacity=".75"
-              filter={`url(#${id}-blur-sm)`}
-            />
+          <g key={i} className={`dango-ball dango-ball-${i}`} filter={`url(#${id}-cast)`}>
+            <g mask={i === 0 ? `url(#${id}-bite)` : undefined}>
+              <circle cx={cx} cy={cy} r={R} fill={`url(#${id}-mochi-${i})`} />
+              <circle cx={cx} cy={cy} r={R} fill={`url(#${id}-occ)`} />
+              <circle cx={cx} cy={cy} r={R} fill="#fff" filter={`url(#${id}-powder)`} />
+              <ellipse
+                cx={cx - 10}
+                cy={cy - 13}
+                rx="11"
+                ry="6"
+                transform={`rotate(-30 ${cx - 10} ${cy - 13})`}
+                fill="#fff"
+                opacity=".45"
+                filter={`url(#${id}-blur)`}
+              />
+              <ellipse
+                cx={cx - 12}
+                cy={cy - 15}
+                rx="3.5"
+                ry="2"
+                transform={`rotate(-30 ${cx - 12} ${cy - 15})`}
+                fill="#fff"
+                opacity=".75"
+                filter={`url(#${id}-blur-sm)`}
+              />
+              {/* Bite edge on the pink ball: slightly darker mochi inside the tooth marks */}
+              {i === 0 && (
+                <g clipPath={`url(#${id}-pink)`}>
+                  <g className="dango-bite" transform={biteTransform(0)}>
+                    {BITE.map(([bx, by, r], j) => (
+                      <circle
+                        key={j}
+                        cx={bx}
+                        cy={by}
+                        r={r}
+                        fill="none"
+                        stroke="#c97f90"
+                        strokeWidth="2.5"
+                      />
+                    ))}
+                  </g>
+                </g>
+              )}
+            </g>
           </g>
         );
       })}

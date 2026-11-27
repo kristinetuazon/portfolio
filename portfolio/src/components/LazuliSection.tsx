@@ -53,6 +53,53 @@ const LazuliSection = () => {
     () => "3+ years",
   );
 
+  /**
+   * A dango drops onto the skewer, squashes as it lands, slides along it and
+   * bumps into its neighbour, which jiggles.
+   */
+  const landBall = (tl: gsap.core.Timeline, i: number, at: number) => {
+    const ball = `.lz-ball-${i}`;
+    const { cx } = BALLS[i]!;
+    const base = `${cx} ${70 + R}`; // squash from the bottom of the ball
+    tl.fromTo(
+      ball,
+      { y: -170, x: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.32, ease: "power2.in" },
+      at,
+    )
+      .to(
+        ball,
+        { scaleX: 1.16, scaleY: 0.8, svgOrigin: base, duration: 0.07, ease: "power1.out" },
+        at + 0.32,
+      )
+      .to(
+        ball,
+        { scaleX: 1, scaleY: 1, svgOrigin: base, duration: 0.45, ease: "elastic.out(1.3, 0.35)" },
+        at + 0.39,
+      )
+      .to(ball, { x: 0, duration: 0.22, ease: "power3.in" }, at + 0.39);
+    if (i > 0) {
+      const prev = `.lz-ball-${i - 1}`;
+      const mid = `${BALLS[i - 1]!.cx} 70`;
+      tl.to(
+        prev,
+        { x: -6, scaleX: 0.92, scaleY: 1.06, svgOrigin: mid, duration: 0.07 },
+        at + 0.61,
+      ).to(
+        prev,
+        {
+          x: 0,
+          scaleX: 1,
+          scaleY: 1,
+          svgOrigin: mid,
+          duration: 0.5,
+          ease: "elastic.out(1.2, 0.3)",
+        },
+        at + 0.68,
+      );
+    }
+  };
+
   useGSAP(
     () => {
       if (reducedMotion()) return;
@@ -75,14 +122,11 @@ const LazuliSection = () => {
           0.2,
         );
         ROLES.forEach((_, i) => {
+          landBall(tl, i, 0.6 + i * 0.8);
           tl.from(
-            `.lz-ball-${i}`,
-            { scale: 0, y: -40, transformOrigin: "50% 50%", duration: 0.5, ease: "back.out(3)" },
-            0.6 + i * 0.7,
-          ).from(
             `.lz-card-${i}`,
             { y: 40, opacity: 0, duration: 0.5, ease: "back.out(1.6)" },
-            0.7 + i * 0.7,
+            0.9 + i * 0.8,
           );
         });
         tl.to({}, { duration: 0.4 }); // a beat to read before un-pinning
@@ -90,15 +134,10 @@ const LazuliSection = () => {
 
       // Phones and short screens: no pinning. Dango pop on, then each card as it arrives.
       mm.add("(max-width: 975px), (max-height: 639px)", () => {
-        gsap.from(".lz-ball", {
-          scale: 0,
-          y: -30,
-          transformOrigin: "50% 50%",
-          duration: 0.8,
-          ease: "back.out(3)",
-          stagger: 0.15,
+        const drop = gsap.timeline({
           scrollTrigger: { trigger: ".lz-skewer", start: "top 85%" },
         });
+        ROLES.forEach((_, i) => landBall(drop, i, i * 0.55));
         gsap.utils.toArray<HTMLElement>(".lz-card").forEach((card) => {
           gsap.from(card, {
             y: 50,
