@@ -781,3 +781,48 @@
   letter-spacing: 0.06em;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
+
+/* ---------- Off the clock (scrapbook) ---------- */
+
+.oh-polaroid,
+.oh-note {
+  position: relative;
+  overflow: visible;
+  transform: rotate(var(--tilt));
+  transition: transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 0.35s;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.oh-polaroid:hover,
+.oh-note:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.02);
+  box-shadow:
+    0 24px 40px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.oh-polaroid {
+  padding: 0.9rem 0.9rem 1.4rem;
+  background-color: #fdfbf5;
+}
+.oh-note {
+  padding: 1.6rem 1.5rem 1.5rem;
+  border-radius: 3px;
+  background-color: #f8f1e2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* A strip of washi tape holding each piece down */
+.oh-tape {
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 6.5rem;
+  height: 1.5rem;
+  transform: translateX(-50%) rotate(calc(var(--tilt) * -1.6));
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 5px, transparent 5px 10px),
+    var(--tape);
+  opacity: 0.85;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  clip-path: polygon(3% 0, 97% 4%, 100% 50%, 97% 96%, 3% 100%, 0 50%);
+}
