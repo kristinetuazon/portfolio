@@ -77,6 +77,13 @@ const LEARNING = [
     by: "— another way to write tests",
     href: "https://robotframework.org/",
   },
+  {
+    icon: "🧪",
+    verb: "Practising on",
+    label: "this website",
+    by: "— tested with Robot Framework on every change",
+    href: "https://github.com/kristinetuazon/portfolio/tree/main/portfolio/tests/robot",
+  },
 ];
 
 // Compartment tints from the site palette.

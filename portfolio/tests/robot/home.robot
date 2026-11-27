@@ -66,6 +66,13 @@ Earlier Work And Scrapbook Are There
     Get Element Count    \#offhours .oh-item    >=    7
     Get Text    \#offhours    *=    Yamanote
 
+Learning Note Says The Site Is Tested With Robot
+    [Tags]    smoke
+    Open Site
+    Text Should Contain    .bt-learning    tested with Robot Framework on every change
+    Get Attribute    .bt-learning a >> text=this website    href
+    ...    ==    https://github.com/kristinetuazon/portfolio/tree/main/portfolio/tests/robot
+
 No Element Grows Its Own Scrollbar On Desktop
     [Documentation]    Regression: "* { overflow-x: hidden }" gave 15 elements inner scrollbars.
     [Tags]    regression    layout
