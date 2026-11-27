@@ -3,7 +3,6 @@ import Image from "next/image";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
 import { projects, type ProjectLink } from "../data/projects";
 import { GitHubIcon, WebIcon, YouTubeIcon } from "./icons";
-import BubblePlayground from "./BubblePlayground";
 
 const ICONS: Record<ProjectLink["kind"], typeof GitHubIcon> = {
   github: GitHubIcon,
@@ -58,8 +57,6 @@ const EarlierWork = () => {
       <p className="mt-3 max-w-md text-center font-bodyThinItalic text-white">
         a few things I built before joining Lazuli
       </p>
-
-      <BubblePlayground />
 
       <ul className="ew-grid mt-14 grid w-full max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {projects.map((p) => (
