@@ -1,21 +1,16 @@
-// @ts-check
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
- * This is especially useful for Docker builds.
- */
-!process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  swcMinify: true,
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+  // The RSS feed reads posts at request time, so the Markdown must ship with
+  // that server function. (Blog pages themselves are built ahead of time.)
+  outputFileTracingIncludes: {
+    "/blog/rss.xml": ["./content/blog/**/*"],
   },
   images: {
+    // The dango / onigiri artwork is SVG.
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  }
+  },
 };
+
 export default config;
