@@ -12,10 +12,35 @@ export const SECTIONS: { id: string; label: string; kind: OnigiriKind }[] = [
   { id: "contact", label: "Contact", kind: "yaki" },
 ];
 
+/** A few grains of rice tumble off when an onigiri is bitten. */
+function crumbs(btn: HTMLElement) {
+  if (reducedMotion()) return;
+  for (let i = 0; i < 4; i++) {
+    const grain = document.createElement("span");
+    grain.className = "rice-crumb";
+    btn.appendChild(grain);
+    gsap.fromTo(
+      grain,
+      { x: gsap.utils.random(-4, 4), y: 0, rotation: gsap.utils.random(0, 180), opacity: 1 },
+      {
+        x: `+=${gsap.utils.random(-14, 14)}`,
+        y: gsap.utils.random(18, 30),
+        rotation: `+=${gsap.utils.random(90, 270)}`,
+        opacity: 0,
+        duration: gsap.utils.random(0.5, 0.8),
+        ease: "power2.in",
+        delay: i * 0.03,
+        onComplete: () => grain.remove(),
+      },
+    );
+  }
+}
+
 /**
  * The site's navigation: a column of onigiri, one per section. Each sits
  * grey and quiet until you reach its section, then warms up to full color with
- * a little hop. Click one to go there. Down the right on desktop, across the
+ * a little hop; once you've scrolled past, it has a bite taken out of the top.
+ * Click one to go there. Down the right on desktop, across the
  * top on phones.
  */
 const OnigiriNav = () => {
@@ -30,6 +55,30 @@ const OnigiriNav = () => {
 
         const reached = (on: boolean) => {
           btn.classList.toggle("is-reached", on);
+        };
+
+        // Passing a section takes a bite out of its onigiri; coming back un-bites it.
+        const biteParts = btn.querySelectorAll<SVGGElement>(".onigiri-bite");
+        const bite = { s: 0 };
+        const drawBite = () =>
+          biteParts.forEach((g) =>
+            g.setAttribute("transform", `translate(50 10) scale(${bite.s}) translate(-50 -10)`),
+          );
+        const setBitten = (on: boolean) => {
+          btn.classList.toggle("is-bitten", on);
+          if (reducedMotion()) {
+            bite.s = on ? 1 : 0;
+            drawBite();
+            return;
+          }
+          gsap.to(bite, {
+            s: on ? 1 : 0,
+            duration: on ? 0.28 : 0.45,
+            ease: on ? "back.out(2.2)" : "power2.inOut",
+            onUpdate: drawBite,
+            overwrite: true,
+          });
+          if (on) crumbs(btn);
         };
 
         ScrollTrigger.create({
@@ -55,7 +104,11 @@ const OnigiriNav = () => {
             }
           },
           onEnter: () => reached(true),
-          onEnterBack: () => reached(true),
+          onEnterBack: () => {
+            reached(true);
+            setBitten(false);
+          },
+          onLeave: () => setBitten(true),
           // Scrolling back above a section makes its onigiri go quiet again.
           onLeaveBack: () => index > 0 && reached(false),
         });

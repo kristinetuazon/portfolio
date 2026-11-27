@@ -234,6 +234,17 @@
   filter: none;
   opacity: 1;
 }
+.rice-crumb {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: 3px;
+  height: 2px;
+  margin-left: -1.5px;
+  border-radius: 50%;
+  background: #f5f1e8;
+  pointer-events: none;
+}
 .rice-btn:focus-visible {
   outline: 2px dashed #f6fbf4;
   outline-offset: 3px;
