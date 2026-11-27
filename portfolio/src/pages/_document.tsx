@@ -8,6 +8,21 @@ export default function Document() {
       <Head>
         {/* Apply a saved light theme before the first paint. */}
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        {/* The two fonts in the intro (the first thing on screen). */}
+        <link
+          rel="preload"
+          href="/fonts/Audrey-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Petrona-Thin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
       <body className="bg-charcoal">
         <Main />

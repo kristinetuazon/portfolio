@@ -114,3 +114,25 @@ Scrapbook Tape Is Not Clipped
         ...    }
         Should Be True    ${visible}    Tape ${i} is clipped at its top edge
     END
+
+Fonts Are Compressed And Never Hide Text
+    [Documentation]    Performance: only woff2 fonts are downloaded (not the big .otf/.ttf originals).
+    [Tags]    performance
+    Open Site
+    # Scroll everything into view so every font in use gets loaded.
+    Install Page Checks
+    Scroll Through Page    sidewaysScroll
+    ${fonts}=    Evaluate JavaScript    ${None}
+    ...    () => performance.getEntriesByType("resource").map((r) => r.name).filter((n) => /\\.(woff2?|otf|ttf)(\\?|$)/.test(n) && !n.includes("gstatic"))
+    Should Not Be Empty    ${fonts}
+    FOR    ${font}    IN    @{fonts}
+        Should End With    ${font}    .woff2
+    END
+
+No Custom Cursor Or Steam
+    [Documentation]    Removed for speed and simplicity; the normal mouse pointer is used.
+    [Tags]    performance
+    Open Site
+    Get Element Count    .cursor    ==    0
+    Get Element Count    .onigiri-steam    ==    0
+    Get Style    body    cursor    ==    auto

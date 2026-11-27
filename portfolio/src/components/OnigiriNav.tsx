@@ -44,7 +44,7 @@ function burst(btn: HTMLElement, kind: "crumb" | "sparkle", count: number) {
 
 /**
  * The site's navigation: a column of onigiri, one per section.
- * - Grey until you reach its section, then it warms to color, hops, and steams.
+ * - Grey until you reach its section, then it warms to color and hops.
  * - The current one has a little face that blinks and looks where you scroll.
  * - Once you've scrolled past, it gets chomped twice (and comes back if you return).
  * - Hovering tilts it toward the mouse and flutters the nori.
@@ -67,36 +67,8 @@ const OnigiriNav = () => {
         const body = btn.querySelector(".onigiri-body")!;
         const face = btn.querySelector(".onigiri-face")!;
         const eyes = btn.querySelector(".onigiri-eyes")!;
-        const steam = btn.querySelector(".onigiri-steam")!;
-        const steamPaths = steam.querySelectorAll("path");
 
         const reached = (on: boolean) => btn.classList.toggle("is-reached", on);
-
-        // --- Steam when it lights up ---------------------------------------
-        const puff = () => {
-          if (calm) return;
-          gsap
-            .timeline()
-            .set(steam, { opacity: 1 })
-            .fromTo(
-              steamPaths,
-              { drawSVG: "0% 0%", y: 0, opacity: 0.6 },
-              { drawSVG: "0% 100%", duration: 0.8, ease: "power1.out", stagger: 0.12 },
-            )
-            .to(
-              steamPaths,
-              {
-                drawSVG: "100% 100%",
-                y: -6,
-                opacity: 0,
-                duration: 0.8,
-                ease: "sine.in",
-                stagger: 0.1,
-              },
-              "-=0.2",
-            )
-            .set(steam, { opacity: 0 });
-        };
 
         // --- Blinking (runs quietly; only visible while the face is shown) -
         if (!calm) {
@@ -173,12 +145,10 @@ const OnigiriNav = () => {
           },
           onEnter: () => {
             reached(true);
-            puff();
           },
           onEnterBack: () => {
             reached(true);
             setBitten(false);
-            puff();
           },
           onLeave: () => setBitten(true),
           // Scrolling back above a section makes its onigiri go quiet again.

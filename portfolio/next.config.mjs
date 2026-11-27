@@ -32,6 +32,17 @@ const config = {
       },
     ];
   },
+  // Fonts keep their names when they change, so cache for a month, not forever.
+  async headers() {
+    return [
+      {
+        source: "/fonts/:file",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+        ],
+      },
+    ];
+  },
   images: {
     // The dango / onigiri artwork is SVG.
     dangerouslyAllowSVG: true,

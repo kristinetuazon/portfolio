@@ -2,7 +2,6 @@ import { type AppType } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
-import Cursor from "../components/Cursor";
 import CornerControls from "../components/CornerControls";
 
 import "../styles/globals.css";
@@ -24,7 +23,6 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           />
         </Head>
       )}
-      <Cursor />
       <CornerControls languages={pathname === "/"} />
       <Analytics />
       {/* A new language means new text: start the page (and its animations) fresh. */}
