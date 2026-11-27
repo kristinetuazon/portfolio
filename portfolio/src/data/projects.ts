@@ -66,7 +66,7 @@ export const projects: Project[] = [
     },
     part: {
       en: "My own app, 37 pull requests: a Next.js frontend with Firebase sign-in and Redux, an Express server, and a second server in Java.",
-      ja: "自分ひとりで作ったアプリ（プルリクエスト37件）。Firebaseログインと Redux を使った Next.js のフロントエンド、Express のサーバー、さらに Java 版のサーバーも。",
+      ja: "自分ひとりで作ったアプリ（プルリクエスト37件）。FirebaseログインとReduxを使ったNext.jsのフロントエンド、Expressのサーバー、さらにJava版のサーバーも。",
     },
     links: [
       { kind: "github", href: "https://github.com/kristinetuazon/minimize" },

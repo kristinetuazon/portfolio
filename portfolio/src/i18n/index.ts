@@ -167,7 +167,7 @@ const en = {
           id: "bootcamp",
           date: "Aug 2022",
           title: "Code Chrysalis",
-          text: "A full-stack bootcamp in Tokyo: data structures, REST APIs, SQL, React and TypeScript. About 120 pull requests and four apps in three months, from Minimize (my own) to Tokyo Noire, a location-based story game.",
+          text: "A full-stack bootcamp in Tokyo, and four apps in three months: from Minimize, which I built on my own, to Tokyo Noire, a location-based story game built as a team (more in earlier work, below).",
           tags: ["Node / Express", "SQL", "React", "Firebase"],
         },
         {
@@ -366,7 +366,7 @@ const ja: Dict = {
       {
         tag: "2年目 · 2024–25",
         title: "多言語対応と管理ツール",
-        text: "引き続きフロントエンドを担当し、翻訳の言語切り替えを実装。顧客データを管理する社内向けの管理ツールもRubyで開発しました。",
+        text: "引き続きフロントエンドを担当し、言語切り替え機能を実装。顧客データを管理する社内向けの管理ツールもRubyで開発しました。",
         highlights: [
           "アプリ全体の英語・日本語対応",
           "管理ツール：組織、ユーザー、権限、招待、監査ログ",
@@ -378,13 +378,13 @@ const ja: Dict = {
       {
         tag: "3年目 · 2025–現在",
         title: "QA・E2Eテスト",
-        text: "LazuliのE2Eテストスイートをゼロから構築し、オーナーとして運用しています。3つのプロダクトにわたる約390件のPlaywrightテストを、開発・ステージング・本番の各環境で3種類のブラウザに対して実行。壊れたテストがマージされないようCIでチェックし、テストがランダムに失敗する原因だった競合状態も突き止めました。",
+        text: "LazuliのE2Eテストスイートをゼロから構築し、責任者として運用しています。3つのプロダクトにわたる約390件のPlaywrightテストを、開発・ステージング・本番の各環境で3種類のブラウザに対して実行。壊れたテストがマージされないようCIでチェックし、テストがランダムに失敗する原因だった競合状態も突き止めました。",
         highlights: [
-          "PDFやExcelからの抽出精度を、実際の商品カタログで採点するテスト",
-          "バグのチケットから書く回帰テスト（毎回のリリースの一部）",
-          "新バージョンのプロダクトのリリース前に、テスト全体を移行",
-          "不安定なテストの書き方を防ぐLintルールと、テスト中にログアウトされる不具合の修正",
-          "新しいプロダクトのヘルプセンターを書き直し",
+          "実際の商品カタログを使って、PDFやExcelからの抽出精度を測るテスト",
+          "バグのチケットをもとにした回帰テストを、リリースのたびに実行",
+          "新バージョンのリリースに先がけて、テスト一式を移行",
+          "不安定なテストの書き方を防ぐLintルールと、テストの途中でログアウトされてしまう不具合の修正",
+          "新しいプロダクトに合わせてヘルプセンターを書き直し",
         ],
       },
     ],
@@ -468,21 +468,21 @@ const ja: Dict = {
           id: "bootcamp",
           date: "2022年8月",
           title: "Code Chrysalis",
-          text: "東京のフルスタック・ブートキャンプへ。データ構造、REST API、SQL、React、TypeScriptを学び、3か月で約120件のプルリクエストと4つのアプリを作りました。自分のアプリMinimizeから、位置情報を使った物語ゲームTokyo Noireまで。",
+          text: "東京のフルスタック・ブートキャンプへ。3か月で4つのアプリを作りました。ひとりで作ったMinimizeから、チームで作った位置情報の物語ゲームTokyo Noireまで（くわしくは下の「作品たち」で）。",
           tags: ["Node / Express", "SQL", "React", "Firebase"],
         },
         {
           id: "lazuli",
           date: "2023年6月",
           title: "Lazuliへ",
-          text: "商品データのスタートアップにフロントエンドエンジニアとして入社。最初の仕事は、商品カタログを作り直して本番リリースすること、商品説明文の生成などAI機能のUI、そしてフロントエンドのテスト基盤づくりでした。",
+          text: "商品データを扱うスタートアップに、フロントエンドエンジニアとして入社。最初の仕事は、商品カタログを作り直して本番リリースすること、商品説明文の生成などAI機能のUI、そしてフロントエンドのテスト基盤づくりでした。",
           tags: ["Next.js", "TypeScript"],
         },
         {
           id: "platform",
           date: "2023〜25年",
           title: "プラットフォームを育てる",
-          text: "Product Data Platformのフロントエンドを2年間担当。データ連携と同期スケジュール、社内向けの管理コンソール、デジタルアセット管理、そしてアプリ全体の英語・日本語対応を作りました。",
+          text: "Product Data Platformのフロントエンドを2年間担当。データ連携と同期スケジュール、社内向けの管理ツール、デジタルアセット管理、そしてアプリ全体の英語・日本語対応を作りました。",
           tags: ["React", "Auth0", "i18n"],
         },
         {
