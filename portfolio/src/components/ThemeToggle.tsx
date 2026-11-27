@@ -72,7 +72,7 @@ const ThemeToggle = () => {
           </g>
         ) : (
           // A crescent moon, to switch to night
-          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" fill="#8e7fa3" />
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" fill="#5d4b85" />
         )}
       </svg>
     </button>

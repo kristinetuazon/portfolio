@@ -1113,3 +1113,29 @@ a.lang-option:focus-visible {
     inset -1px -1px 0 #d6ccba,
     0 0 0 0.6px rgba(43, 33, 41, 0.45);
 }
+
+/* Light theme: the corner pills (bubble counter, sun/moon, EN / 日本語) and the
+   phone nav become white paper chips with an ink edge, so they stand off the cream. */
+:root[data-theme="light"] .pop-counter,
+:root[data-theme="light"] .lang-switch,
+:root[data-theme="light"] .theme-toggle {
+  background: rgba(255, 253, 247, 0.92);
+  border: 1px solid rgba(43, 33, 41, 0.28);
+  box-shadow: 0 4px 14px rgba(43, 33, 41, 0.14);
+}
+:root[data-theme="light"] .theme-toggle:hover,
+:root[data-theme="light"] .theme-toggle:focus-visible,
+:root[data-theme="light"] a.lang-option:hover,
+:root[data-theme="light"] a.lang-option:focus-visible {
+  background: rgba(43, 33, 41, 0.08);
+}
+:root[data-theme="light"] .pop-counter-total {
+  color: rgb(var(--c-coffee));
+}
+@media (max-width: 767px) {
+  :root[data-theme="light"] .rice-nav {
+    background: rgba(255, 253, 247, 0.92);
+    border: 1px solid rgba(43, 33, 41, 0.2);
+    box-shadow: 0 4px 14px rgba(43, 33, 41, 0.12);
+  }
+}
