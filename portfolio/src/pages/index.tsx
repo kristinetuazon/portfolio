@@ -69,11 +69,11 @@ const Home: NextPage = () => {
         id="about"
         className="story flex min-h-screen w-screen flex-col items-center bg-gradient-to-b from-[#3a2d37] via-charcoal to-mint pb-40 pt-32"
       >
-        <p className="font-bodyRegularItalic text-white">It all started with a</p>
+        <p className="font-bodyRegularItalic text-white">{t.story.startedWith}</p>
         <h2 className="mb-3 font-heading text-4xl uppercase tracking-widest text-white">
           Hello World;
         </h2>
-        <p className="font-bodyRegularItalic text-white">and I knew I was hooked.</p>
+        <p className="font-bodyRegularItalic text-white">{t.story.hooked}</p>
 
         <Hero />
 
@@ -81,32 +81,26 @@ const Home: NextPage = () => {
           id="about1"
           className="2xl:mx-96 mx-10 mt-20 text-center font-bodyRegular leading-relaxed text-white md:mx-36 lg:mx-60 xl:mx-72"
         >
-          On October 2020, I began learning how to code with the intention of being a{" "}
-          <span>software engineer</span>. After a pandemic, a Javascript foundations course, a
-          couple years of saving and an intensive software engineering course later,{" "}
-          <span>
-            I have created several projects that I want to share to the world that I said hello to.
-          </span>
+          {t.story.p1.before}
+          <span>{t.story.p1.highlight}</span>
+          {t.story.p1.middle}
+          <span>{t.story.p1.highlight2}</span>
         </p>
 
         <p
           id="about2"
           className="2xl:mx-96 mx-10 mt-10 text-center font-bodyRegular leading-relaxed text-white md:mx-36 lg:mx-60 xl:mx-72"
         >
-          As a growing software developer with a background in literature and a deep appreciation of
-          art and design,{" "}
-          <span>
-            I wanted a space to visually and dynamically showcase and tell the stories of the
-            projects that I&apos;ve been working on using the technologies I have learned, and
-            continue to learn about.
-          </span>
+          {t.story.p2.before}
+          <span>{t.story.p2.highlight}</span>
         </p>
 
         <Link
           href="/mailbox/why-programming"
+          locale="en"
           className="mx-10 mt-36 text-center font-audreyNormal text-xl uppercase tracking-widest text-charcoal decoration-charcoal underline-offset-8 transition-[letter-spacing] hover:tracking-wide hover:underline"
         >
-          Why programming? Read the story →
+          {t.story.readStory}
         </Link>
       </section>
 

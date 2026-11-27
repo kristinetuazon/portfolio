@@ -10,7 +10,8 @@ export type ProjectLink = { kind: "github" | "website" | "youtube"; href: string
 export type Project = {
   id: string;
   title: string;
-  description: string;
+  /** One sentence, in English and Japanese. */
+  description: { en: string; ja: string };
   links: ProjectLink[];
   /** Card image: one screenshot, ideally 16:9. */
   image: StaticImageData;
@@ -24,7 +25,10 @@ export const projects: Project[] = [
   {
     id: "studyhero",
     title: "study hero",
-    description: "A gamified pomodoro web application for game-lovers.",
+    description: {
+      en: "A gamified pomodoro web application for game-lovers.",
+      ja: "ゲーム好きのための、ゲーム感覚で集中できるポモドーロWebアプリ。",
+    },
     links: [
       { kind: "github", href: "https://github.com/Ghost-Pepper-Greenfield/study-hero" },
       { kind: "youtube", href: "https://youtu.be/W3A1CalxAh8" },
@@ -35,7 +39,10 @@ export const projects: Project[] = [
   {
     id: "costofliving",
     title: "cost of living",
-    description: "A legacy project that helps people find their next home within their budget.",
+    description: {
+      en: "A legacy project that helps people find their next home within their budget.",
+      ja: "予算内で次の住まいを見つける手助けをする、レガシープロジェクト。",
+    },
     links: [{ kind: "youtube", href: "https://youtu.be/iHT86r0FjlU" }],
     image: costOfLiving,
     color: "#dae3ea",
@@ -43,8 +50,10 @@ export const projects: Project[] = [
   {
     id: "minimize",
     title: "minimize",
-    description:
-      "A tinder-style decluttering application. Both version one and version two exists.",
+    description: {
+      en: "A tinder-style decluttering application. Both version one and version two exists.",
+      ja: "Tinder風にスワイプして片づける、断捨離アプリ。バージョン1と2があります。",
+    },
     links: [
       { kind: "github", href: "https://github.com/kristinetuazon/minimize" },
       { kind: "website", href: "https://www.mnmz.app/" },
@@ -56,7 +65,10 @@ export const projects: Project[] = [
   {
     id: "tokyonoire",
     title: "tokyo noire",
-    description: "A geo-location, narrative based game platform and editor.",
+    description: {
+      en: "A geo-location, narrative based game platform and editor.",
+      ja: "位置情報を使った、物語ベースのゲームプラットフォームとエディター。",
+    },
     links: [
       { kind: "github", href: "https://github.com/TokyoNoire" },
       { kind: "website", href: "https://tokyonoire.com/" },

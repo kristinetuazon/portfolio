@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { gsap, reducedMotion, useGSAP } from "../lib/gsap";
 import { projects, type ProjectLink } from "../data/projects";
+import { useLocale, useT } from "../i18n";
 import { GitHubIcon, WebIcon, YouTubeIcon } from "./icons";
 
 const ICONS: Record<ProjectLink["kind"], typeof GitHubIcon> = {
@@ -9,14 +10,11 @@ const ICONS: Record<ProjectLink["kind"], typeof GitHubIcon> = {
   website: WebIcon,
   youtube: YouTubeIcon,
 };
-const LABELS: Record<ProjectLink["kind"], string> = {
-  github: "code on GitHub",
-  website: "live site",
-  youtube: "demo video",
-};
 
 /** Bootcamp-era projects as a row of bubbly cards. */
 const EarlierWork = () => {
+  const t = useT();
+  const locale = useLocale();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -50,13 +48,11 @@ const EarlierWork = () => {
       id="projects"
       className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-mint to-charcoal px-6 py-28 md:pl-12 md:pr-36"
     >
-      <p className="font-audreyMediumOblique uppercase text-white">and before that, my</p>
+      <p className="font-audreyMediumOblique uppercase text-white">{t.earlier.lead}</p>
       <h2 className="mt-1 font-heading text-4xl uppercase tracking-widest text-white">
-        earlier work
+        {t.earlier.title}
       </h2>
-      <p className="mt-3 max-w-md text-center font-bodyThinItalic text-white">
-        a few things I built before joining Lazuli
-      </p>
+      <p className="mt-3 max-w-md text-center font-bodyThinItalic text-white">{t.earlier.sub}</p>
 
       <ul className="ew-grid mt-14 grid w-full max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {projects.map((p) => (
@@ -68,7 +64,7 @@ const EarlierWork = () => {
             >
               <Image
                 src={p.image}
-                alt={`${p.title} screenshot`}
+                alt={t.earlier.screenshot(p.title)}
                 sizes="(min-width: 1440px) 300px, (min-width: 400px) 50vw, 100vw"
                 className="aspect-video w-full object-cover"
               />
@@ -82,7 +78,7 @@ const EarlierWork = () => {
                   {p.title}
                 </h3>
                 <p className="mt-2 flex-1 font-bodyLight leading-relaxed text-creme">
-                  {p.description}
+                  {p.description[locale]}
                 </p>
                 <div className="mt-4 flex gap-3">
                   {p.links.map(({ kind, href }) => {
@@ -92,8 +88,8 @@ const EarlierWork = () => {
                         key={href}
                         href={href}
                         className="text-white transition-colors hover:text-orange"
-                        aria-label={`${p.title}: ${LABELS[kind]}`}
-                        title={LABELS[kind]}
+                        aria-label={`${p.title}: ${t.earlier.links[kind]}`}
+                        title={t.earlier.links[kind]}
                       >
                         <Icon />
                       </a>
