@@ -9,6 +9,7 @@ export const SECTIONS: { id: string; label: string; kind: OnigiriKind }[] = [
   { id: "lazuli", label: "Lazuli", kind: "sesame" },
   { id: "about", label: "Story", kind: "ume" },
   { id: "projects", label: "Projects", kind: "salmon" },
+  { id: "offhours", label: "Off hours", kind: "furikake" },
   { id: "contact", label: "Contact", kind: "yaki" },
 ];
 

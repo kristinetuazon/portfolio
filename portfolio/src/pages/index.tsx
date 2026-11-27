@@ -9,6 +9,7 @@ import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
 import EarlierWork from "../components/EarlierWork";
+import OffHours from "../components/OffHours";
 import ContactMe from "../components/ContactMe";
 
 const Home: NextPage = () => {
@@ -85,6 +86,7 @@ const Home: NextPage = () => {
       </section>
 
       <EarlierWork />
+      <OffHours />
 
       <section
         id="contact"

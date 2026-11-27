@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-export type OnigiriKind = "classic" | "sesame" | "ume" | "salmon" | "yaki";
+export type OnigiriKind = "classic" | "sesame" | "ume" | "salmon" | "yaki" | "furikake";
 
 // Rounded rice triangle, 100×100 box.
 const RICE =
@@ -47,6 +47,21 @@ const SESAME: [number, number, number][] = [
 ];
 
 // Salmon flakes on top: [x, y, rx, ry, rotation]
+// Furikake: little flakes of nori, egg, salmon and sesame: [x, y, w, h, rotation, color]
+const FURIKAKE: [number, number, number, number, number, string][] = [
+  [44, 25, 3.2, 2, 20, "#2f4a2a"],
+  [53, 23, 2.6, 2.6, -15, "#f2c14e"],
+  [40, 33, 2.8, 1.8, 50, "#e8704a"],
+  [57, 32, 3.4, 2, -40, "#2f4a2a"],
+  [49, 37, 2.4, 2.4, 10, "#f2c14e"],
+  [62, 41, 2.6, 1.6, 30, "#1b1714"],
+  [35, 43, 2.6, 2.4, -20, "#2f4a2a"],
+  [46, 46, 3, 1.8, 65, "#e8704a"],
+  [55, 47, 2.2, 2.2, 0, "#f2c14e"],
+  [66, 49, 2.8, 1.8, -55, "#2f4a2a"],
+  [39, 51, 2.2, 1.4, 25, "#1b1714"],
+];
+
 const SALMON: [number, number, number, number, number][] = [
   [46, 30, 6, 3.5, 25],
   [55, 33, 5, 3, -20],
@@ -241,6 +256,19 @@ const Onigiri = ({ kind, className }: { kind: OnigiriKind; className?: string })
               <ellipse cx="47.3" cy="33" rx="2.4" ry="1.4" fill="#fff" opacity=".6" />
             </g>
           )}
+          {kind === "furikake" &&
+            FURIKAKE.map(([x, y, w, h, r, color], i) => (
+              <rect
+                key={i}
+                x={x - w / 2}
+                y={y - h / 2}
+                width={w}
+                height={h}
+                rx=".5"
+                fill={color}
+                transform={`rotate(${r} ${x} ${y})`}
+              />
+            ))}
           {kind === "salmon" &&
             SALMON.map(([x, y, rx, ry, r], i) => (
               <g key={i} transform={`rotate(${r} ${x} ${y})`}>

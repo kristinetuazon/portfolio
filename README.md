@@ -9,8 +9,8 @@ The app lives in [`portfolio/`](portfolio).
 ## What's on the site
 
 - **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
-  Lazuli, the story of how she got into code, a row of earlier projects, and
-  contact links. A column of onigiri on the side lights up as you scroll.
+  Lazuli, the story of how she got into code, a row of earlier projects, an
+  "off the clock" scrapbook of hobbies, and contact links. A column of onigiri on the side lights up as you scroll.
 - **Mailbox (`/mailbox`)**: the blog. Posts are written in Markdown and kept in
   this repo, shown as sealed envelopes that open into letters, with an RSS feed
   at `/mailbox/rss.xml`. Old `/blog` links redirect here.
