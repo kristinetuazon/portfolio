@@ -27,9 +27,15 @@ updated: 2026-12-03                 # optional, set when you meaningfully edit a
 tags: [career, nextjs]              # optional
 cover: cover.jpg                    # optional, file in public/blog/<folder>/
 coverAlt: What the image shows      # required when cover is set
+lang: ja                            # optional; "ja" for a letter written in Japanese (default "en")
 draft: true                         # optional; drafts show in `npm run dev` but not on the live site
 ---
 ```
+
+A letter with `lang: ja` gets Japanese dates (2026年11月27日), a reading
+time counted in characters, Japanese labels around it ("クリスティンからの手紙"),
+a red 日本語 stamp on its envelope, and the Japanese font. Its link preview
+draws the Japanese title too.
 
 Any other field is rejected, which catches typos like `publishAt`.
 

@@ -26,6 +26,8 @@ export const frontmatterSchema = z
     /** Image file in public/blog/<slug>/, e.g. `cover.jpg`. */
     cover: z.string().trim().min(1).optional(),
     coverAlt: z.string().trim().optional(),
+    /** The language the letter is written in: "en" (default) or "ja". */
+    lang: z.enum(["en", "ja"]).default("en"),
     /** Drafts show up in `npm run dev` but are left out of the live site. */
     draft: z.boolean().default(false),
   })

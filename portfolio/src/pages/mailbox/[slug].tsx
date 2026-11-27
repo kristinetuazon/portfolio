@@ -1,19 +1,20 @@
 import { useRef } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
-import BlogLayout, { formatDate, Tags } from "../../components/blog/BlogLayout";
+import BlogLayout, { formatDate, LETTER_COPY, Tags } from "../../components/blog/BlogLayout";
 import { gsap, reducedMotion, useGSAP } from "../../lib/gsap";
 import { loadPosts } from "../../services/blog/loader";
 import type { Post } from "../../services/blog/types";
 import { absolute, ogImage, PERSON } from "../../lib/site";
 
-type Props = { post: Post };
+type Props = { post: Post; hasJapanese: boolean };
 
 /**
  * A post, shown as a letter on cream paper. On arrival it unfolds from three
  * folds: the top and bottom flaps swing open to reveal the page.
  */
 const BlogPost: NextPage<Props> = ({ post }) => {
+  const copy = LETTER_COPY[post.lang];
   const letter = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -74,6 +75,7 @@ const BlogPost: NextPage<Props> = ({ post }) => {
       description={post.summary}
       path={`/mailbox/${post.slug}`}
       letterTitle={post.title}
+      lang={post.lang}
       image={post.cover}
       imageAlt={post.coverAlt}
       jsonLd={{
@@ -83,7 +85,7 @@ const BlogPost: NextPage<Props> = ({ post }) => {
         description: post.summary,
         datePublished: post.publishedAt,
         dateModified: post.updated ?? post.publishedAt,
-        inLanguage: "en",
+        inLanguage: post.lang,
         url: absolute(`/mailbox/${post.slug}`),
         image: post.cover ? absolute(post.cover) : ogImage(post.title, "letter"),
         keywords: post.tags.join(", ") || undefined,
@@ -96,23 +98,23 @@ const BlogPost: NextPage<Props> = ({ post }) => {
         <style>{`.letter-intro{opacity:1 !important}`}</style>
       </noscript>
 
-      <article ref={letter} className="letter letter-intro">
+      <article ref={letter} className="letter letter-intro" lang={post.lang}>
         <div className="letter-fold letter-fold-top" aria-hidden="true" />
         <div className="letter-fold letter-fold-bottom" aria-hidden="true" />
 
         <div className="letter-paper">
           <header>
             <p className="text-right font-bodyRegularItalic text-sm text-[#7a675f]">
-              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, post.lang)}</time>
               {" · "}
-              {post.readingMinutes} min read
+              {copy.read(post.readingMinutes)}
               {post.draft && (
-                <span className="ml-2 rounded bg-orange px-2 font-bodyRegular not-italic text-charcoal">
+                <span className="ml-2 rounded bg-orange px-2 font-bodyRegular not-italic text-ink">
                   draft
                 </span>
               )}
             </p>
-            <h1 className="mt-6 font-heading text-3xl uppercase leading-snug tracking-widest text-charcoal sm:text-4xl">
+            <h1 className="mt-6 font-heading text-3xl uppercase leading-snug tracking-widest text-ink sm:text-4xl">
               {post.title}
             </h1>
             <p className="mt-4 font-bodyLight text-xl leading-relaxed text-[#5a4a45]">
@@ -136,13 +138,13 @@ const BlogPost: NextPage<Props> = ({ post }) => {
 
           <footer className="mt-16 border-t border-[#d8ccb6] pt-6 font-bodyRegular text-[#5a4a45]">
             {post.updated && (
-              <p className="mb-4 text-sm">Last updated {formatDate(post.updated)}</p>
+              <p className="mb-4 text-sm">{copy.updated(formatDate(post.updated, post.lang))}</p>
             )}
             <Link
               href="/mailbox"
-              className="text-charcoal decoration-orange underline-offset-4 hover:underline"
+              className="text-ink decoration-orange underline-offset-4 hover:underline"
             >
-              ← Back to all letters
+              {copy.back}
             </Link>
           </footer>
         </div>
@@ -161,5 +163,7 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
   const post = (await loadPosts()).find((p) => p.slug === params?.slug);
   if (!post) return { notFound: true };
-  return { props: JSON.parse(JSON.stringify({ post })) as Props };
+  return {
+    props: JSON.parse(JSON.stringify({ post, hasJapanese: post.lang === "ja" })) as Props,
+  };
 };

@@ -257,9 +257,12 @@ const OnigiriNav = () => {
           </li>
         ))}
       </ol>
-      {/* The letters are in English, so the mailbox link always goes to the English pages. */}
-      <Link href="/mailbox" locale="en" className="rice-blog">
-        {t.nav.mailbox}
+      {/* The mailbox (a red post box) lives at /mailbox for every language. */}
+      <Link href="/mailbox" locale="en" className="rice-blog" aria-label={t.nav.mailbox}>
+        <span className="rice-blog-icon" aria-hidden="true">
+          📮
+        </span>
+        <span className="rice-label">{t.nav.mailbox}</span>
       </Link>
     </nav>
   );

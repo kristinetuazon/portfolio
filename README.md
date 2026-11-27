@@ -17,8 +17,14 @@ The app lives in [`portfolio/`](portfolio).
 - **日本語 (`/ja`)**: the home page in Japanese, switched with the EN / 日本語
   pill in the bottom-right corner. All the words live in
   `portfolio/src/i18n/index.ts`; TypeScript fails the build if a Japanese
-  string is missing. The letters stay in English.
+  string is missing. Mailbox letters can be written in Japanese too
+  (`lang: ja`, see `portfolio/content/blog/README.md`).
 - **404**: "This page got eaten 🍙", with a bitten onigiri.
+- **Light theme**: the sun / moon button in the bottom-right corner switches
+  to cream paper; the choice is saved in the browser. Dark is the default.
+  Theme colors are CSS variables in `portfolio/src/styles/globals.css`.
+- **"now;"**: a rotating line under the intro (reading, listening, learning,
+  latest walk, current favourite). Edit `portfolio/src/data/now.ts`.
 - **Search and link previews**: `/sitemap.xml`, `robots.txt`, canonical and
   language links, schema.org data (Person on the home page, BlogPosting on each
   letter), and a drawn 1200×630 preview card from `/api/og` for Slack,

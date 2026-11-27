@@ -76,6 +76,37 @@
    but on every element that also turns overflow-y into "auto", so any box whose
    content poked out a few pixels grew its own little scrollbar. "clip" hides the
    sideways overflow without creating a scroll box, and only the page needs it. */
+/* ---------- Themes ----------
+   Colors as "R G B" so Tailwind can add transparency (bg-charcoal/70).
+   Dark is the default; the sun/moon button sets data-theme="light" on <html>. */
+:root {
+  color-scheme: dark;
+  --c-charcoal: 43 33 41; /* page background */
+  --c-white: 246 251 244; /* main text */
+  --c-creme: 229 209 184; /* soft text */
+  --c-coffee: 194 149 110;
+  --c-mint: 112 138 129;
+  --c-orange: 221 142 88;
+  --c-plum: 58 45 55;
+  --c-pre: 31 24 30;
+  --c-highlight: 43 33 41; /* behind highlighted words in the story */
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --c-charcoal: 245 236 220; /* cream paper */
+  --c-white: 43 33 41; /* ink */
+  --c-creme: 112 82 70;
+  --c-coffee: 150 100 62;
+  --c-mint: 196 218 204; /* pale matcha */
+  --c-orange: 184 98 46;
+  --c-plum: 238 224 206;
+  --c-pre: 43 33 41;
+  --c-highlight: 248 200 210; /* sakura highlighter */
+}
+html {
+  background: rgb(var(--c-charcoal));
+}
+
 html,
 body {
   overflow-x: hidden; /* fallback for older browsers */
@@ -106,7 +137,7 @@ body {
   margin-bottom: 45px;
 }
 .story span {
-  background-image: linear-gradient(#2b2129, #2b2129);
+  background-image: linear-gradient(rgb(var(--c-highlight)), rgb(var(--c-highlight)));
   background-size: 0% 100%;
   background-repeat: no-repeat;
   transition: background-size 1s ease-in;
@@ -165,7 +196,7 @@ body {
   overflow-x: auto;
 }
 .blog .post-body :not(pre) > code {
-  background: rgba(246, 251, 244, 0.08);
+  background: rgb(var(--c-white) / 0.08);
   border-radius: 0.25rem;
   padding: 0.1em 0.35em;
 }
@@ -203,7 +234,7 @@ body {
   cursor: none;
 }
 .envelope-link:focus-visible {
-  outline: 2px dashed #f6fbf4;
+  outline: 2px dashed rgb(var(--c-white));
   outline-offset: 6px;
 }
 .envelope {
@@ -356,6 +387,23 @@ body {
   text-transform: uppercase;
   color: #2b2129;
 }
+/* A little red hanko on letters written in Japanese */
+.env-lang {
+  position: absolute;
+  z-index: 5;
+  right: 6%;
+  top: 8%;
+  padding: 0.15rem 0.4rem;
+  border: 2px solid #c0392b;
+  border-radius: 0.3rem;
+  color: #c0392b;
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  transform: rotate(-6deg);
+  opacity: 0.85;
+}
 .env-draft {
   position: absolute;
   z-index: 5;
@@ -481,7 +529,7 @@ body {
   overflow: visible; /* labels sit outside the nav */
   padding: 0.35rem 1rem 0.35rem 0.9rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -550,7 +598,7 @@ body {
   pointer-events: none;
 }
 .rice-btn:focus-visible {
-  outline: 2px dashed #f6fbf4;
+  outline: 2px dashed rgb(var(--c-white));
   outline-offset: 3px;
 }
 .rice-label {
@@ -563,8 +611,8 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #f6fbf4;
-  text-shadow: 0 1px 6px rgba(43, 33, 41, 0.9);
+  color: rgb(var(--c-white));
+  text-shadow: 0 1px 6px rgb(var(--c-charcoal) / 0.9);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
@@ -587,7 +635,7 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #f6fbf4;
+  color: rgb(var(--c-white));
 }
 
 /* Desktop: a column down the right edge, labels to the left */
@@ -732,11 +780,11 @@ body {
   overflow: visible;
   padding: 0.4rem 0.9rem 0.4rem 0.5rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(246, 251, 244, 0.12);
-  color: #f6fbf4;
+  border: 1px solid rgb(var(--c-white) / 0.12);
+  color: rgb(var(--c-white));
   font-family: Petrona_Regular, "Zen Maru Gothic", serif;
   font-size: 0.85rem;
   line-height: 1.1;
@@ -781,8 +829,8 @@ body {
   white-space: nowrap;
   padding: 0.25rem 0.7rem;
   border-radius: 9999px;
-  background: #f6fbf4;
-  color: #2b2129;
+  background: rgb(var(--c-white));
+  color: rgb(var(--c-charcoal));
   font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
@@ -854,24 +902,49 @@ body {
 
 /* ---------- Language switch (EN / 日本語) ---------- */
 
-.lang-switch {
+.corner-controls {
   position: fixed;
   z-index: 45; /* same layer as the pop counter */
   right: 1rem;
   bottom: 1rem;
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-charcoal) / 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgb(var(--c-white) / 0.12);
+  color: rgb(var(--c-white));
+  transition: background-color 0.2s;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgb(var(--c-white) / 0.14);
+}
+.theme-toggle svg {
+  overflow: visible;
+}
+.lang-switch {
+  display: flex;
   gap: 0.2rem;
   padding: 0.25rem;
   border-radius: 9999px;
-  background: rgba(43, 33, 41, 0.72);
+  background: rgb(var(--c-charcoal) / 0.72);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(246, 251, 244, 0.12);
+  border: 1px solid rgb(var(--c-white) / 0.12);
 }
 .lang-option {
   padding: 0.3rem 0.75rem;
   border-radius: 9999px;
-  color: #f6fbf4;
+  color: rgb(var(--c-white));
   font-family: Audrey_Medium, "Zen Maru Gothic", serif;
   font-size: 0.8rem;
   letter-spacing: 0.08em;
@@ -880,7 +953,7 @@ body {
 }
 a.lang-option:hover,
 a.lang-option:focus-visible {
-  background: rgba(246, 251, 244, 0.14);
+  background: rgb(var(--c-white) / 0.14);
 }
 .lang-option.is-current {
   background: #f2a7b6;
@@ -919,4 +992,503 @@ a.lang-option:focus-visible {
   background: #f5f1e8;
   box-shadow: inset -1px -1px 0 #d6ccba;
   transform: rotate(var(--r));
+}
+
+/* ---------- "now;" line under the intro ---------- */
+
+.now-line {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 34rem;
+  text-align: center;
+}
+.now-label {
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgb(var(--c-orange));
+}
+.now-items {
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px dashed rgb(var(--c-white) / 0.25);
+  color: rgb(var(--c-white));
+  font-family: Petrona_Light, "Zen Maru Gothic", serif;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  transition: border-color 0.2s;
+}
+.now-items:hover,
+.now-items:focus-visible {
+  border-color: rgb(var(--c-orange));
+}
+/* All items share one spot; only the current one shows. */
+.now-stack {
+  display: grid;
+}
+.now-stack > span {
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+.now-stack > span.is-current {
+  visibility: visible;
+}
+.now-items em {
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
+  color: rgb(var(--c-creme));
+}
+.now-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+.now-dots span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-white) / 0.2);
+  transition: background-color 0.3s;
+}
+.now-dots span.is-current {
+  background: rgb(var(--c-orange));
+}
+
+/* ---------- Light theme: keep white things visible on cream paper ---------- */
+
+/* Onigiri and the white dango get a thin ink outline and a soft shadow, like stickers. */
+:root[data-theme="light"] .rice-icon,
+:root[data-theme="light"] .nf-onigiri,
+:root[data-theme="light"] .hero-dango-img {
+  filter: drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.7)) drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.5))
+    drop-shadow(0 3px 4px rgba(43, 33, 41, 0.22));
+}
+/* Sections not reached yet: faded, but still clearly onigiri. */
+:root[data-theme="light"] .rice-btn:not(.is-reached):not(:hover):not(:focus-visible) .rice-icon {
+  filter: grayscale(1) drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.6))
+    drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.4));
+  opacity: 0.55;
+}
+
+/* Bubbles: on cream, white film disappears, so give them a soft violet rim
+   and let the rainbow film darken the paper (multiply) instead of lightening it. */
+:root[data-theme="light"] .soap-film {
+  background: radial-gradient(
+    circle at 50% 55%,
+    transparent 0 52%,
+    rgba(150, 140, 190, 0.06) 62%,
+    rgba(130, 115, 170, 0.2) 69%,
+    rgba(105, 90, 145, 0.45) 71%,
+    transparent 72.5%
+  );
+  box-shadow:
+    inset 0 0 6px rgba(120, 110, 170, 0.25),
+    inset 10px 8px 18px rgba(70, 160, 230, 0.2),
+    inset -10px -12px 20px rgba(230, 90, 170, 0.2),
+    0 3px 10px rgba(43, 33, 41, 0.12);
+}
+:root[data-theme="light"] .soap-film::before {
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+:root[data-theme="light"] .soap-ring {
+  border-color: rgba(105, 90, 145, 0.6);
+  box-shadow: 0 0 8px rgba(105, 90, 145, 0.3);
+}
+:root[data-theme="light"] .soap-drop {
+  background: rgba(105, 90, 145, 0.5);
+}
+:root[data-theme="light"] #scroll-title {
+  color: rgb(var(--c-coffee));
+}
+/* Japanese has no italics; a slanted fake looks wrong. */
+:lang(ja) em,
+:lang(ja) .now-items em {
+  font-style: normal;
+}
+:root[data-theme="light"] .nf-crumb {
+  box-shadow:
+    inset -1px -1px 0 #d6ccba,
+    0 0 0 0.6px rgba(43, 33, 41, 0.45);
+}
+
+/* Light theme: the corner pills (bubble counter, sun/moon, EN / 日本語) and the
+   phone nav become white paper chips with an ink edge, so they stand off the cream. */
+:root[data-theme="light"] .pop-counter,
+:root[data-theme="light"] .lang-switch,
+:root[data-theme="light"] .theme-toggle {
+  background: rgba(255, 253, 247, 0.92);
+  border: 1px solid rgba(43, 33, 41, 0.28);
+  box-shadow: 0 4px 14px rgba(43, 33, 41, 0.14);
+}
+:root[data-theme="light"] .theme-toggle:hover,
+:root[data-theme="light"] .theme-toggle:focus-visible,
+:root[data-theme="light"] a.lang-option:hover,
+:root[data-theme="light"] a.lang-option:focus-visible {
+  background: rgba(43, 33, 41, 0.08);
+}
+:root[data-theme="light"] .pop-counter-total {
+  color: rgb(var(--c-coffee));
+}
+@media (max-width: 767px) {
+  :root[data-theme="light"] .rice-nav {
+    background: rgba(255, 253, 247, 0.92);
+    border: 1px solid rgba(43, 33, 41, 0.2);
+    box-shadow: 0 4px 14px rgba(43, 33, 41, 0.12);
+  }
+}
+
+/* Light theme: the bouncing onigiri under "scroll" need an outline too. */
+:root[data-theme="light"] .gelatine img {
+  filter: drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.75)) drop-shadow(0 0 0.6px rgba(43, 33, 41, 0.5))
+    drop-shadow(0 2px 3px rgba(43, 33, 41, 0.2));
+}
+
+/* ---------- Nav: the mailbox is a red post box ---------- */
+
+.rice-blog {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.rice-blog-icon {
+  font-size: 1.55rem;
+  line-height: 1;
+  transition: transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.rice-blog:hover .rice-blog-icon,
+.rice-blog:focus-visible .rice-blog-icon {
+  transform: rotate(-8deg) scale(1.15);
+}
+.rice-blog:hover .rice-label,
+.rice-blog:focus-visible .rice-label {
+  opacity: 1;
+}
+@media (max-width: 767px) {
+  .rice-blog .rice-label {
+    display: none;
+  }
+}
+
+/* ---------- Contact: a postcard ---------- */
+
+.postcard {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: 0.5rem;
+  /* Card stock: cream with a faint warm grain */
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.6), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(194, 149, 110, 0.12), transparent 45%), #fbf6ea;
+  color: #2b2129;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+:root[data-theme="light"] .postcard {
+  box-shadow:
+    0 18px 40px rgba(43, 33, 41, 0.18),
+    0 0 0 1px rgba(43, 33, 41, 0.12);
+}
+@media (min-width: 768px) {
+  .postcard {
+    grid-template-columns: 1.1fr auto 1fr;
+    gap: 2.5rem;
+  }
+}
+.pc-divider {
+  border-top: 1.5px dashed #d8ccb6;
+}
+@media (min-width: 768px) {
+  .pc-divider {
+    border-top: none;
+    border-left: 1.5px dashed #d8ccb6;
+  }
+}
+.pc-signature {
+  width: min(15rem, 70%);
+  height: auto;
+}
+.pc-corner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+/* Perforated edge: little half-circles bitten out of the border */
+.pc-stamp {
+  width: 4.2rem;
+  padding: 0.3rem;
+  background: #fff;
+  transform: rotate(3deg);
+  filter: drop-shadow(0 2px 3px rgba(43, 33, 41, 0.2));
+  -webkit-mask:
+    radial-gradient(circle at 50% 50%, transparent 0 2.2px, #000 2.6px) -3px -3px / 7px 7px,
+    linear-gradient(#000, #000) 3px 3px / calc(100% - 6px) calc(100% - 6px) no-repeat;
+  mask:
+    radial-gradient(circle at 50% 50%, transparent 0 2.2px, #000 2.6px) -3px -3px / 7px 7px,
+    linear-gradient(#000, #000) 3px 3px / calc(100% - 6px) calc(100% - 6px) no-repeat;
+}
+.pc-stamp svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pc-postmark {
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  margin-right: -1.4rem;
+  z-index: 1;
+  border: 1.5px solid rgba(142, 59, 82, 0.6);
+  border-radius: 50%;
+  color: rgba(142, 59, 82, 0.75);
+  font-family: Audrey_Medium, serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  line-height: 1.3;
+  transform: rotate(-14deg);
+  align-content: center;
+}
+.pc-postmark-mid {
+  border-top: 1px solid rgba(142, 59, 82, 0.5);
+  padding-top: 0.1rem;
+}
+.pc-lines {
+  display: grid;
+}
+.pc-lines li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  border-bottom: 1px solid #d8ccb6;
+}
+.pc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  font-family: Petrona_Regular, "Zen Maru Gothic", serif;
+  font-size: 1.05rem;
+  color: #2b2129;
+  transition: color 0.2s;
+}
+.pc-link:hover,
+.pc-link:focus-visible {
+  color: #8e3b52;
+}
+.pc-postbox-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.pc-postbox {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+.pc-env {
+  position: absolute;
+  top: 0;
+  left: 0.15rem;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+}
+.pc-copy {
+  margin-left: auto;
+  flex: none;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid rgba(43, 33, 41, 0.3);
+  border-radius: 9999px;
+  color: #2b2129;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+.pc-copy:hover,
+.pc-copy:focus-visible {
+  background: rgba(43, 33, 41, 0.08);
+}
+/* "copied!" stamped in red, like a hanko */
+.pc-hanko {
+  position: absolute;
+  right: 0.5rem;
+  top: -1.6rem;
+  padding: 0.15rem 0.5rem;
+  border: 2px solid #c0392b;
+  border-radius: 0.3rem;
+  color: #c0392b;
+  background: rgba(251, 246, 234, 0.9);
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+/* Let the two halves shrink to the card (a long email would otherwise push them wider). */
+.pc-message,
+.pc-address {
+  min-width: 0;
+}
+.pc-show span:last-child {
+  text-decoration: underline dashed rgba(142, 59, 82, 0.6);
+  text-underline-offset: 4px;
+}
+
+/* ---------- Postcard: two sides that flip ---------- */
+
+.pc-scene {
+  width: 100%;
+  max-width: 58rem;
+  perspective: 1800px;
+  transform: rotate(-1.2deg);
+}
+.pc-flip {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  /* Without JavaScript (or before it runs) the writing side shows. */
+  transform: rotateY(180deg);
+}
+.pc-face {
+  grid-area: 1 / 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.pc-back {
+  transform: rotateY(180deg);
+}
+@media (min-width: 768px) {
+  .pc-back {
+    grid-template-columns: 1.1fr auto 1fr;
+  }
+}
+.pc-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: -0.5rem;
+}
+.pc-head-title {
+  font-family: "Zen Maru Gothic", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  color: #c0392b;
+}
+.pc-head-en {
+  font-family: Audrey_Medium, serif;
+  letter-spacing: 0.25em;
+  opacity: 0.8;
+}
+/* The red postal-code boxes printed on every Japanese postcard */
+.pc-zip {
+  display: flex;
+  gap: 0.25rem;
+}
+.pc-zip span {
+  width: 1.05rem;
+  height: 1.35rem;
+  border: 1.5px solid rgba(192, 57, 43, 0.7);
+}
+.pc-zip .pc-zip-gap {
+  margin-left: 0.45rem;
+}
+@media (max-width: 399px) {
+  .pc-zip span {
+    width: 0.8rem;
+    height: 1.05rem;
+  }
+}
+.pc-turn {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.6rem;
+  color: #8a7a70;
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.pc-turn:hover,
+.pc-turn:focus-visible {
+  color: #8e3b52;
+}
+
+/* Picture side: a photo with retro "greetings from" lettering */
+.pc-front {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 10px solid #fbf6ea;
+  background: #fbf6ea;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+:root[data-theme="light"] .pc-front {
+  box-shadow:
+    0 18px 40px rgba(43, 33, 41, 0.18),
+    0 0 0 1px rgba(43, 33, 41, 0.12);
+}
+.pc-front img {
+  transition: transform 0.6s ease;
+}
+.pc-front:hover img {
+  transform: scale(1.03);
+}
+.pc-greeting {
+  position: absolute;
+  left: 6%;
+  bottom: 9%;
+  display: flex;
+  flex-direction: column;
+  color: #fbf6ea;
+  text-shadow:
+    0 2px 0 #8e3b52,
+    0 4px 14px rgba(0, 0, 0, 0.45);
+  transform: rotate(-4deg);
+}
+.pc-greeting-small {
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+}
+.pc-greeting-big {
+  font-family: Audrey_Bold, serif;
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: #f6c177;
+  -webkit-text-stroke: 2px #fbf6ea;
+}
+.pc-turn-hint {
+  position: absolute;
+  right: 1rem;
+  top: 0.9rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(251, 246, 234, 0.9);
+  color: #2b2129;
+  font-family: Petrona_Italic, "Zen Maru Gothic", serif;
+  font-size: 0.85rem;
+}
+@media (max-width: 767px) {
+  .pc-head-en {
+    display: none;
+  }
 }

@@ -27,8 +27,8 @@ Clicking An Onigiri Goes To Its Section
     Open Site
     Hide Bubbles
     Click    [data-section="offhours"]
-    Wait For Elements State    \#offhours    visible
-    Get Attribute    [data-section="offhours"]    aria-current    ==    ${EMPTY}
+    # Smooth scrolling takes a moment (longer on a busy machine): wait for the highlight.
+    Wait For Condition    Attribute    [data-section="offhours"]    aria-current    ==    ${EMPTY}
 
 Passed Sections Get Bitten
     [Documentation]    Scrolling past a section takes a bite out of its onigiri.

@@ -3,14 +3,16 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
 import Cursor from "../components/Cursor";
+import CornerControls from "../components/CornerControls";
 
 import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  const { locale } = useRouter();
+  const { locale, pathname } = useRouter();
   return (
     <div>
-      {locale === "ja" && (
+      {/* Japanese pages, and mailbox pages with a Japanese letter on them. */}
+      {(locale === "ja" || (pageProps as { hasJapanese?: boolean }).hasJapanese === true) && (
         <Head>
           {/* The site's fonts have no Japanese letters; this rounded one matches their feel. */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,6 +25,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         </Head>
       )}
       <Cursor />
+      <CornerControls languages={pathname === "/"} />
       <Analytics />
       {/* A new language means new text: start the page (and its animations) fresh. */}
       <Component key={locale} {...pageProps} />

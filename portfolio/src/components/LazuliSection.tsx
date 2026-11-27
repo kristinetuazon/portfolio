@@ -193,7 +193,7 @@ const LazuliSection = () => {
     <div id="lazuli">
       <section
         ref={root}
-        className="w-screen bg-gradient-to-b from-charcoal to-[#3a2d37] px-6 pb-16 pt-32 md:pl-20 md:pr-36"
+        className="w-screen bg-gradient-to-b from-charcoal to-plum px-6 pb-16 pt-32 md:pl-20 md:pr-36"
       >
         {/* Part 1: who, where, and the numbers */}
         <div className="lz-intro mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.15fr_1fr] lg:items-end">
@@ -437,7 +437,7 @@ const LazuliSection = () => {
                   />
                   {t.lazuli.years[i]!.tag}
                   {"now" in role && (
-                    <span className="rounded-full bg-[#a3c46f] px-2 py-px text-[0.65rem] tracking-wider text-charcoal">
+                    <span className="rounded-full bg-[#a3c46f] px-2 py-px text-[0.65rem] tracking-wider text-ink">
                       {t.lazuli.now}
                     </span>
                   )}

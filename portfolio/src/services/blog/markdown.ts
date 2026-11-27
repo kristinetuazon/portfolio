@@ -104,10 +104,16 @@ export async function renderMarkdown(markdown: string, slug: string) {
   return { html: String(file), usedImages: [...usedImages] };
 }
 
+/**
+ * Minutes to read: about 220 words a minute in English, and about 500
+ * characters a minute for Japanese (which has no spaces between words).
+ */
 export function readingMinutes(markdown: string) {
-  const words = markdown
-    .replace(/```[\s\S]*?```/g, " ")
+  const text = markdown.replace(/```[\s\S]*?```/g, " ");
+  const japanese = text.match(/[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]/g)?.length ?? 0;
+  const words = text
+    .replace(/[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]/g, " ")
     .split(/\s+/)
-    .filter(Boolean).length;
-  return Math.max(1, Math.round(words / 220));
+    .filter((w) => /\w/.test(w)).length;
+  return Math.max(1, Math.round(words / 220 + japanese / 500));
 }

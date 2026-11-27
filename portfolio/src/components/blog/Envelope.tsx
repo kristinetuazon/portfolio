@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { gsap, reducedMotion } from "../../lib/gsap";
 import type { PostSummary } from "../../services/blog/types";
 import WaxSeal from "./WaxSeal";
-import { formatDate, Tags } from "./BlogLayout";
+import { formatDate, LETTER_COPY, Tags } from "./BlogLayout";
 
 /** Short postmark date, e.g. "27 NOV 2026". */
 const postmark = (iso: string) =>
@@ -24,6 +24,7 @@ const postmark = (iso: string) =>
  * straight to the post.
  */
 const Envelope = ({ post }: { post: PostSummary }) => {
+  const copy = LETTER_COPY[post.lang];
   const router = useRouter();
   const href = `/mailbox/${post.slug}`;
   const opening = useRef<{ tl: gsap.core.Timeline; timer: number; el: HTMLElement } | null>(null);
@@ -125,7 +126,8 @@ const Envelope = ({ post }: { post: PostSummary }) => {
         href={href}
         onClick={open}
         className="envelope-link"
-        aria-label={`Open the letter: ${post.title}`}
+        aria-label={copy.open(post.title)}
+        lang={post.lang}
       >
         <div className="envelope">
           <div className="env-body" />
@@ -141,16 +143,17 @@ const Envelope = ({ post }: { post: PostSummary }) => {
             <span>{postmark(post.publishedAt)}</span>
           </div>
           <div className="env-address">
-            <span className="env-from">a letter from Kristine</span>
+            <span className="env-from">{copy.from}</span>
             <h2 className="env-title">{post.title}</h2>
           </div>
           {post.draft && <span className="env-draft">draft</span>}
+          {copy.stamp && <span className="env-lang">{copy.stamp}</span>}
         </div>
       </Link>
-      <div className="mt-4 px-1">
+      <div className="mt-4 px-1" lang={post.lang}>
         <p className="font-bodyRegular text-xs uppercase tracking-widest text-coffee">
-          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> ·{" "}
-          {post.readingMinutes} min read
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, post.lang)}</time> ·{" "}
+          {copy.read(post.readingMinutes)}
         </p>
         <p className="mt-2 font-bodyLight leading-relaxed text-creme">{post.summary}</p>
         <div className="mt-3">
