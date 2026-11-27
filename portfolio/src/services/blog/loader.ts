@@ -30,10 +30,7 @@ const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 async function loadPost(slug: string, dirs: BlogDirs): Promise<Post> {
   const rel = path.join("content", "blog", slug, "index.md");
   if (!SLUG.test(slug)) {
-    throw new BlogContentError(
-      rel,
-      `folder name "${slug}" must be lowercase words joined by dashes, e.g. "my-first-post"`,
-    );
+    throw new BlogContentError(rel, `folder name "${slug}" must be lowercase words joined by dashes, e.g. "my-first-post"`);
   }
   const file = path.join(dirs.contentDir, slug, "index.md");
   if (!fs.existsSync(file)) {
@@ -48,10 +45,7 @@ async function loadPost(slug: string, dirs: BlogDirs): Promise<Post> {
       engines: { yaml: (src) => yaml.load(src, { schema: yaml.CORE_SCHEMA }) as object },
     });
   } catch (err) {
-    throw new BlogContentError(
-      rel,
-      `the frontmatter (between the --- lines) isn't valid YAML: ${(err as Error).message}`,
-    );
+    throw new BlogContentError(rel, `the frontmatter (between the --- lines) isn't valid YAML: ${(err as Error).message}`);
   }
 
   const result = frontmatterSchema.safeParse(parsed.data);
@@ -73,9 +67,7 @@ async function loadPost(slug: string, dirs: BlogDirs): Promise<Post> {
   if (missing.length) {
     throw new BlogContentError(
       rel,
-      missing
-        .map((img) => `  - image "${img}" not found; put it in public/blog/${slug}/${img}`)
-        .join("\n"),
+      missing.map((img) => `  - image "${img}" not found; put it in public/blog/${slug}/${img}`).join("\n"),
     );
   }
 
@@ -91,10 +83,9 @@ async function loadPost(slug: string, dirs: BlogDirs): Promise<Post> {
 let cache: Post[] | undefined;
 
 /** All posts, newest first. Drafts are included only in development. */
-export async function loadPosts({
-  includeDrafts = process.env.NODE_ENV === "development",
-  dirs = defaultDirs(),
-} = {}): Promise<Post[]> {
+export async function loadPosts(
+  { includeDrafts = process.env.NODE_ENV === "development", dirs = defaultDirs() } = {},
+): Promise<Post[]> {
   const cacheable = process.env.NODE_ENV === "production" && !includeDrafts;
   if (cacheable && cache) return cache;
 

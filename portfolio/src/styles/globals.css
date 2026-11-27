@@ -128,13 +128,13 @@ body {
     transform: scale(1, 1);
   }
   25% {
-    transform: scale(0.9, 1);
+    transform: scale(0.9, 1.0);
   }
   50% {
     transform: scale(1.3, 0.9);
   }
   75% {
-    transform: scale(0.95, 1);
+    transform: scale(0.95, 1.00);
   }
 }
 
@@ -178,12 +178,8 @@ body {
   padding: 0.75rem 1.25rem;
   margin: 1.75em 0;
 }
-.blog .alert > :first-child {
-  margin-top: 0;
-}
-.blog .alert > :last-child {
-  margin-bottom: 0;
-}
+.blog .alert > :first-child { margin-top: 0; }
+.blog .alert > :last-child { margin-bottom: 0; }
 .blog .alert-title {
   color: var(--alert-color);
   font-family: Audrey_Medium, "Zen Maru Gothic", serif;
@@ -192,21 +188,11 @@ body {
   font-size: 0.85em;
   margin-bottom: 0.25em;
 }
-.blog .alert-note {
-  --alert-color: #a9c4ba;
-}
-.blog .alert-tip {
-  --alert-color: #9fc79a;
-}
-.blog .alert-important {
-  --alert-color: #c88e95;
-}
-.blog .alert-warning {
-  --alert-color: #dd8e58;
-}
-.blog .alert-caution {
-  --alert-color: #e07a6b;
-}
+.blog .alert-note { --alert-color: #a9c4ba; }
+.blog .alert-tip { --alert-color: #9fc79a; }
+.blog .alert-important { --alert-color: #c88e95; }
+.blog .alert-warning { --alert-color: #DD8E58; }
+.blog .alert-caution { --alert-color: #e07a6b; }
 
 /* ---------- Blog: envelopes ---------- */
 
@@ -227,9 +213,7 @@ body {
      browsers sort layers by depth and ignore z-index, so the open flap could end up
      in front of the letter (seen in Firefox-based browsers). */
   perspective: 900px;
-  transition:
-    transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1),
-    filter 0.35s;
+  transition: transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1), filter 0.35s;
   filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.4));
 }
 .envelope-link:hover .envelope,
@@ -286,11 +270,8 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to top right, transparent 49.6%, rgba(120, 90, 50, 0.18) 50%, transparent 50.5%)
-      left bottom / 50% 100% no-repeat,
-    linear-gradient(to top left, transparent 49.6%, rgba(120, 90, 50, 0.18) 50%, transparent 50.5%)
-      right bottom / 50% 100% no-repeat;
+  background: linear-gradient(to top right, transparent 49.6%, rgba(120, 90, 50, 0.18) 50%, transparent 50.5%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent 49.6%, rgba(120, 90, 50, 0.18) 50%, transparent 50.5%) right bottom / 50% 100% no-repeat;
 }
 /* Top flap, hinged on the top edge */
 .env-flap {
@@ -349,11 +330,7 @@ body {
   top: 30%;
   width: 70%;
   height: 40%;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(160, 75, 98, 0.45) 0 2px,
-    transparent 2px 7px
-  );
+  background: repeating-linear-gradient(to bottom, rgba(160, 75, 98, 0.45) 0 2px, transparent 2px 7px);
   -webkit-mask: radial-gradient(circle at 0 50%, transparent 0, #000 0);
   border-radius: 40%;
 }
@@ -448,14 +425,10 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 .letter-fold-top {
-  background-image:
-    linear-gradient(to top, rgba(110, 85, 60, 0.18), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: linear-gradient(to top, rgba(110, 85, 60, 0.18), transparent 60%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .letter-fold-bottom {
-  background-image:
-    linear-gradient(to bottom, rgba(110, 85, 60, 0.18), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: linear-gradient(to bottom, rgba(110, 85, 60, 0.18), transparent 60%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .letter-tags li {
   border-color: #c9b79c;
@@ -487,21 +460,11 @@ body {
 .blog .letter .post-body :not(pre) > code {
   background: rgba(43, 33, 41, 0.07);
 }
-.blog .letter .alert-note {
-  --alert-color: #4f7d70;
-}
-.blog .letter .alert-tip {
-  --alert-color: #4f8a47;
-}
-.blog .letter .alert-important {
-  --alert-color: #a04a62;
-}
-.blog .letter .alert-warning {
-  --alert-color: #b8642a;
-}
-.blog .letter .alert-caution {
-  --alert-color: #b3463a;
-}
+.blog .letter .alert-note { --alert-color: #4f7d70; }
+.blog .letter .alert-tip { --alert-color: #4f8a47; }
+.blog .letter .alert-important { --alert-color: #a04a62; }
+.blog .letter .alert-warning { --alert-color: #b8642a; }
+.blog .letter .alert-caution { --alert-color: #b3463a; }
 
 /* ---------- Onigiri nav ---------- */
 
@@ -542,9 +505,7 @@ body {
   /* Quiet until its section is reached */
   filter: grayscale(1) brightness(0.75);
   opacity: 0.45;
-  transition:
-    filter 0.5s ease,
-    opacity 0.5s ease;
+  transition: filter 0.5s ease, opacity 0.5s ease;
 }
 .rice-btn.is-reached .rice-icon,
 .rice-btn:hover .rice-icon,
@@ -728,21 +689,9 @@ body {
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(
-      ellipse 22% 13% at 32% 24%,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0) 100%
-    ),
-    radial-gradient(
-      ellipse 9% 6% at 45% 17%,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0) 100%
-    ),
-    radial-gradient(
-      ellipse 16% 8% at 70% 80%,
-      rgba(255, 255, 255, 0.35),
-      rgba(255, 255, 255, 0) 100%
-    );
+    radial-gradient(ellipse 22% 13% at 32% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 9% 6% at 45% 17%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 16% 8% at 70% 80%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 100%);
   transform: rotate(-12deg);
 }
 @keyframes soap-swirl {
@@ -807,29 +756,9 @@ body {
   background:
     radial-gradient(ellipse 30% 18% at 33% 27%, rgba(255, 255, 255, 0.95), transparent 100%),
     radial-gradient(circle, transparent 55%, rgba(255, 255, 255, 0.25) 70%, transparent 72%),
-    conic-gradient(
-      from 30deg,
-      rgba(255, 120, 200, 0.6),
-      rgba(255, 220, 120, 0.5),
-      rgba(140, 255, 190, 0.5),
-      rgba(120, 200, 255, 0.6),
-      rgba(190, 140, 255, 0.55),
-      rgba(255, 120, 200, 0.6)
-    );
-  -webkit-mask: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.22) 0 52%,
-    rgba(0, 0, 0, 0.5) 60%,
-    #000 67% 71%,
-    transparent 72%
-  );
-  mask: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.22) 0 52%,
-    rgba(0, 0, 0, 0.5) 60%,
-    #000 67% 71%,
-    transparent 72%
-  );
+    conic-gradient(from 30deg, rgba(255, 120, 200, 0.6), rgba(255, 220, 120, 0.5), rgba(140, 255, 190, 0.5), rgba(120, 200, 255, 0.6), rgba(190, 140, 255, 0.55), rgba(255, 120, 200, 0.6));
+  -webkit-mask: radial-gradient(circle, rgba(0, 0, 0, 0.22) 0 52%, rgba(0, 0, 0, 0.5) 60%, #000 67% 71%, transparent 72%);
+  mask: radial-gradient(circle, rgba(0, 0, 0, 0.22) 0 52%, rgba(0, 0, 0, 0.5) 60%, #000 67% 71%, transparent 72%);
 }
 .pop-counter-number {
   display: inline-block;
@@ -867,9 +796,7 @@ body {
   position: relative;
   overflow: visible;
   transform: rotate(var(--tilt));
-  transition:
-    transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1),
-    box-shadow 0.35s;
+  transition: transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 0.35s;
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.35),
     0 2px 6px rgba(0, 0, 0, 0.2);

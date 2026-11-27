@@ -50,12 +50,7 @@ describe("loadPosts", () => {
     write("newer", post(`title: New\nsummary: Newer.\npublishedAt: "2026-03-01"\ntags: [a, b]`));
     const posts = await load();
     expect(posts.map((p) => p.slug)).toEqual(["newer", "older"]);
-    expect(posts[1]).toMatchObject({
-      publishedAt: "2026-01-02",
-      tags: [],
-      draft: false,
-      readingMinutes: 1,
-    });
+    expect(posts[1]).toMatchObject({ publishedAt: "2026-01-02", tags: [], draft: false, readingMinutes: 1 });
     expect(posts[0]!.tags).toEqual(["a", "b"]);
   });
 
@@ -66,10 +61,7 @@ describe("loadPosts", () => {
   });
 
   it("resolves the cover and inline images to the post's public folder", async () => {
-    write("pics", post(`${valid}\ncover: c.jpg\ncoverAlt: A cat`, "![x](./a.png)"), [
-      "c.jpg",
-      "a.png",
-    ]);
+    write("pics", post(`${valid}\ncover: c.jpg\ncoverAlt: A cat`, "![x](./a.png)"), ["c.jpg", "a.png"]);
     const [p] = await load();
     expect(p!.cover).toBe("/blog/pics/c.jpg");
     expect(p!.html).toContain('src="/blog/pics/a.png"');
@@ -118,10 +110,7 @@ describe("renderMarkdown", () => {
   });
 
   it("does not render raw HTML", async () => {
-    const { html } = await renderMarkdown(
-      'Hi <script>alert(1)</script> <img src=x onerror="x()">',
-      "s",
-    );
+    const { html } = await renderMarkdown('Hi <script>alert(1)</script> <img src=x onerror="x()">', "s");
     expect(html).not.toMatch(/<script|onerror/);
   });
 
