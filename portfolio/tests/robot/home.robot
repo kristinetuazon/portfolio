@@ -59,10 +59,10 @@ Popping A Bubble Counts It
     Mouse Button    click    ${x}    ${y}
     Get Text    .pop-counter    *=    1 popped
 
-Earlier Work And Scrapbook Are There
+Projects And Scrapbook Are There
     [Tags]    smoke
     Open Site
-    Get Element Count    .ew-card    ==    4
+    Get Element Count    \#projects .pj-card    ==    3
     Get Element Count    \#offhours .oh-item    >=    7
     Get Text    \#offhours    *=    Yamanote
 

@@ -1670,17 +1670,6 @@ a.lang-option:focus-visible {
   height: auto;
   border-radius: 0.4rem;
 }
-.hv-thumbs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.4rem;
-}
-.hv-thumb {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: 0.3rem;
-}
 
 /* Lazuli year cards: highlights with a little dango bullet in the year's color */
 .lz-highlights {
@@ -1704,4 +1693,48 @@ a.lang-option:focus-visible {
   height: 0.55rem;
   border-radius: 50%;
   background: var(--dot);
+}
+
+/* ---------- Projects ---------- */
+
+.pj-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 2px solid var(--accent);
+  background: rgb(var(--c-charcoal) / 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+/* The drawing sits on a strip of paper at the top of the card */
+.pj-visual {
+  padding: 1rem 1.5rem 0.75rem;
+  background: #fbf6ea;
+  border-bottom: 2px dashed rgba(194, 149, 110, 0.6);
+}
+.pj-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 2px dashed rgba(194, 149, 110, 0.6);
+}
+.pj-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: Audrey_Medium, "Zen Maru Gothic", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--c-white));
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 6px;
+  transition: color 0.2s;
+}
+.pj-link:hover,
+.pj-link:focus-visible {
+  color: rgb(var(--c-orange));
 }

@@ -1,96 +1,83 @@
 import type { StaticImageData } from "next/image";
-
-import studyHero from "../../public/StudyHero/StudyHero1.jpg";
-import costOfLiving from "../../public/CostOfLiving/Cost_of_Living1.jpg";
-import minimize from "../../public/Minimize/Minimize1.jpeg";
 import tokyoNoire from "../../public/TokyoNoire/TokyoNoire1.jpeg";
 
-export type ProjectLink = { kind: "github" | "website" | "youtube"; href: string };
+/**
+ * Projects, shown as cards on the home page and in full on /projects.
+ * To add one: add an entry here (newest first). `visual` picks the little
+ * drawing on its card (see ProjectCard); or give an `image` (a screenshot) instead.
+ */
+export type ProjectLink = { kind: "live" | "github" | "video"; href: string };
 
 export type Project = {
   id: string;
   title: string;
-  /** One sentence, in English and Japanese. */
-  description: { en: string; ja: string };
-  /** What she built on it. */
-  part: { en: string; ja: string };
+  /** Short line for the card. */
+  summary: { en: string; ja: string };
+  /** A few sentences for the projects page. */
+  details: { en: string; ja: string };
+  tags: string[];
   links: ProjectLink[];
-  /** Card image: one screenshot, ideally 16:9. */
-  image: StaticImageData;
-  /** Ball color for the card, from the dango palette. */
+  /** Shown when there's no public link (work projects). */
+  note?: { en: string; ja: string };
+  visual?: "swipe" | "site" | "tests";
+  /** A screenshot to show instead of a drawing. */
+  image?: StaticImageData;
+  /** Card accent, from the dango palette. */
   color: string;
 };
 
-// Projects from before Lazuli, shown as a compact "earlier work" row.
-// To add one: put a screenshot in /public/<Name>/, import it above and add an entry.
 export const projects: Project[] = [
   {
-    id: "studyhero",
-    title: "study hero",
-    description: {
-      en: "A gamified pomodoro web application for game-lovers.",
-      ja: "ゲーム好きのための、ゲーム感覚で集中できるポモドーロWebアプリ。",
+    id: "minimize-v2",
+    title: "Minimize v2",
+    summary: {
+      en: "A Tinder-style decluttering app: swipe through your things and decide what stays.",
+      ja: "Tinder風にスワイプして、持ち物を残すか手放すか決めていく断捨離アプリ。",
     },
-    part: {
-      en: "Team project: Firebase sign-in, page layouts and the dashboard.",
-      ja: "チームで開発。Firebaseのログイン、ページレイアウト、ダッシュボード。",
+    details: {
+      en: "The second version of Minimize, my decluttering app. Each of your things comes up as a card: swipe to keep it or let it go.",
+      ja: "断捨離アプリMinimizeの第2版。持ち物が1枚ずつカードで表示され、スワイプで残すか手放すかを決めていきます。",
     },
-    links: [
-      { kind: "github", href: "https://github.com/Ghost-Pepper-Greenfield/study-hero" },
-      { kind: "youtube", href: "https://youtu.be/W3A1CalxAh8" },
-    ],
-    image: studyHero,
-    color: "#ff99ad",
+    tags: [],
+    links: [{ kind: "live", href: "https://minimize-v2.vercel.app/" }],
+    visual: "swipe",
+    color: "#a3c46f",
   },
   {
-    id: "costofliving",
-    title: "cost of living",
-    description: {
-      en: "A legacy project that helps people find their next home within their budget.",
-      ja: "予算内で次の住まいを見つける手助けをする、レガシープロジェクト。",
+    id: "kristinecodes",
+    title: "kristineCodes;",
+    summary: {
+      en: "This website: a bilingual, hand-animated portfolio with a mailbox, tested on every change.",
+      ja: "このウェブサイト。英語と日本語、手づくりのアニメーション、お手紙のポスト付きで、変更のたびにテストしています。",
     },
-    part: {
-      en: "Team project, built on an existing codebase: Firebase sign-in, page layouts and the dashboard.",
-      ja: "既存のコードを引き継いだチーム開発。Firebaseのログイン、ページレイアウト、ダッシュボード。",
+    details: {
+      en: "Built with Next.js, React, TypeScript and GSAP: dango and onigiri drawn in SVG, letters written in Markdown, English and Japanese, a light theme, and link previews drawn on the fly. Every change runs an end-to-end suite in Robot Framework on GitHub Actions.",
+      ja: "Next.js、React、TypeScript、GSAPで制作。SVGで描いたお団子やおにぎり、Markdownで書くお手紙、英語と日本語、昼のテーマ、その場で描くリンクのプレビュー画像。変更のたびにRobot FrameworkのE2EテストがGitHub Actionsで走ります。",
     },
-    links: [{ kind: "youtube", href: "https://youtu.be/iHT86r0FjlU" }],
-    image: costOfLiving,
-    color: "#dae3ea",
-  },
-  {
-    id: "minimize",
-    title: "minimize",
-    description: {
-      en: "A tinder-style decluttering application. Both version one and version two exists.",
-      ja: "Tinder風にスワイプして片づける、断捨離アプリ。バージョン1と2があります。",
-    },
-    part: {
-      en: "My own app, 37 pull requests: a Next.js frontend with Firebase sign-in and Redux, an Express server, and a second server in Java.",
-      ja: "自分ひとりで作ったアプリ（プルリクエスト37件）。FirebaseログインとReduxを使ったNext.jsのフロントエンド、Expressのサーバー、さらにJava版のサーバーも。",
-    },
+    tags: ["Next.js", "TypeScript", "GSAP", "Robot Framework"],
     links: [
-      { kind: "github", href: "https://github.com/kristinetuazon/minimize" },
-      { kind: "website", href: "https://www.mnmz.app/" },
-      { kind: "youtube", href: "https://youtu.be/w1CIF_Wsj-Y" },
+      { kind: "live", href: "https://www.kristinecodes.dev" },
+      { kind: "github", href: "https://github.com/kristinetuazon/portfolio" },
     ],
-    image: minimize,
-    color: "#8cc63e",
+    visual: "site",
+    color: "#f2a7b6",
   },
   {
     id: "tokyonoire",
-    title: "tokyo noire",
-    description: {
-      en: "A geo-location, narrative based game platform and editor.",
-      ja: "位置情報を使った、物語ベースのゲームプラットフォームとエディター。",
+    title: "Tokyo Noire",
+    summary: {
+      en: "A location-based story game platform and editor, built as a team at Code Chrysalis.",
+      ja: "位置情報を使った物語ゲームのプラットフォームとエディター。Code Chrysalisでチーム開発。",
     },
-    part: {
-      en: "Team project, where I was the main contributor to the TypeScript client (161 commits): sign-in, game progression, and a drag-and-drop editor for building games.",
-      ja: "チーム開発で、TypeScriptのクライアントのメイン担当（コミット161件）。ログイン、ゲームの進行、ゲームを作るためのドラッグ＆ドロップのエディターを作りました。",
+    details: {
+      en: "Real-life mysteries you solve by walking around the city, plus an editor for writing your own. I was the main contributor to the TypeScript client (161 commits): sign-in, game progression, and the drag-and-drop editor for building games.",
+      ja: "街を歩きながら謎を解く、リアルな物語ゲームと、自分でゲームを作れるエディター。TypeScriptのクライアントのメイン担当（コミット161件）として、ログイン、ゲームの進行、ゲームを作るためのドラッグ＆ドロップのエディターを作りました。",
     },
+    tags: ["TypeScript", "Geolocation"],
     links: [
+      { kind: "live", href: "https://tokyonoire.com/" },
       { kind: "github", href: "https://github.com/TokyoNoire" },
-      { kind: "website", href: "https://tokyonoire.com/" },
-      { kind: "youtube", href: "https://youtu.be/biS2DXEf2As" },
+      { kind: "video", href: "https://youtu.be/biS2DXEf2As" },
     ],
     image: tokyoNoire,
     color: "#f6c177",

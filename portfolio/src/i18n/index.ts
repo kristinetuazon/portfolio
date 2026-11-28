@@ -167,7 +167,7 @@ const en = {
           id: "bootcamp",
           date: "Aug 2022",
           title: "Code Chrysalis",
-          text: "A full-stack bootcamp in Tokyo, and four apps in three months: from Minimize, which I built on my own, to Tokyo Noire, a location-based story game built as a team (more in earlier work, below).",
+          text: "A full-stack bootcamp in Tokyo: data structures, REST APIs, SQL, React and TypeScript, and four apps built in three months, alone and in teams.",
           tags: ["Node / Express", "SQL", "React", "Firebase"],
         },
         {
@@ -274,15 +274,16 @@ const en = {
       },
     },
   },
-  earlier: {
-    lead: "and before that, my",
-    title: "earlier work",
-    sub: "a few things I built before joining Lazuli",
-    story:
-      "Starting in August 2022: three months of full-stack bootcamp at Code Chrysalis in Tokyo, learning data structures, REST APIs, SQL, React and TypeScript. About 120 pull requests later I had four apps, three built with teammates and one of my own, plus my first open-source pull request, to mymizu's website.",
-    myPart: "my part",
-    links: { github: "code on GitHub", website: "live site", youtube: "demo video" },
+  projects: {
+    lead: "things I've made",
+    title: "projects;",
+    sub: "things I've built, on my own and in teams",
+    seeAll: "all projects",
+    links: { live: "visit the site", github: "code on GitHub", video: "demo video" },
     screenshot: (title: string) => `${title} screenshot`,
+    metaTitle: "Projects · kristineCodes;",
+    metaDescription:
+      "Projects by Kristine Tuazon, software engineer in Yokohama: Minimize v2, this website, and Tokyo Noire.",
   },
   theme: { toLight: "Switch to the light theme", toDark: "Switch to the dark theme" },
   contact: {
@@ -468,7 +469,7 @@ const ja: Dict = {
           id: "bootcamp",
           date: "2022年8月",
           title: "Code Chrysalis",
-          text: "東京のフルスタック・ブートキャンプへ。3か月で4つのアプリを作りました。ひとりで作ったMinimizeから、チームで作った位置情報の物語ゲームTokyo Noireまで（くわしくは下の「作品たち」で）。",
+          text: "東京のフルスタック・ブートキャンプへ。データ構造、REST API、SQL、React、TypeScriptを学び、3か月でひとりやチームで4つのアプリを作りました。",
           tags: ["Node / Express", "SQL", "React", "Firebase"],
         },
         {
@@ -579,15 +580,16 @@ const ja: Dict = {
       },
     },
   },
-  earlier: {
-    lead: "Lazuliよりも前の",
+  projects: {
+    lead: "つくったもの",
     title: "作品たち",
-    sub: "学びながらつくった、思い出のプロジェクト",
-    story:
-      "2022年8月から3か月間、東京のCode Chrysalisでフルスタックのブートキャンプに参加。データ構造、REST API、SQL、React、TypeScriptを学びました。約120件のプルリクエストを経て、チームで3つ、ひとりで1つのアプリが完成。はじめてのオープンソースへのプルリクエスト（mymizuのウェブサイト）もこのころです。",
-    myPart: "担当",
-    links: { github: "GitHubのコード", website: "サイトを見る", youtube: "デモ動画" },
+    sub: "ひとりで、チームで、つくってきたもの",
+    seeAll: "作品をすべて見る",
+    links: { live: "サイトを見る", github: "GitHubのコード", video: "デモ動画" },
     screenshot: (title: string) => `${title}のスクリーンショット`,
+    metaTitle: "作品 · kristineCodes;",
+    metaDescription:
+      "横浜のソフトウェアエンジニア、Kristine Tuazonの作品：Minimize v2、このウェブサイト、Tokyo Noire。",
   },
   theme: { toLight: "昼のテーマにする", toDark: "夜のテーマにする" },
   contact: {

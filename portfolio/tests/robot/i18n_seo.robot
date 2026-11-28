@@ -20,7 +20,7 @@ Japanese Home Page Is In Japanese
     Text Should Contain    \#learning-title    いま勉強中
     Text Should Contain    \#about    すべては、この一行から
     Text Should Contain    \#projects h2    作品たち
-    Text Should Contain    \#studyhero    ポモドーロ
+    Text Should Contain    \#projects    断捨離アプリ
     Text Should Contain    .rice-blog    ポスト
 
 Japanese Image Descriptions Are In Japanese
@@ -138,7 +138,6 @@ The History Timeline Has Every Chapter In Both Languages
     Get Element Count    .ht-rail-fill    ==    1
     Get Element Count    .ht-bar    ==    4
     Text Should Contain    .ht-chapter[data-id="bootcamp"]    Code Chrysalis
-    Text Should Contain    .ew-story    Code Chrysalis
     Open Site    /ja
     Get Element Count    .ht-chapter    ==    6
     Text Should Contain    .ht-chapter[data-id="lazuli"]    Lazuliへ

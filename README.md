@@ -9,7 +9,7 @@ The app lives in [`portfolio/`](portfolio).
 ## What's on the site
 
 - **Home (`/`)**: a bouncy intro, Kristine's work as a software engineer at
-  Lazuli, the story of how she got into code, a row of earlier projects, an
+  Lazuli, the story of how she got into code (a cross-stitched timeline), her projects, an
   "off the clock" scrapbook of hobbies, and contact links. A column of onigiri on the side lights up as you scroll.
 - **Mailbox (`/mailbox`)**: the blog. Posts are written in Markdown and kept in
   this repo, shown as sealed envelopes that open into letters, with an RSS feed
@@ -74,8 +74,8 @@ portfolio/
 └── src/
     ├── pages/               index.tsx (home), 404, mailbox/ (list, post, RSS), sitemap.xml, api/og (preview cards)
     ├── i18n/index.ts        English and Japanese copy
-    ├── components/          OnigiriNav, Onigiri, IntroHero, LazuliSection, EarlierWork, ContactMe, …
-    ├── data/projects.ts     The "earlier work" projects
+    ├── components/          OnigiriNav, Onigiri, IntroHero, LazuliSection, HistoryTimeline, ProjectsSection, ContactMe, …
+    ├── data/projects.ts     Projects (home page cards and /projects)
     ├── lib/gsap.ts          Shared scroll-animation helpers (reveal, fadeInOn)
     ├── lib/site.ts          Site URL, preview-card URLs, schema.org Person
     ├── services/blog/       Post loader, frontmatter schema, Markdown renderer, tests
@@ -87,25 +87,26 @@ Colors and font names are defined in `portfolio/tailwind.config.cjs`
 
 ## Adding a project
 
-The home page's "earlier work" row reads from `portfolio/src/data/projects.ts`.
+Projects show as cards on the home page and in full on `/projects`. Both read
+from `portfolio/src/data/projects.ts`; add an entry there (newest first):
 
-1. Put a screenshot (16:9 works best) in `portfolio/public/<ProjectName>/`.
-2. Import it at the top of `projects.ts` and add an entry:
+```ts
+{
+  id: "my-project",                 // also the anchor on /projects (#my-project)
+  title: "My project",
+  summary: { en: "One line for the card.", ja: "カード用のひとこと。" },
+  details: { en: "A few sentences for the projects page.", ja: "作品ページ用の説明。" },
+  tags: ["Next.js"],
+  links: [
+    { kind: "live", href: "https://…" },
+    { kind: "github", href: "https://github.com/…" },
+  ],
+  visual: "swipe",                  // the drawing on the card: "swipe", "site" or "tests"
+  color: "#a3c46f",                 // card border, from the dango palette
+},
+```
 
-   ```ts
-   {
-     id: "my-project",
-     title: "my project",
-     description: "One line about what it does.",
-     links: [
-       { kind: "github", href: "https://github.com/…" },
-       { kind: "website", href: "https://…" },
-       { kind: "youtube", href: "https://youtu.be/…" },
-     ],
-     image: myProject,
-     color: "#ff99ad", // card border, from the dango palette
-   },
-   ```
+A work project with private code can leave `links` empty and add a `note`.
 
 The Lazuli section's text lives in `portfolio/src/components/LazuliSection.tsx`
 (the `ROLES` list), and its "3 years 6 months" counts up from June 2023

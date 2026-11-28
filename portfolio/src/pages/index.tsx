@@ -7,7 +7,7 @@ import BubbleCounter from "../components/BubbleCounter";
 import IntroHero from "../components/IntroHero";
 import LazuliSection from "../components/LazuliSection";
 import Hero from "../components/Hero";
-import EarlierWork from "../components/EarlierWork";
+import ProjectsSection from "../components/ProjectsSection";
 import HistoryTimeline from "../components/HistoryTimeline";
 import OffHours from "../components/OffHours";
 import ContactMe from "../components/ContactMe";
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
         </Link>
       </section>
 
-      <EarlierWork />
+      <ProjectsSection />
       <OffHours />
 
       <section
